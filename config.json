@@ -1,0 +1,162 @@
+{
+  "podcasts": [
+    {
+      "name": "大方谈钱",
+      "podcast_id": "66ed1e69dbf9bb012f843e39",
+      "category": "公募基金",
+      "fund_company_name": "华夏基金",
+      "enabled": true
+    },
+    {
+      "name": "中欧基金播客",
+      "podcast_id": "66594e8894977a26ef2c7823",
+      "category": "公募基金",
+      "fund_company_name": "中欧基金",
+      "enabled": true
+    },
+    {
+      "name": "有富同享",
+      "podcast_id": "685e568f8d5a9c9c2e59bc59",
+      "category": "公募基金",
+      "fund_company_name": "富国基金",
+      "enabled": true
+    },
+    {
+      "name": "与财同行",
+      "podcast_id": "68bfc415120c1ebd3ae51049",
+      "category": "公募基金",
+      "fund_company_name": "财通基金",
+      "enabled": true
+    },
+    {
+      "name": "人间钱话",
+      "podcast_id": "65716792d6e0ff5822d25668",
+      "category": "公募基金",
+      "fund_company_name": "天弘基金",
+      "enabled": true
+    },
+    {
+      "name": "深度求真",
+      "podcast_id": "67a40d8651337de4afb904bf",
+      "category": "公募基金",
+      "fund_company_name": "大成基金",
+      "enabled": true
+    },
+    {
+      "name": "养基方程式",
+      "podcast_id": "63e30c0b0d7e8eaa72262020",
+      "category": "公募基金",
+      "fund_company_name": "广发基金",
+      "enabled": true
+    },
+    {
+      "name": "基金经理一周论市",
+      "podcast_id": "66c2ddd333591c27be1eab94",
+      "category": "公募基金",
+      "fund_company_name": "银华基金",
+      "enabled": true
+    },
+    {
+      "name": "好朋友的播客",
+      "podcast_id": "64bcf642d0844ea8124f440e",
+      "category": "公募基金",
+      "fund_company_name": "中泰资管",
+      "enabled": true
+    },
+    {
+      "name": "好朋友的直播间",
+      "podcast_id": "66bab65359d80f45bc4536b0",
+      "category": "公募基金",
+      "fund_company_name": "中泰资管",
+      "enabled": true
+    },
+    {
+      "name": "德邦基金财经列车",
+      "podcast_id": "6696077d37236c546e76dadb",
+      "category": "公募基金",
+      "fund_company_name": "德邦基金",
+      "enabled": true
+    },
+    {
+      "name": "投资心得·基金聊天局",
+      "podcast_id": "68196909d65ef17b3c31dc64",
+      "category": "公募基金",
+      "fund_company_name": "国投瑞银基金",
+      "enabled": true
+    },
+    {
+      "name": "投资心法·基金访谈录",
+      "podcast_id": "68e51df4f9024a8d552b97a0",
+      "category": "公募基金",
+      "fund_company_name": "国投瑞银基金",
+      "enabled": true
+    },
+    {
+      "name": "时间嘉讲",
+      "podcast_id": "podcast/685a2f44a1309edcc5eb002d",
+      "category": "公募基金",
+      "fund_company_name": "嘉实基金",
+      "enabled": true
+    },
+    {
+      "name": "泰客Talk",
+      "podcast_id": "66713893c26e396a369ed206",
+      "category": "公募基金",
+      "fund_company_name": "国泰基金",
+      "enabled": true
+    },
+    {
+      "name": "茶水间经济学",
+      "podcast_id": "67ca49d7f38eac9e544b9e02",
+      "category": "公募基金",
+      "fund_company_name": "易方达基金",
+      "enabled": true
+    },
+    {
+      "name": "莫问钱程",
+      "podcast_id": "67f777938f7b771017a82ee0",
+      "category": "公募基金",
+      "fund_company_name": "银华基金",
+      "enabled": true
+    },
+    {
+      "name": "财话连篇",
+      "podcast_id": "672073aa1d2e86f67ab936ed",
+      "category": "公募基金",
+      "fund_company_name": "易方达基金",
+      "enabled": true
+    },
+    {
+      "name": "钱途规划局",
+      "podcast_id": "68ac193967d32ea07cdeaa15",
+      "category": "公募基金",
+      "fund_company_name": "汇添富基金",
+      "enabled": true
+    },
+    {
+      "name": "随基漫步",
+      "podcast_id": "649a8998a5b2b405c6d152eb",
+      "category": "公募基金",
+      "fund_company_name": "兴全基金",
+      "enabled": true
+    },
+    {
+      "name": "鹏然心动",
+      "podcast_id": "68f9d033fa9d08a7bb5b5691",
+      "category": "公募基金",
+      "fund_company_name": "鹏华基金",
+      "enabled": true
+    }
+  ],
+  "crawler_settings": {
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "request_delay": 2,
+    "max_retries": 3,
+    "timeout": 30
+  },
+  "report_settings": {
+    "output_dir": "reports",
+    "include_charts": false,
+    "compare_with_yesterday": true
+  }
+}

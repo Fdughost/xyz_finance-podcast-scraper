@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.cursor/
+.vscode/
+.idea/
+
+# Logs
+logs/
+
+# Database
+data/podcast_monitor.db
+
+# Temporary files
+reports/__tmp_review.xlsx
+
+# Archive
+podcast_monitor.tar.gz
