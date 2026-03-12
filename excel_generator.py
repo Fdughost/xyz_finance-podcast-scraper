@@ -57,6 +57,10 @@ class PodcastExcelGenerator:
             if col not in df.columns:
                 df[col] = ""
         
+        # 按订阅数降序排列
+        df['subscribers'] = pd.to_numeric(df['subscribers'], errors='coerce').fillna(0).astype(int)
+        df = df.sort_values(by='subscribers', ascending=False).reset_index(drop=True)
+
         # 按照映射顺序重新排序列并重命名
         df = df[list(column_mapping.keys())].rename(columns=column_mapping)
 

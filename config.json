@@ -146,7 +146,36 @@
       "category": "公募基金",
       "fund_company_name": "鹏华基金",
       "enabled": true
+    },
+    {
+      "name": "话中有金",
+      "podcast_id": "64f83ea4e490c5dee580ce7d",
+      "category": "公募基金",
+      "fund_company_name": "中金资管",
+      "enabled": true
+    },
+    {
+      "name": "泰度Voice",
+      "podcast_id": "62b3227a053b85adc57a728a",
+      "category": "公募基金",
+      "fund_company_name": "华泰证券",
+      "enabled": true
+    },
+    {
+      "name": "和盘托出",
+      "podcast_id": "68021db8f5eff49a89582340",
+      "category": "公募基金",
+      "fund_company_name": "蚂蚁财富",
+      "enabled": true
+    },
+    {
+      "name": "厚雪长波",
+      "podcast_id": "646d6bfa53a5e5ea14e69c7c",
+      "category": "公募基金",
+      "fund_company_name": "雪球财富",
+      "enabled": true
     }
+
   ],
   "crawler_settings": {
     "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
