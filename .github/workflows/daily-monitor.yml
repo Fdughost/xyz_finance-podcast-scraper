@@ -12,14 +12,14 @@ jobs:
 
     steps:
       - name: 检出代码
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
         with:
           # 使用 PAT 以便后续能 push 回仓库
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 1
 
       - name: 设置 Python 环境
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v5.6.0
         with:
           python-version: '3.11'
           cache: 'pip'
