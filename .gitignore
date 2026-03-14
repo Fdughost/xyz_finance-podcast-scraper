@@ -15,8 +15,8 @@ Thumbs.db
 # Logs
 logs/
 
-# Database
-data/podcast_monitor.db
+# Database (本地临时数据库，已由 GitHub Actions 统一管理)
+# data/podcast_monitor.db
 
 # Temporary files
 reports/__tmp_review.xlsx

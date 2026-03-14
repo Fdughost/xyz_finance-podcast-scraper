@@ -1,0 +1,40 @@
+name: 播客监控日报
+
+on:
+  schedule:
+    # 每天北京时间 10:00 运行（UTC 02:00）
+    - cron: '0 2 * * *'
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  run-monitor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+        with:
+          # 使用 PAT 以便后续能 push 回仓库
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 1
+
+      - name: 设置 Python 环境
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+
+      - name: 运行播客监控
+        run: python main.py
+
+      - name: 提交报表和数据库
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add reports/ data/podcast_monitor.db
+          # 如果有变更才提交
+          git diff --cached --quiet || git commit -m "chore: 自动生成播客日报 $(date +'%Y-%m-%d')"
+          git push
