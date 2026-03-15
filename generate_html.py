@@ -8,9 +8,11 @@ import os
 import glob
 import pandas as pd
 from datetime import datetime
+from urllib.parse import quote
 
 REPORTS_DIR = 'reports'
 DOCS_DIR = 'docs'
+GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/Fdughost/xyz_finance-podcast-scraper/main/reports'
 
 
 def get_latest_excel():
@@ -55,7 +57,8 @@ def generate_html():
     archive_html = ''
     for fname in all_reports:
         d = fname.replace('播客监控日报_', '').replace('.xlsx', '')
-        archive_html += f'<li><a href="../reports/{fname}" download>📥 {d} 报表</a></li>\n'
+        encoded = quote(fname)
+        archive_html += f'<li><a href="{GITHUB_RAW_BASE}/{encoded}">📥 {d} 报表</a></li>\n'
 
     html = f'''<!DOCTYPE html>
 <html lang="zh-CN">
@@ -92,7 +95,7 @@ def generate_html():
 <div class="container">
   <div class="card">
     <h2>最新报表（{date_str}）</h2>
-    <a class="download-btn" href="../reports/播客监控日报_{date_str}.xlsx" download>⬇ 下载 Excel 报表</a>
+    <a class="download-btn" href="{GITHUB_RAW_BASE}/{quote('播客监控日报_' + date_str + '.xlsx')}">⬇ 下载 Excel 报表</a>
   </div>
 
   <div class="card">
