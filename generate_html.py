@@ -121,6 +121,34 @@ def generate_html():
             <td style="text-align:right">{row.get("互动指标(点赞+收藏)", "")}</td>
         </tr>'''
 
+    # 生成移动端卡片
+    cards_html = ''
+    for i, row in df.iterrows():
+        name = row.get('节目名称', '')
+        subs = int(row['订阅数'])
+        d7 = (subs - subs_7d[name]) if name in subs_7d else None
+        d30 = (subs - subs_30d[name]) if name in subs_30d else None
+        d7_txt, d7_cls = fmt_delta(d7)
+        d30_txt, d30_cls = fmt_delta(d30)
+        episode = row.get('最新单集名称', '')
+        cards_html += f'''<div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">{i + 1}</span>
+    <div>
+      <div class="pod-name">{name}</div>
+      <div class="pod-company">{row.get("基金公司", "")}</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">{subs:,}</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta {d7_cls}">{d7_txt}</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta {d30_cls}">{d30_txt}</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">{row.get("最新单集播放数量", "")}</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="{episode}">📻 {episode}</div>
+  <div class="pod-meta">{row.get("最新单集上线日期", "")} &nbsp;·&nbsp; 互动 {row.get("互动指标(点赞+收藏)", "")}</div>
+</div>'''
+
     # 生成历史报表下载列表
     archive_html = ''
     for fname in all_reports:
@@ -325,14 +353,28 @@ document.getElementById('auth-modal').addEventListener('click', function(e) {
   .btn-submit {{ width: 100%; background: #1a3a5c; color: #fff; border: none; padding: 11px; border-radius: 6px; font-size: 15px; cursor: pointer; margin-top: 4px; }}
   .btn-submit:hover {{ background: #0f2540; }}
   #auth-msg {{ font-size: 13px; margin-top: 12px; min-height: 18px; color: #e74c3c; text-align: center; }}
-  /* 移动端 */
+  /* 播客卡片（移动端） */
+  .pod-card {{ border: 1px solid #e8edf2; border-radius: 8px; padding: 14px; margin-bottom: 10px; }}
+  .pod-card-header {{ display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }}
+  .pod-rank {{ background: #1a3a5c; color: #fff; border-radius: 4px; font-size: 11px; font-weight: 600; padding: 2px 6px; flex-shrink: 0; margin-top: 2px; }}
+  .pod-name {{ font-weight: 600; font-size: 15px; color: #1a3a5c; }}
+  .pod-company {{ font-size: 12px; color: #999; margin-top: 2px; }}
+  .pod-stats {{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 10px; }}
+  .pod-stat {{ text-align: center; background: #f7f9fc; border-radius: 6px; padding: 6px 4px; }}
+  .pod-stat-val {{ font-size: 14px; font-weight: 600; color: #333; }}
+  .pod-stat-label {{ font-size: 11px; color: #999; margin-top: 2px; }}
+  .pod-episode {{ font-size: 12px; color: #555; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px; }}
+  .pod-meta {{ font-size: 11px; color: #aaa; }}
+  /* 桌面显示表格，隐藏卡片；移动端反之 */
+  .mobile-cards {{ display: none; }}
   @media (max-width: 640px) {{
-    header {{ padding: 16px; }}
-    .header-left h1 {{ font-size: 18px; }}
-    .container {{ margin: 12px auto; padding: 0 10px; }}
+    header {{ padding: 14px 16px; }}
+    .header-left h1 {{ font-size: 17px; }}
+    .container {{ margin: 10px auto; padding: 0 10px; }}
     .card {{ padding: 14px; }}
-    td, th {{ padding: 8px 8px; font-size: 12px; }}
-    .chart-container {{ height: 240px; }}
+    .desktop-table {{ display: none; }}
+    .mobile-cards {{ display: block; }}
+    .chart-container {{ height: 220px; }}
   }}
 </style>
 </head>
@@ -365,7 +407,7 @@ document.getElementById('auth-modal').addEventListener('click', function(e) {
 
   <div class="card">
     <h2>播客数据总览</h2>
-    <div class="table-wrap">
+    <div class="desktop-table table-wrap">
     <table>
       <thead><tr>
         <th>#</th><th>节目名称</th><th>基金公司</th><th>订阅数</th>
@@ -375,6 +417,7 @@ document.getElementById('auth-modal').addEventListener('click', function(e) {
       <tbody>{rows_html}</tbody>
     </table>
     </div>
+    <div class="mobile-cards">{cards_html}</div>
   </div>
 
   <div class="card">

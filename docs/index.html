@@ -53,14 +53,28 @@
   .btn-submit { width: 100%; background: #1a3a5c; color: #fff; border: none; padding: 11px; border-radius: 6px; font-size: 15px; cursor: pointer; margin-top: 4px; }
   .btn-submit:hover { background: #0f2540; }
   #auth-msg { font-size: 13px; margin-top: 12px; min-height: 18px; color: #e74c3c; text-align: center; }
-  /* 移动端 */
+  /* 播客卡片（移动端） */
+  .pod-card { border: 1px solid #e8edf2; border-radius: 8px; padding: 14px; margin-bottom: 10px; }
+  .pod-card-header { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+  .pod-rank { background: #1a3a5c; color: #fff; border-radius: 4px; font-size: 11px; font-weight: 600; padding: 2px 6px; flex-shrink: 0; margin-top: 2px; }
+  .pod-name { font-weight: 600; font-size: 15px; color: #1a3a5c; }
+  .pod-company { font-size: 12px; color: #999; margin-top: 2px; }
+  .pod-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 10px; }
+  .pod-stat { text-align: center; background: #f7f9fc; border-radius: 6px; padding: 6px 4px; }
+  .pod-stat-val { font-size: 14px; font-weight: 600; color: #333; }
+  .pod-stat-label { font-size: 11px; color: #999; margin-top: 2px; }
+  .pod-episode { font-size: 12px; color: #555; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px; }
+  .pod-meta { font-size: 11px; color: #aaa; }
+  /* 桌面显示表格，隐藏卡片；移动端反之 */
+  .mobile-cards { display: none; }
   @media (max-width: 640px) {
-    header { padding: 16px; }
-    .header-left h1 { font-size: 18px; }
-    .container { margin: 12px auto; padding: 0 10px; }
+    header { padding: 14px 16px; }
+    .header-left h1 { font-size: 17px; }
+    .container { margin: 10px auto; padding: 0 10px; }
     .card { padding: 14px; }
-    td, th { padding: 8px 8px; font-size: 12px; }
-    .chart-container { height: 240px; }
+    .desktop-table { display: none; }
+    .mobile-cards { display: block; }
+    .chart-container { height: 220px; }
   }
 </style>
 </head>
@@ -68,7 +82,7 @@
 <header>
   <div class="header-left">
     <h1>公募基金播客监控日报</h1>
-    <p>数据日期：2026-03-15 &nbsp;|&nbsp; 页面生成：2026-03-16 01:07 UTC &nbsp;|&nbsp; 共 25 个播客</p>
+    <p>数据日期：2026-03-15 &nbsp;|&nbsp; 页面生成：2026-03-16 01:11 UTC &nbsp;|&nbsp; 共 25 个播客</p>
   </div>
   <div class="header-right">
     <div id="user-info">
@@ -93,7 +107,7 @@
 
   <div class="card">
     <h2>播客数据总览</h2>
-    <div class="table-wrap">
+    <div class="desktop-table table-wrap">
     <table>
       <thead><tr>
         <th>#</th><th>节目名称</th><th>基金公司</th><th>订阅数</th>
@@ -378,6 +392,407 @@
         </tr></tbody>
     </table>
     </div>
+    <div class="mobile-cards"><div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">1</span>
+    <div>
+      <div class="pod-name">大方谈钱</div>
+      <div class="pod-company">华夏基金</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">172,829</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">14869</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="首届红火播客节之周期：Ai+Au的时代">📻 首届红火播客节之周期：Ai+Au的时代</div>
+  <div class="pod-meta">2026-03-08 &nbsp;·&nbsp; 互动 199</div>
+</div><div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">2</span>
+    <div>
+      <div class="pod-name">厚雪长波</div>
+      <div class="pod-company">雪球财富</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">119,320</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">19158</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="对话智谱CEO张鹏—一场关于AI原理、商业模式和企业护城河的坦白局">📻 对话智谱CEO张鹏—一场关于AI原理、商业模式和企业护城河的坦白局</div>
+  <div class="pod-meta">2026-03-08 &nbsp;·&nbsp; 互动 138</div>
+</div><div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">3</span>
+    <div>
+      <div class="pod-name">中欧基金</div>
+      <div class="pod-company">中欧基金</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">75,177</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">8384</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="46.HALO交易爆火：当AI狂奔，市场又开始拥抱“老派”资产">📻 46.HALO交易爆火：当AI狂奔，市场又开始拥抱“老派”资产</div>
+  <div class="pod-meta">2026-03-10 &nbsp;·&nbsp; 互动 92</div>
+</div><div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">4</span>
+    <div>
+      <div class="pod-name">和盘托出</div>
+      <div class="pod-company">蚂蚁财富</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">49,465</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">6408</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="关于马斯克精心布局，终于把"奇点年"召唤到眼前，这件大事">📻 关于马斯克精心布局，终于把"奇点年"召唤到眼前，这件大事</div>
+  <div class="pod-meta">2026-03-11 &nbsp;·&nbsp; 互动 66</div>
+</div><div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">5</span>
+    <div>
+      <div class="pod-name">有富同享</div>
+      <div class="pod-company">富国基金</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">37,519</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">441</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="一周富盘 | “养龙虾”爆火刷屏！头部大厂纷纷入局，AI智能体热潮下，基金该怎么布局？">📻 一周富盘 | “养龙虾”爆火刷屏！头部大厂纷纷入局，AI智能体热潮下，基金该怎么布局？</div>
+  <div class="pod-meta">2026-03-15 &nbsp;·&nbsp; 互动 0</div>
+</div><div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">6</span>
+    <div>
+      <div class="pod-name">人间钱话</div>
+      <div class="pod-company">天弘基金</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">26,886</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">2287</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="E35 美伊冲突全球动荡，如何防止钱包烧毁？">📻 E35 美伊冲突全球动荡，如何防止钱包烧毁？</div>
+  <div class="pod-meta">2026-03-12 &nbsp;·&nbsp; 互动 15</div>
+</div><div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">7</span>
+    <div>
+      <div class="pod-name">泰度Voice</div>
+      <div class="pod-company">华泰证券</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">22,726</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">944</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="S3E11 | 超越传统“因子工厂”：AGI开启量化投资新时代">📻 S3E11 | 超越传统“因子工厂”：AGI开启量化投资新时代</div>
+  <div class="pod-meta">2025-08-15 &nbsp;·&nbsp; 互动 21</div>
+</div><div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">8</span>
+    <div>
+      <div class="pod-name">深度求真</div>
+      <div class="pod-company">大成基金</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">20,510</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">7592</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="18.Seedance出炉，AI视频革命与科技投资新范式">📻 18.Seedance出炉，AI视频革命与科技投资新范式</div>
+  <div class="pod-meta">2026-02-13 &nbsp;·&nbsp; 互动 309</div>
+</div><div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">9</span>
+    <div>
+      <div class="pod-name">话中有金</div>
+      <div class="pod-company">中金资管</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">8,917</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">849</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="EP135 对话中金公司食品饮料行业首席分析师：当“反向过年”遇上“下沉消费”">📻 EP135 对话中金公司食品饮料行业首席分析师：当“反向过年”遇上“下沉消费”</div>
+  <div class="pod-meta">2026-03-12 &nbsp;·&nbsp; 互动 6</div>
+</div><div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">10</span>
+    <div>
+      <div class="pod-name">德邦基金财经列车</div>
+      <div class="pod-company">德邦基金</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">8,438</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">48</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="309.全球游客涌向中国春节：一场文化与旅游的双向奔赴">📻 309.全球游客涌向中国春节：一场文化与旅游的双向奔赴</div>
+  <div class="pod-meta">2026-03-15 &nbsp;·&nbsp; 互动 1</div>
+</div><div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">11</span>
+    <div>
+      <div class="pod-name">随基漫步 Random Walk</div>
+      <div class="pod-company">兴全基金</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">6,833</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">1132</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="OpenClaw爆火后，AI发展的2个重点方向">📻 OpenClaw爆火后，AI发展的2个重点方向</div>
+  <div class="pod-meta">2026-03-09 &nbsp;·&nbsp; 互动 19</div>
+</div><div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">12</span>
+    <div>
+      <div class="pod-name">茶水间经济学</div>
+      <div class="pod-company">易方达基金</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">6,830</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">3159</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="对话三点下班浩哥：他说感谢股市改写了他的人生">📻 对话三点下班浩哥：他说感谢股市改写了他的人生</div>
+  <div class="pod-meta">2026-01-13 &nbsp;·&nbsp; 互动 27</div>
+</div><div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">13</span>
+    <div>
+      <div class="pod-name">泰客Talk</div>
+      <div class="pod-company">国泰基金</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">6,276</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">3603</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="Vol 27 Z世代的新年消费回忆录">📻 Vol 27 Z世代的新年消费回忆录</div>
+  <div class="pod-meta">2026-03-11 &nbsp;·&nbsp; 互动 215</div>
+</div><div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">14</span>
+    <div>
+      <div class="pod-name">时间嘉讲</div>
+      <div class="pod-company">嘉实基金</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">5,384</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">26006</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="Ep10.当“一盒内存条=一套房”：这轮半导体行情谁在定价？">📻 Ep10.当“一盒内存条=一套房”：这轮半导体行情谁在定价？</div>
+  <div class="pod-meta">2026-02-25 &nbsp;·&nbsp; 互动 514</div>
+</div><div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">15</span>
+    <div>
+      <div class="pod-name">莫问钱程</div>
+      <div class="pod-company">银华基金</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">4,475</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">5350</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="养娃这条路，做好财务规划能省多少弯路？">📻 养娃这条路，做好财务规划能省多少弯路？</div>
+  <div class="pod-meta">2025-09-17 &nbsp;·&nbsp; 互动 93</div>
+</div><div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">16</span>
+    <div>
+      <div class="pod-name">财话连篇</div>
+      <div class="pod-company">易方达基金</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">3,816</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">4689</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="Vol.18 | 越南市场为何快速上涨？——基金经理越南调研感受">📻 Vol.18 | 越南市场为何快速上涨？——基金经理越南调研感受</div>
+  <div class="pod-meta">2025-11-14 &nbsp;·&nbsp; 互动 36</div>
+</div><div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">17</span>
+    <div>
+      <div class="pod-name">养基方程式</div>
+      <div class="pod-company">广发基金</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">3,296</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">263</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="港股科技风起，未来路在何方？| 串台「自由进度条」">📻 港股科技风起，未来路在何方？| 串台「自由进度条」</div>
+  <div class="pod-meta">2025-12-02 &nbsp;·&nbsp; 互动 3</div>
+</div><div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">18</span>
+    <div>
+      <div class="pod-name">钱途规划局</div>
+      <div class="pod-company">汇添富基金</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">1,981</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">187</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="E20“宠物理财”小课堂：养毛孩子，怎样花钱不心疼？">📻 E20“宠物理财”小课堂：养毛孩子，怎样花钱不心疼？</div>
+  <div class="pod-meta">2026-01-07 &nbsp;·&nbsp; 互动 1</div>
+</div><div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">19</span>
+    <div>
+      <div class="pod-name">好朋友的直播间</div>
+      <div class="pod-company">中泰资管</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">1,595</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">346</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="E33.田瑀｜研究不必设限，结论宁缺毋滥">📻 E33.田瑀｜研究不必设限，结论宁缺毋滥</div>
+  <div class="pod-meta">2026-03-10 &nbsp;·&nbsp; 互动 5</div>
+</div><div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">20</span>
+    <div>
+      <div class="pod-name">投资心得·基金聊天局</div>
+      <div class="pod-company">国投瑞银基金</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">1,494</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">107</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="EP9.别内耗了，允许自己“知行不合一”">📻 EP9.别内耗了，允许自己“知行不合一”</div>
+  <div class="pod-meta">2026-03-04 &nbsp;·&nbsp; 互动 4</div>
+</div><div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">21</span>
+    <div>
+      <div class="pod-name">与财同行</div>
+      <div class="pod-company">财通基金</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">1,303</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">1224</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="一线基金经理闭门分享：AI、有色、出海……2026年的钱往哪里投？">📻 一线基金经理闭门分享：AI、有色、出海……2026年的钱往哪里投？</div>
+  <div class="pod-meta">2026-02-01 &nbsp;·&nbsp; 互动 23</div>
+</div><div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">22</span>
+    <div>
+      <div class="pod-name">鹏然心动</div>
+      <div class="pod-company">鹏华基金</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">736</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">2880</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="Vol 3：新消费浪潮，Z世代用"情绪货币"改写"商业规则"？|元气消费局">📻 Vol 3：新消费浪潮，Z世代用"情绪货币"改写"商业规则"？|元气消费局</div>
+  <div class="pod-meta">2025-11-11 &nbsp;·&nbsp; 互动 151</div>
+</div><div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">23</span>
+    <div>
+      <div class="pod-name">基金经理一周论市</div>
+      <div class="pod-company">银华基金</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">304</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">56</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="Vol 53：银华王丽敏：“周期搭台，成长唱戏”或是未来一段时间A股的主旋律">📻 Vol 53：银华王丽敏：“周期搭台，成长唱戏”或是未来一段时间A股的主旋律</div>
+  <div class="pod-meta">2025-09-29 &nbsp;·&nbsp; 互动 0</div>
+</div><div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">24</span>
+    <div>
+      <div class="pod-name">好朋友</div>
+      <div class="pod-company">中泰资管</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">51</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">70</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="Vol.5 不上班的日子，跑步、做饭、好好生活">📻 Vol.5 不上班的日子，跑步、做饭、好好生活</div>
+  <div class="pod-meta">2026-02-25 &nbsp;·&nbsp; 互动 5</div>
+</div><div class="pod-card">
+  <div class="pod-card-header">
+    <span class="pod-rank">25</span>
+    <div>
+      <div class="pod-name">投资心法</div>
+      <div class="pod-company">国投瑞银基金</div>
+    </div>
+  </div>
+  <div class="pod-stats">
+    <div class="pod-stat"><div class="pod-stat-val">28</div><div class="pod-stat-label">订阅数</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">7日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val delta ">—</div><div class="pod-stat-label">30日增量</div></div>
+    <div class="pod-stat"><div class="pod-stat-val">122</div><div class="pod-stat-label">播放量</div></div>
+  </div>
+  <div class="pod-episode" title="0010 段永平《波士堂》访谈：敢为天下后">📻 0010 段永平《波士堂》访谈：敢为天下后</div>
+  <div class="pod-meta">2025-10-07 &nbsp;·&nbsp; 互动 0</div>
+</div></div>
   </div>
 
   <div class="card">
