@@ -37,6 +37,9 @@
   .archive-list a { color: #1a3a5c; text-decoration: none; font-size: 13px; padding: 5px 10px; border: 1px solid #c8d6e5; border-radius: 4px; }
   .archive-list a:hover { background: #eef3fb; }
   .chart-container { position: relative; height: 320px; }
+  .pill-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .pill { padding: 5px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; border: 1.5px solid #e2e8f0; color: #64748b; background: #f8fafc; transition: .15s; user-select: none; }
+  .pill.active { color: #fff; border-color: transparent; }
   footer { text-align: center; font-size: 12px; color: #999; padding: 20px; }
   /* Modal */
   .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; padding: 16px; }
@@ -82,7 +85,7 @@
 <header>
   <div class="header-left">
     <h1>公募基金播客监控日报</h1>
-    <p>数据日期：2026-03-15 &nbsp;|&nbsp; 页面生成：2026-03-16 01:11 UTC &nbsp;|&nbsp; 共 25 个播客</p>
+    <p>数据日期：2026-03-15 &nbsp;|&nbsp; 页面生成：2026-03-16 01:18 UTC &nbsp;|&nbsp; 共 25 个播客</p>
   </div>
   <div class="header-right">
     <div id="user-info">
@@ -796,7 +799,15 @@
   </div>
 
   <div class="card">
-    <h2>订阅数趋势（前10名）</h2>
+    <h2>订阅数排行</h2>
+    <div class="chart-container">
+      <canvas id="barChart"></canvas>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>订阅数趋势</h2>
+    <div id="trendPills" class="pill-list"></div>
     <div class="chart-container">
       <canvas id="trendChart"></canvas>
     </div>
@@ -946,50 +957,101 @@ document.getElementById('auth-modal').addEventListener('click', function(e) {
   if (e.target === this) closeModal();
 });
 
-// 趋势图
+// 图表
 (function() {
   const raw = {"dates": ["2026-03-13", "2026-03-14", "2026-03-15"], "series": [{"name": "大方谈钱", "data": [172333, 172752, 172829]}, {"name": "厚雪长波", "data": [118748, 119112, 119320]}, {"name": "中欧基金", "data": [74217, 74905, 75177]}, {"name": "和盘托出", "data": [49363, 49448, 49465]}, {"name": "有富同享", "data": [36947, 37422, 37519]}, {"name": "人间钱话", "data": [26875, 26887, 26886]}, {"name": "泰度Voice", "data": [22713, 22725, 22726]}, {"name": "深度求真", "data": [20483, 20509, 20510]}, {"name": "话中有金", "data": [8882, 8909, 8917]}, {"name": "德邦基金财经列车", "data": [8390, 8425, 8438]}]};
-  if (!raw.dates || raw.dates.length < 2) return;
+  if (!raw.dates || raw.dates.length === 0) return;
 
   const colors = [
-    '#1a3a5c','#e74c3c','#27ae60','#f39c12','#8e44ad',
-    '#2980b9','#16a085','#d35400','#7f8c8d','#c0392b'
+    '#3b82f6','#ef4444','#10b981','#f59e0b','#8b5cf6',
+    '#ec4899','#14b8a6','#f97316','#6366f1','#84cc16'
   ];
 
+  // 横向条形图：最新订阅数
+  const latestSubs = raw.series.map(s => {
+    const vals = s.data.filter(v => v != null);
+    return vals[vals.length - 1] || 0;
+  });
+  new Chart(document.getElementById('barChart'), {
+    type: 'bar',
+    data: {
+      labels: raw.series.map(s => s.name),
+      datasets: [{ data: latestSubs, backgroundColor: colors, borderRadius: 4, borderSkipped: false }]
+    },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ' ' + ctx.raw.toLocaleString() } }
+      },
+      scales: {
+        x: { grid: { color: '#f5f5f5' }, ticks: { callback: v => v >= 10000 ? (v/10000).toFixed(0)+'w' : v, font: { size: 11 } } },
+        y: { grid: { display: false }, ticks: { font: { size: 12 } } }
+      }
+    }
+  });
+
+  // 趋势折线图：多选 pill 切换
+  if (raw.dates.length < 2) return;
+
+  const activeSet = new Set(raw.series.map((_, i) => i)); // 默认全选
+
   const datasets = raw.series.map((s, i) => ({
-    label: s.name,
-    data: s.data,
-    borderColor: colors[i % colors.length],
-    backgroundColor: 'transparent',
-    borderWidth: 2,
-    pointRadius: 3,
-    tension: 0.3,
-    spanGaps: true,
+    label: s.name, data: s.data, spanGaps: true,
+    borderColor: colors[i], backgroundColor: colors[i] + '18',
+    borderWidth: 2, pointRadius: 3, pointHoverRadius: 5,
+    tension: 0.4, fill: false,
   }));
 
-  new Chart(document.getElementById('trendChart'), {
+  const trendChart = new Chart(document.getElementById('trendChart'), {
     type: 'line',
     data: { labels: raw.dates, datasets },
     options: {
-      responsive: true,
-      maintainAspectRatio: false,
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
       plugins: {
-        legend: { position: 'bottom', labels: { font: { size: 12 }, boxWidth: 12 } },
+        legend: { display: false },
         tooltip: {
-          callbacks: {
-            label: ctx => ctx.dataset.label + ': ' + (ctx.raw != null ? ctx.raw.toLocaleString() : 'N/A')
-          }
+          backgroundColor: '#fff', borderColor: '#e2e8f0', borderWidth: 1,
+          titleColor: '#333', bodyColor: '#555',
+          filter: item => activeSet.has(item.datasetIndex),
+          callbacks: { label: ctx => ' ' + ctx.dataset.label + ': ' + (ctx.raw != null ? ctx.raw.toLocaleString() : '—') }
         }
       },
       scales: {
-        y: {
-          ticks: { callback: v => v >= 10000 ? (v/10000).toFixed(1)+'w' : v.toLocaleString() }
-        },
-        x: {
-          ticks: { maxTicksLimit: 10 }
-        }
+        y: { grid: { color: '#f5f5f5' }, ticks: { callback: v => v >= 10000 ? (v/10000).toFixed(1)+'w' : v.toLocaleString(), font: { size: 11 } } },
+        x: { grid: { display: false }, ticks: { font: { size: 11 }, maxTicksLimit: 8 } }
       }
     }
+  });
+
+  // 生成 pill 按钮
+  const pillList = document.getElementById('trendPills');
+  raw.series.forEach((s, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'pill active';
+    btn.style.background = colors[i];
+    btn.textContent = s.name;
+    btn.onclick = () => {
+      const isActive = activeSet.has(i);
+      if (isActive && activeSet.size === 1) return; // 至少保留一条
+      if (isActive) {
+        activeSet.delete(i);
+        btn.classList.remove('active');
+        btn.style.background = '';
+        btn.style.color = '';
+      } else {
+        activeSet.add(i);
+        btn.classList.add('active');
+        btn.style.background = colors[i];
+        btn.style.color = '#fff';
+      }
+      trendChart.data.datasets.forEach((ds, j) => {
+        ds.hidden = !activeSet.has(j);
+      });
+      trendChart.update('active');
+    };
+    pillList.appendChild(btn);
   });
 })();
 
