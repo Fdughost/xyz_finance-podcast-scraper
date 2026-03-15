@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>公募基金播客监控日报</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f4f6f9; color: #333; }
@@ -13,8 +14,8 @@
   .header-left p { font-size: 13px; opacity: 0.75; margin-top: 4px; }
   .header-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
   #user-info { display: none; align-items: center; gap: 10px; }
-  #user-email-display { font-size: 13px; opacity: 0.85; }
-  .btn-header { background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.4); padding: 6px 16px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+  #user-email-display { font-size: 13px; opacity: 0.85; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .btn-header { background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.4); padding: 6px 16px; border-radius: 6px; cursor: pointer; font-size: 13px; white-space: nowrap; }
   .btn-header:hover { background: rgba(255,255,255,0.25); }
   .container { max-width: 1200px; margin: 24px auto; padding: 0 16px; }
   .card { background: #fff; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,.1); padding: 20px; margin-bottom: 20px; }
@@ -22,19 +23,24 @@
   .download-btn { display: inline-block; background: #1a7a4a; color: #fff; padding: 8px 18px; border-radius: 6px; text-decoration: none; font-size: 14px; }
   .download-btn:hover { background: #155e3a; }
   .locked-section { display: none; align-items: center; gap: 12px; color: #888; font-size: 14px; }
-  .btn-login-inline { background: #1a3a5c; color: #fff; border: none; padding: 6px 14px; border-radius: 5px; cursor: pointer; font-size: 13px; }
+  .btn-login-inline { background: #1a3a5c; color: #fff; border: none; padding: 6px 14px; border-radius: 5px; cursor: pointer; font-size: 13px; white-space: nowrap; }
   .btn-login-inline:hover { background: #0f2540; }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
   th { background: #1a3a5c; color: #fff; padding: 10px 12px; text-align: left; white-space: nowrap; }
-  td { padding: 9px 12px; border-bottom: 1px solid #eee; vertical-align: middle; }
+  td { padding: 9px 12px; border-bottom: 1px solid #eee; vertical-align: middle; white-space: nowrap; }
   tr:hover td { background: #eef3fb !important; }
+  .delta { font-weight: 500; }
+  .delta-up { color: #e74c3c; }
+  .delta-down { color: #27ae60; }
   .archive-list { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }
   .archive-list a { color: #1a3a5c; text-decoration: none; font-size: 13px; padding: 5px 10px; border: 1px solid #c8d6e5; border-radius: 4px; }
   .archive-list a:hover { background: #eef3fb; }
+  .chart-container { position: relative; height: 320px; }
   footer { text-align: center; font-size: 12px; color: #999; padding: 20px; }
   /* Modal */
-  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; }
-  .modal-box { background: #fff; border-radius: 12px; padding: 32px; width: 100%; max-width: 400px; position: relative; margin: 16px; }
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; padding: 16px; }
+  .modal-box { background: #fff; border-radius: 12px; padding: 32px; width: 100%; max-width: 400px; position: relative; }
   .modal-title { font-size: 18px; font-weight: 600; color: #1a3a5c; margin-bottom: 20px; }
   .modal-close { position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 20px; cursor: pointer; color: #999; line-height: 1; }
   .tabs { display: flex; border-bottom: 2px solid #eee; margin-bottom: 20px; }
@@ -47,13 +53,22 @@
   .btn-submit { width: 100%; background: #1a3a5c; color: #fff; border: none; padding: 11px; border-radius: 6px; font-size: 15px; cursor: pointer; margin-top: 4px; }
   .btn-submit:hover { background: #0f2540; }
   #auth-msg { font-size: 13px; margin-top: 12px; min-height: 18px; color: #e74c3c; text-align: center; }
+  /* 移动端 */
+  @media (max-width: 640px) {
+    header { padding: 16px; }
+    .header-left h1 { font-size: 18px; }
+    .container { margin: 12px auto; padding: 0 10px; }
+    .card { padding: 14px; }
+    td, th { padding: 8px 8px; font-size: 12px; }
+    .chart-container { height: 240px; }
+  }
 </style>
 </head>
 <body>
 <header>
   <div class="header-left">
     <h1>公募基金播客监控日报</h1>
-    <p>数据日期：2026-03-15 &nbsp;|&nbsp; 页面生成：2026-03-16 00:49 UTC &nbsp;|&nbsp; 共 25 个播客</p>
+    <p>数据日期：2026-03-15 &nbsp;|&nbsp; 页面生成：2026-03-16 01:07 UTC &nbsp;|&nbsp; 共 25 个播客</p>
   </div>
   <div class="header-right">
     <div id="user-info">
@@ -78,18 +93,21 @@
 
   <div class="card">
     <h2>播客数据总览</h2>
-    <div style="overflow-x:auto">
+    <div class="table-wrap">
     <table>
       <thead><tr>
         <th>#</th><th>节目名称</th><th>基金公司</th><th>订阅数</th>
-        <th>最新单集</th><th>上线日期</th><th>播放量</th><th>互动（点赞+收藏）</th>
+        <th>7日增量</th><th>30日增量</th>
+        <th>最新单集</th><th>上线日期</th><th>播放量</th><th>互动</th>
       </tr></thead>
       <tbody><tr style="background:#f9f9f9">
             <td>1</td>
             <td style="font-weight:500">大方谈钱</td>
             <td>华夏基金</td>
             <td style="text-align:right">172,829</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="首届红火播客节之周期：Ai+Au的时代">首届红火播客节之周期：Ai+Au的时代</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="首届红火播客节之周期：Ai+Au的时代">首届红火播客节之周期：Ai+Au的时代</td>
             <td>2026-03-08</td>
             <td style="text-align:right">14869</td>
             <td style="text-align:right">199</td>
@@ -98,7 +116,9 @@
             <td style="font-weight:500">厚雪长波</td>
             <td>雪球财富</td>
             <td style="text-align:right">119,320</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="对话智谱CEO张鹏—一场关于AI原理、商业模式和企业护城河的坦白局">对话智谱CEO张鹏—一场关于AI原理、商业模式和企业护城河的坦白局</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="对话智谱CEO张鹏—一场关于AI原理、商业模式和企业护城河的坦白局">对话智谱CEO张鹏—一场关于AI原理、商业模式和企业护城河的坦白局</td>
             <td>2026-03-08</td>
             <td style="text-align:right">19158</td>
             <td style="text-align:right">138</td>
@@ -107,7 +127,9 @@
             <td style="font-weight:500">中欧基金</td>
             <td>中欧基金</td>
             <td style="text-align:right">75,177</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="46.HALO交易爆火：当AI狂奔，市场又开始拥抱“老派”资产">46.HALO交易爆火：当AI狂奔，市场又开始拥抱“老派”资产</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="46.HALO交易爆火：当AI狂奔，市场又开始拥抱“老派”资产">46.HALO交易爆火：当AI狂奔，市场又开始拥抱“老派”资产</td>
             <td>2026-03-10</td>
             <td style="text-align:right">8384</td>
             <td style="text-align:right">92</td>
@@ -116,7 +138,9 @@
             <td style="font-weight:500">和盘托出</td>
             <td>蚂蚁财富</td>
             <td style="text-align:right">49,465</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="关于马斯克精心布局，终于把"奇点年"召唤到眼前，这件大事">关于马斯克精心布局，终于把"奇点年"召唤到眼前，这件大事</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="关于马斯克精心布局，终于把"奇点年"召唤到眼前，这件大事">关于马斯克精心布局，终于把"奇点年"召唤到眼前，这件大事</td>
             <td>2026-03-11</td>
             <td style="text-align:right">6408</td>
             <td style="text-align:right">66</td>
@@ -125,7 +149,9 @@
             <td style="font-weight:500">有富同享</td>
             <td>富国基金</td>
             <td style="text-align:right">37,519</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="一周富盘 | “养龙虾”爆火刷屏！头部大厂纷纷入局，AI智能体热潮下，基金该怎么布局？">一周富盘 | “养龙虾”爆火刷屏！头部大厂纷纷入局，AI智能体热潮下，基金该怎么布局？</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="一周富盘 | “养龙虾”爆火刷屏！头部大厂纷纷入局，AI智能体热潮下，基金该怎么布局？">一周富盘 | “养龙虾”爆火刷屏！头部大厂纷纷入局，AI智能体热潮下，基金该怎么布局？</td>
             <td>2026-03-15</td>
             <td style="text-align:right">441</td>
             <td style="text-align:right">0</td>
@@ -134,7 +160,9 @@
             <td style="font-weight:500">人间钱话</td>
             <td>天弘基金</td>
             <td style="text-align:right">26,886</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="E35 美伊冲突全球动荡，如何防止钱包烧毁？">E35 美伊冲突全球动荡，如何防止钱包烧毁？</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="E35 美伊冲突全球动荡，如何防止钱包烧毁？">E35 美伊冲突全球动荡，如何防止钱包烧毁？</td>
             <td>2026-03-12</td>
             <td style="text-align:right">2287</td>
             <td style="text-align:right">15</td>
@@ -143,7 +171,9 @@
             <td style="font-weight:500">泰度Voice</td>
             <td>华泰证券</td>
             <td style="text-align:right">22,726</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="S3E11 | 超越传统“因子工厂”：AGI开启量化投资新时代">S3E11 | 超越传统“因子工厂”：AGI开启量化投资新时代</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="S3E11 | 超越传统“因子工厂”：AGI开启量化投资新时代">S3E11 | 超越传统“因子工厂”：AGI开启量化投资新时代</td>
             <td>2025-08-15</td>
             <td style="text-align:right">944</td>
             <td style="text-align:right">21</td>
@@ -152,7 +182,9 @@
             <td style="font-weight:500">深度求真</td>
             <td>大成基金</td>
             <td style="text-align:right">20,510</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="18.Seedance出炉，AI视频革命与科技投资新范式">18.Seedance出炉，AI视频革命与科技投资新范式</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="18.Seedance出炉，AI视频革命与科技投资新范式">18.Seedance出炉，AI视频革命与科技投资新范式</td>
             <td>2026-02-13</td>
             <td style="text-align:right">7592</td>
             <td style="text-align:right">309</td>
@@ -161,7 +193,9 @@
             <td style="font-weight:500">话中有金</td>
             <td>中金资管</td>
             <td style="text-align:right">8,917</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="EP135 对话中金公司食品饮料行业首席分析师：当“反向过年”遇上“下沉消费”">EP135 对话中金公司食品饮料行业首席分析师：当“反向过年”遇上“下沉消费”</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="EP135 对话中金公司食品饮料行业首席分析师：当“反向过年”遇上“下沉消费”">EP135 对话中金公司食品饮料行业首席分析师：当“反向过年”遇上“下沉消费”</td>
             <td>2026-03-12</td>
             <td style="text-align:right">849</td>
             <td style="text-align:right">6</td>
@@ -170,7 +204,9 @@
             <td style="font-weight:500">德邦基金财经列车</td>
             <td>德邦基金</td>
             <td style="text-align:right">8,438</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="309.全球游客涌向中国春节：一场文化与旅游的双向奔赴">309.全球游客涌向中国春节：一场文化与旅游的双向奔赴</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="309.全球游客涌向中国春节：一场文化与旅游的双向奔赴">309.全球游客涌向中国春节：一场文化与旅游的双向奔赴</td>
             <td>2026-03-15</td>
             <td style="text-align:right">48</td>
             <td style="text-align:right">1</td>
@@ -179,7 +215,9 @@
             <td style="font-weight:500">随基漫步 Random Walk</td>
             <td>兴全基金</td>
             <td style="text-align:right">6,833</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="OpenClaw爆火后，AI发展的2个重点方向">OpenClaw爆火后，AI发展的2个重点方向</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="OpenClaw爆火后，AI发展的2个重点方向">OpenClaw爆火后，AI发展的2个重点方向</td>
             <td>2026-03-09</td>
             <td style="text-align:right">1132</td>
             <td style="text-align:right">19</td>
@@ -188,7 +226,9 @@
             <td style="font-weight:500">茶水间经济学</td>
             <td>易方达基金</td>
             <td style="text-align:right">6,830</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="对话三点下班浩哥：他说感谢股市改写了他的人生">对话三点下班浩哥：他说感谢股市改写了他的人生</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="对话三点下班浩哥：他说感谢股市改写了他的人生">对话三点下班浩哥：他说感谢股市改写了他的人生</td>
             <td>2026-01-13</td>
             <td style="text-align:right">3159</td>
             <td style="text-align:right">27</td>
@@ -197,7 +237,9 @@
             <td style="font-weight:500">泰客Talk</td>
             <td>国泰基金</td>
             <td style="text-align:right">6,276</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Vol 27 Z世代的新年消费回忆录">Vol 27 Z世代的新年消费回忆录</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Vol 27 Z世代的新年消费回忆录">Vol 27 Z世代的新年消费回忆录</td>
             <td>2026-03-11</td>
             <td style="text-align:right">3603</td>
             <td style="text-align:right">215</td>
@@ -206,7 +248,9 @@
             <td style="font-weight:500">时间嘉讲</td>
             <td>嘉实基金</td>
             <td style="text-align:right">5,384</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Ep10.当“一盒内存条=一套房”：这轮半导体行情谁在定价？">Ep10.当“一盒内存条=一套房”：这轮半导体行情谁在定价？</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Ep10.当“一盒内存条=一套房”：这轮半导体行情谁在定价？">Ep10.当“一盒内存条=一套房”：这轮半导体行情谁在定价？</td>
             <td>2026-02-25</td>
             <td style="text-align:right">26006</td>
             <td style="text-align:right">514</td>
@@ -215,7 +259,9 @@
             <td style="font-weight:500">莫问钱程</td>
             <td>银华基金</td>
             <td style="text-align:right">4,475</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="养娃这条路，做好财务规划能省多少弯路？">养娃这条路，做好财务规划能省多少弯路？</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="养娃这条路，做好财务规划能省多少弯路？">养娃这条路，做好财务规划能省多少弯路？</td>
             <td>2025-09-17</td>
             <td style="text-align:right">5350</td>
             <td style="text-align:right">93</td>
@@ -224,7 +270,9 @@
             <td style="font-weight:500">财话连篇</td>
             <td>易方达基金</td>
             <td style="text-align:right">3,816</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Vol.18 | 越南市场为何快速上涨？——基金经理越南调研感受">Vol.18 | 越南市场为何快速上涨？——基金经理越南调研感受</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Vol.18 | 越南市场为何快速上涨？——基金经理越南调研感受">Vol.18 | 越南市场为何快速上涨？——基金经理越南调研感受</td>
             <td>2025-11-14</td>
             <td style="text-align:right">4689</td>
             <td style="text-align:right">36</td>
@@ -233,7 +281,9 @@
             <td style="font-weight:500">养基方程式</td>
             <td>广发基金</td>
             <td style="text-align:right">3,296</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="港股科技风起，未来路在何方？| 串台「自由进度条」">港股科技风起，未来路在何方？| 串台「自由进度条」</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="港股科技风起，未来路在何方？| 串台「自由进度条」">港股科技风起，未来路在何方？| 串台「自由进度条」</td>
             <td>2025-12-02</td>
             <td style="text-align:right">263</td>
             <td style="text-align:right">3</td>
@@ -242,7 +292,9 @@
             <td style="font-weight:500">钱途规划局</td>
             <td>汇添富基金</td>
             <td style="text-align:right">1,981</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="E20“宠物理财”小课堂：养毛孩子，怎样花钱不心疼？">E20“宠物理财”小课堂：养毛孩子，怎样花钱不心疼？</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="E20“宠物理财”小课堂：养毛孩子，怎样花钱不心疼？">E20“宠物理财”小课堂：养毛孩子，怎样花钱不心疼？</td>
             <td>2026-01-07</td>
             <td style="text-align:right">187</td>
             <td style="text-align:right">1</td>
@@ -251,7 +303,9 @@
             <td style="font-weight:500">好朋友的直播间</td>
             <td>中泰资管</td>
             <td style="text-align:right">1,595</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="E33.田瑀｜研究不必设限，结论宁缺毋滥">E33.田瑀｜研究不必设限，结论宁缺毋滥</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="E33.田瑀｜研究不必设限，结论宁缺毋滥">E33.田瑀｜研究不必设限，结论宁缺毋滥</td>
             <td>2026-03-10</td>
             <td style="text-align:right">346</td>
             <td style="text-align:right">5</td>
@@ -260,7 +314,9 @@
             <td style="font-weight:500">投资心得·基金聊天局</td>
             <td>国投瑞银基金</td>
             <td style="text-align:right">1,494</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="EP9.别内耗了，允许自己“知行不合一”">EP9.别内耗了，允许自己“知行不合一”</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="EP9.别内耗了，允许自己“知行不合一”">EP9.别内耗了，允许自己“知行不合一”</td>
             <td>2026-03-04</td>
             <td style="text-align:right">107</td>
             <td style="text-align:right">4</td>
@@ -269,7 +325,9 @@
             <td style="font-weight:500">与财同行</td>
             <td>财通基金</td>
             <td style="text-align:right">1,303</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="一线基金经理闭门分享：AI、有色、出海……2026年的钱往哪里投？">一线基金经理闭门分享：AI、有色、出海……2026年的钱往哪里投？</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="一线基金经理闭门分享：AI、有色、出海……2026年的钱往哪里投？">一线基金经理闭门分享：AI、有色、出海……2026年的钱往哪里投？</td>
             <td>2026-02-01</td>
             <td style="text-align:right">1224</td>
             <td style="text-align:right">23</td>
@@ -278,7 +336,9 @@
             <td style="font-weight:500">鹏然心动</td>
             <td>鹏华基金</td>
             <td style="text-align:right">736</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Vol 3：新消费浪潮，Z世代用"情绪货币"改写"商业规则"？|元气消费局">Vol 3：新消费浪潮，Z世代用"情绪货币"改写"商业规则"？|元气消费局</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Vol 3：新消费浪潮，Z世代用"情绪货币"改写"商业规则"？|元气消费局">Vol 3：新消费浪潮，Z世代用"情绪货币"改写"商业规则"？|元气消费局</td>
             <td>2025-11-11</td>
             <td style="text-align:right">2880</td>
             <td style="text-align:right">151</td>
@@ -287,7 +347,9 @@
             <td style="font-weight:500">基金经理一周论市</td>
             <td>银华基金</td>
             <td style="text-align:right">304</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Vol 53：银华王丽敏：“周期搭台，成长唱戏”或是未来一段时间A股的主旋律">Vol 53：银华王丽敏：“周期搭台，成长唱戏”或是未来一段时间A股的主旋律</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Vol 53：银华王丽敏：“周期搭台，成长唱戏”或是未来一段时间A股的主旋律">Vol 53：银华王丽敏：“周期搭台，成长唱戏”或是未来一段时间A股的主旋律</td>
             <td>2025-09-29</td>
             <td style="text-align:right">56</td>
             <td style="text-align:right">0</td>
@@ -296,7 +358,9 @@
             <td style="font-weight:500">好朋友</td>
             <td>中泰资管</td>
             <td style="text-align:right">51</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Vol.5 不上班的日子，跑步、做饭、好好生活">Vol.5 不上班的日子，跑步、做饭、好好生活</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Vol.5 不上班的日子，跑步、做饭、好好生活">Vol.5 不上班的日子，跑步、做饭、好好生活</td>
             <td>2026-02-25</td>
             <td style="text-align:right">70</td>
             <td style="text-align:right">5</td>
@@ -305,12 +369,21 @@
             <td style="font-weight:500">投资心法</td>
             <td>国投瑞银基金</td>
             <td style="text-align:right">28</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="0010 段永平《波士堂》访谈：敢为天下后">0010 段永平《波士堂》访谈：敢为天下后</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td class="delta " style="text-align:right">—</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="0010 段永平《波士堂》访谈：敢为天下后">0010 段永平《波士堂》访谈：敢为天下后</td>
             <td>2025-10-07</td>
             <td style="text-align:right">122</td>
             <td style="text-align:right">0</td>
         </tr></tbody>
     </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>订阅数趋势（前10名）</h2>
+    <div class="chart-container">
+      <canvas id="trendChart"></canvas>
     </div>
   </div>
 
@@ -457,6 +530,53 @@ async function handleLogout() {
 document.getElementById('auth-modal').addEventListener('click', function(e) {
   if (e.target === this) closeModal();
 });
+
+// 趋势图
+(function() {
+  const raw = {"dates": ["2026-03-13", "2026-03-14", "2026-03-15"], "series": [{"name": "大方谈钱", "data": [172333, 172752, 172829]}, {"name": "厚雪长波", "data": [118748, 119112, 119320]}, {"name": "中欧基金", "data": [74217, 74905, 75177]}, {"name": "和盘托出", "data": [49363, 49448, 49465]}, {"name": "有富同享", "data": [36947, 37422, 37519]}, {"name": "人间钱话", "data": [26875, 26887, 26886]}, {"name": "泰度Voice", "data": [22713, 22725, 22726]}, {"name": "深度求真", "data": [20483, 20509, 20510]}, {"name": "话中有金", "data": [8882, 8909, 8917]}, {"name": "德邦基金财经列车", "data": [8390, 8425, 8438]}]};
+  if (!raw.dates || raw.dates.length < 2) return;
+
+  const colors = [
+    '#1a3a5c','#e74c3c','#27ae60','#f39c12','#8e44ad',
+    '#2980b9','#16a085','#d35400','#7f8c8d','#c0392b'
+  ];
+
+  const datasets = raw.series.map((s, i) => ({
+    label: s.name,
+    data: s.data,
+    borderColor: colors[i % colors.length],
+    backgroundColor: 'transparent',
+    borderWidth: 2,
+    pointRadius: 3,
+    tension: 0.3,
+    spanGaps: true,
+  }));
+
+  new Chart(document.getElementById('trendChart'), {
+    type: 'line',
+    data: { labels: raw.dates, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 12 }, boxWidth: 12 } },
+        tooltip: {
+          callbacks: {
+            label: ctx => ctx.dataset.label + ': ' + (ctx.raw != null ? ctx.raw.toLocaleString() : 'N/A')
+          }
+        }
+      },
+      scales: {
+        y: {
+          ticks: { callback: v => v >= 10000 ? (v/10000).toFixed(1)+'w' : v.toLocaleString() }
+        },
+        x: {
+          ticks: { maxTicksLimit: 10 }
+        }
+      }
+    }
+  });
+})();
 
 </script>
 </body>

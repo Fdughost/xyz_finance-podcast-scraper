@@ -6,8 +6,9 @@
 
 import os
 import glob
+import json
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, timedelta
 from urllib.parse import quote
 
 REPORTS_DIR = 'reports'
@@ -27,6 +28,36 @@ def get_all_reports():
     return [os.path.basename(f) for f in files]
 
 
+def find_report_near_date(target_date, max_days_offset=5):
+    """找最接近 target_date 的报表，往前最多找 max_days_offset 天"""
+    for offset in range(max_days_offset + 1):
+        d = target_date - timedelta(days=offset)
+        path = os.path.join(REPORTS_DIR, f'播客监控日报_{d.strftime("%Y-%m-%d")}.xlsx')
+        if os.path.exists(path):
+            return path
+    return None
+
+
+def load_subs_map(filepath):
+    """从报表文件读取 {节目名称: 订阅数} 映射"""
+    if not filepath:
+        return {}
+    df = pd.read_excel(filepath)
+    return dict(zip(df['节目名称'], df['订阅数']))
+
+
+def fmt_delta(delta):
+    """格式化增量显示"""
+    if delta is None:
+        return '—', ''
+    if delta > 0:
+        return f'+{delta:,}', 'delta-up'
+    elif delta < 0:
+        return f'{delta:,}', 'delta-down'
+    else:
+        return '0', ''
+
+
 def generate_html():
     os.makedirs(DOCS_DIR, exist_ok=True)
 
@@ -37,19 +68,54 @@ def generate_html():
 
     df = pd.read_excel(latest)
     date_str = os.path.basename(latest).replace('播客监控日报_', '').replace('.xlsx', '')
+    latest_date = datetime.strptime(date_str, '%Y-%m-%d')
     all_reports = get_all_reports()
     generated_at = datetime.now().strftime('%Y-%m-%d %H:%M UTC')
+
+    # 加载历史数据用于增量计算
+    subs_7d = load_subs_map(find_report_near_date(latest_date - timedelta(days=7)))
+    subs_30d = load_subs_map(find_report_near_date(latest_date - timedelta(days=30)))
+
+    # 加载最近 60 天所有报表用于趋势图（最多取 60 个）
+    all_files = sorted(glob.glob(os.path.join(REPORTS_DIR, '播客监控日报_*.xlsx')))[-60:]
+    trend_dates = []
+    trend_data = {}  # {节目名称: [订阅数, ...]}
+    top_names = df['节目名称'].head(10).tolist()  # 只展示前10名的趋势
+
+    for fpath in all_files:
+        d = os.path.basename(fpath).replace('播客监控日报_', '').replace('.xlsx', '')
+        trend_dates.append(d)
+        tmp = load_subs_map(fpath)
+        for name in top_names:
+            if name not in trend_data:
+                trend_data[name] = []
+            trend_data[name].append(tmp.get(name, None))
+
+    trend_json = json.dumps({
+        'dates': trend_dates,
+        'series': [{'name': n, 'data': trend_data[n]} for n in top_names]
+    }, ensure_ascii=False)
 
     # 生成表格行
     rows_html = ''
     for i, row in df.iterrows():
         bg = '#f9f9f9' if i % 2 == 0 else '#ffffff'
+        name = row.get('节目名称', '')
+        subs = int(row['订阅数'])
+
+        d7 = (subs - subs_7d[name]) if name in subs_7d else None
+        d30 = (subs - subs_30d[name]) if name in subs_30d else None
+        d7_txt, d7_cls = fmt_delta(d7)
+        d30_txt, d30_cls = fmt_delta(d30)
+
         rows_html += f'''<tr style="background:{bg}">
             <td>{i + 1}</td>
-            <td style="font-weight:500">{row.get("节目名称", "")}</td>
+            <td style="font-weight:500">{name}</td>
             <td>{row.get("基金公司", "")}</td>
-            <td style="text-align:right">{int(row["订阅数"]):,}</td>
-            <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="{row.get("最新单集名称", "")}">{row.get("最新单集名称", "")}</td>
+            <td style="text-align:right">{subs:,}</td>
+            <td class="delta {d7_cls}" style="text-align:right">{d7_txt}</td>
+            <td class="delta {d30_cls}" style="text-align:right">{d30_txt}</td>
+            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="{row.get("最新单集名称", "")}">{row.get("最新单集名称", "")}</td>
             <td>{row.get("最新单集上线日期", "")}</td>
             <td style="text-align:right">{row.get("最新单集播放数量", "")}</td>
             <td style="text-align:right">{row.get("互动指标(点赞+收藏)", "")}</td>
@@ -62,7 +128,7 @@ def generate_html():
         encoded = quote(fname)
         archive_html += f'<li><a href="{GITHUB_RAW_BASE}/{encoded}">📥 {d} 报表</a></li>\n'
 
-    # JS auth 逻辑（单独定义避免 f-string 转义问题）
+    # JS auth 逻辑
     js_code = """
 const { createClient } = supabase;
 const sb = createClient('__SUPABASE_URL__', '__SUPABASE_ANON_KEY__');
@@ -153,7 +219,56 @@ async function handleLogout() {
 document.getElementById('auth-modal').addEventListener('click', function(e) {
   if (e.target === this) closeModal();
 });
-""".replace('__SUPABASE_URL__', SUPABASE_URL).replace('__SUPABASE_ANON_KEY__', SUPABASE_ANON_KEY)
+
+// 趋势图
+(function() {
+  const raw = __TREND_JSON__;
+  if (!raw.dates || raw.dates.length < 2) return;
+
+  const colors = [
+    '#1a3a5c','#e74c3c','#27ae60','#f39c12','#8e44ad',
+    '#2980b9','#16a085','#d35400','#7f8c8d','#c0392b'
+  ];
+
+  const datasets = raw.series.map((s, i) => ({
+    label: s.name,
+    data: s.data,
+    borderColor: colors[i % colors.length],
+    backgroundColor: 'transparent',
+    borderWidth: 2,
+    pointRadius: 3,
+    tension: 0.3,
+    spanGaps: true,
+  }));
+
+  new Chart(document.getElementById('trendChart'), {
+    type: 'line',
+    data: { labels: raw.dates, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 12 }, boxWidth: 12 } },
+        tooltip: {
+          callbacks: {
+            label: ctx => ctx.dataset.label + ': ' + (ctx.raw != null ? ctx.raw.toLocaleString() : 'N/A')
+          }
+        }
+      },
+      scales: {
+        y: {
+          ticks: { callback: v => v >= 10000 ? (v/10000).toFixed(1)+'w' : v.toLocaleString() }
+        },
+        x: {
+          ticks: { maxTicksLimit: 10 }
+        }
+      }
+    }
+  });
+})();
+""".replace('__SUPABASE_URL__', SUPABASE_URL) \
+   .replace('__SUPABASE_ANON_KEY__', SUPABASE_ANON_KEY) \
+   .replace('__TREND_JSON__', trend_json)
 
     html = f'''<!DOCTYPE html>
 <html lang="zh-CN">
@@ -162,6 +277,7 @@ document.getElementById('auth-modal').addEventListener('click', function(e) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>公募基金播客监控日报</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <style>
   * {{ box-sizing: border-box; margin: 0; padding: 0; }}
   body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f4f6f9; color: #333; }}
@@ -170,8 +286,8 @@ document.getElementById('auth-modal').addEventListener('click', function(e) {
   .header-left p {{ font-size: 13px; opacity: 0.75; margin-top: 4px; }}
   .header-right {{ display: flex; align-items: center; gap: 10px; flex-shrink: 0; }}
   #user-info {{ display: none; align-items: center; gap: 10px; }}
-  #user-email-display {{ font-size: 13px; opacity: 0.85; }}
-  .btn-header {{ background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.4); padding: 6px 16px; border-radius: 6px; cursor: pointer; font-size: 13px; }}
+  #user-email-display {{ font-size: 13px; opacity: 0.85; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }}
+  .btn-header {{ background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.4); padding: 6px 16px; border-radius: 6px; cursor: pointer; font-size: 13px; white-space: nowrap; }}
   .btn-header:hover {{ background: rgba(255,255,255,0.25); }}
   .container {{ max-width: 1200px; margin: 24px auto; padding: 0 16px; }}
   .card {{ background: #fff; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,.1); padding: 20px; margin-bottom: 20px; }}
@@ -179,19 +295,24 @@ document.getElementById('auth-modal').addEventListener('click', function(e) {
   .download-btn {{ display: inline-block; background: #1a7a4a; color: #fff; padding: 8px 18px; border-radius: 6px; text-decoration: none; font-size: 14px; }}
   .download-btn:hover {{ background: #155e3a; }}
   .locked-section {{ display: none; align-items: center; gap: 12px; color: #888; font-size: 14px; }}
-  .btn-login-inline {{ background: #1a3a5c; color: #fff; border: none; padding: 6px 14px; border-radius: 5px; cursor: pointer; font-size: 13px; }}
+  .btn-login-inline {{ background: #1a3a5c; color: #fff; border: none; padding: 6px 14px; border-radius: 5px; cursor: pointer; font-size: 13px; white-space: nowrap; }}
   .btn-login-inline:hover {{ background: #0f2540; }}
+  .table-wrap {{ overflow-x: auto; -webkit-overflow-scrolling: touch; }}
   table {{ width: 100%; border-collapse: collapse; font-size: 13px; }}
   th {{ background: #1a3a5c; color: #fff; padding: 10px 12px; text-align: left; white-space: nowrap; }}
-  td {{ padding: 9px 12px; border-bottom: 1px solid #eee; vertical-align: middle; }}
+  td {{ padding: 9px 12px; border-bottom: 1px solid #eee; vertical-align: middle; white-space: nowrap; }}
   tr:hover td {{ background: #eef3fb !important; }}
+  .delta {{ font-weight: 500; }}
+  .delta-up {{ color: #e74c3c; }}
+  .delta-down {{ color: #27ae60; }}
   .archive-list {{ list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }}
   .archive-list a {{ color: #1a3a5c; text-decoration: none; font-size: 13px; padding: 5px 10px; border: 1px solid #c8d6e5; border-radius: 4px; }}
   .archive-list a:hover {{ background: #eef3fb; }}
+  .chart-container {{ position: relative; height: 320px; }}
   footer {{ text-align: center; font-size: 12px; color: #999; padding: 20px; }}
   /* Modal */
-  .modal-overlay {{ display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; }}
-  .modal-box {{ background: #fff; border-radius: 12px; padding: 32px; width: 100%; max-width: 400px; position: relative; margin: 16px; }}
+  .modal-overlay {{ display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; padding: 16px; }}
+  .modal-box {{ background: #fff; border-radius: 12px; padding: 32px; width: 100%; max-width: 400px; position: relative; }}
   .modal-title {{ font-size: 18px; font-weight: 600; color: #1a3a5c; margin-bottom: 20px; }}
   .modal-close {{ position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 20px; cursor: pointer; color: #999; line-height: 1; }}
   .tabs {{ display: flex; border-bottom: 2px solid #eee; margin-bottom: 20px; }}
@@ -204,6 +325,15 @@ document.getElementById('auth-modal').addEventListener('click', function(e) {
   .btn-submit {{ width: 100%; background: #1a3a5c; color: #fff; border: none; padding: 11px; border-radius: 6px; font-size: 15px; cursor: pointer; margin-top: 4px; }}
   .btn-submit:hover {{ background: #0f2540; }}
   #auth-msg {{ font-size: 13px; margin-top: 12px; min-height: 18px; color: #e74c3c; text-align: center; }}
+  /* 移动端 */
+  @media (max-width: 640px) {{
+    header {{ padding: 16px; }}
+    .header-left h1 {{ font-size: 18px; }}
+    .container {{ margin: 12px auto; padding: 0 10px; }}
+    .card {{ padding: 14px; }}
+    td, th {{ padding: 8px 8px; font-size: 12px; }}
+    .chart-container {{ height: 240px; }}
+  }}
 </style>
 </head>
 <body>
@@ -235,14 +365,22 @@ document.getElementById('auth-modal').addEventListener('click', function(e) {
 
   <div class="card">
     <h2>播客数据总览</h2>
-    <div style="overflow-x:auto">
+    <div class="table-wrap">
     <table>
       <thead><tr>
         <th>#</th><th>节目名称</th><th>基金公司</th><th>订阅数</th>
-        <th>最新单集</th><th>上线日期</th><th>播放量</th><th>互动（点赞+收藏）</th>
+        <th>7日增量</th><th>30日增量</th>
+        <th>最新单集</th><th>上线日期</th><th>播放量</th><th>互动</th>
       </tr></thead>
       <tbody>{rows_html}</tbody>
     </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>订阅数趋势（前10名）</h2>
+    <div class="chart-container">
+      <canvas id="trendChart"></canvas>
     </div>
   </div>
 
