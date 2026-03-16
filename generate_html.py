@@ -210,11 +210,17 @@ async function handleLogin() {
   if (!email || !password) return;
   document.getElementById('auth-msg').style.color = '#666';
   document.getElementById('auth-msg').textContent = '登录中...';
-  const { error } = await sb.auth.signInWithPassword({ email, password });
+  const { data, error } = await sb.auth.signInWithPassword({ email, password });
   if (error) {
     document.getElementById('auth-msg').style.color = '#e74c3c';
     document.getElementById('auth-msg').textContent = '登录失败：' + (error.message.includes('Invalid') ? '邮箱或密码错误' : error.message);
   } else {
+    sb.from('login_logs').insert({
+      email: data.user.email,
+      user_agent: navigator.userAgent.substring(0, 300),
+    }).then(({ error: logErr }) => {
+      if (logErr) console.warn('登录日志写入失败:', logErr.message);
+    });
     closeModal();
   }
 }

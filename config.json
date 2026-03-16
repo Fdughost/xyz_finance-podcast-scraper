@@ -174,6 +174,107 @@
       "category": "公募基金",
       "fund_company_name": "雪球财富",
       "enabled": true
+    },
+
+    {
+      "name": "解盘一刻",
+      "podcast_id": "656d2c4832fc3737bb380de4",
+      "category": "公募基金",
+      "fund_company_name": "华夏基金",
+      "enabled": true
+    },
+
+    {
+      "name": "中金研究院",
+      "podcast_id": "610d156f5df6959814391430",
+      "category": "泛财经",
+      "fund_company_name": "中金公司",
+      "enabled": true
+    },
+    {
+      "name": "对话金融人",
+      "podcast_id": "614da24187ad4d9340d860df",
+      "category": "泛财经",
+      "fund_company_name": "广发证券",
+      "enabled": true
+    },
+
+    {
+      "name": "投资ABC",
+      "podcast_id": "64b0bfde585daadfc82f3b12",
+      "category": "泛财经",
+      "fund_company_name": "",
+      "enabled": true
+    },
+    {
+      "name": "商业就是这样",
+      "podcast_id": "6022a180ef5fdaddc30bb101",
+      "category": "泛财经",
+      "fund_company_name": "第一财经",
+      "enabled": true
+    },
+    {
+      "name": "面基",
+      "podcast_id": "6388760f22567e8ea6ad070f",
+      "category": "泛财经",
+      "fund_company_name": "",
+      "enabled": true
+    },
+    {
+      "name": "起朱楼宴宾客",
+      "podcast_id": "61dd99a47b29652ff572257b",
+      "category": "泛财经",
+      "fund_company_name": "",
+      "enabled": true
+    },
+    {
+      "name": "三点下班",
+      "podcast_id": "62bd91adf288fd4eae3606ff",
+      "category": "泛财经",
+      "fund_company_name": "",
+      "enabled": true
+    },
+    {
+      "name": "The Wanderers 流浪者",
+      "podcast_id": "65539db173f6183e975cfccc",
+      "category": "泛财经",
+      "fund_company_name": "",
+      "enabled": true
+    },
+    {
+      "name": "十分吸引",
+      "podcast_id": "66b4ec5e29b084247093375f",
+      "category": "泛财经",
+      "fund_company_name": "",
+      "enabled": true
+    },
+    {
+      "name": "钱粮胡同",
+      "podcast_id": "5e7cc056418a84a0469754be",
+      "category": "泛财经",
+      "fund_company_name": "",
+      "enabled": true
+    },
+    {
+      "name": "燕妮聊基金",
+      "podcast_id": "65d541dcc10c027a33679998",
+      "category": "泛财经",
+      "fund_company_name": "",
+      "enabled": true
+    },
+    {
+      "name": "听懂掌声",
+      "podcast_id": "62dfff0732518424c87e7933",
+      "category": "泛财经",
+      "fund_company_name": "",
+      "enabled": true
+    },
+    {
+      "name": "无人知晓",
+      "podcast_id": "611719d3cb0b82e1df0ad29e",
+      "category": "泛财经",
+      "fund_company_name": "",
+      "enabled": true
     }
 
   ],
