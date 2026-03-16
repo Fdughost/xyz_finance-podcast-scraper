@@ -214,5 +214,419 @@
     "candidates": [],
     "from_cache": false,
     "resolved_at": "2026-03-05 18:00:15"
+  },
+  "19447301a785c64a2d7ff75441460e1683884301": {
+    "input": "华夏早播间",
+    "status": "not_found",
+    "podcast_id": "",
+    "selected_url": "",
+    "selected_title": "",
+    "score": 0.0,
+    "source": "",
+    "candidates": [],
+    "from_cache": false,
+    "resolved_at": "2026-03-16 16:25:51"
+  },
+  "a9afa0ea0a37a2bc8a2aca444e5ecc3e78c3ccbd": {
+    "input": "解盘一刻",
+    "status": "ambiguous",
+    "podcast_id": "",
+    "selected_url": "",
+    "selected_title": "",
+    "min_score": 0.86,
+    "min_gap": 0.05,
+    "candidates": [
+      {
+        "podcast_id": "66e12e678fcf4d343c4e4896",
+        "url": "https://www.xiaoyuzhoufm.com/podcast/66e12e678fcf4d343c4e4896",
+        "title": "",
+        "score": 0.0
+      }
+    ],
+    "from_cache": false,
+    "source": "so",
+    "auth_used": false,
+    "resolved_at": "2026-03-16 15:19:39"
+  },
+  "2d850ba44e745c4cdb8e70b655459820f49eec8b": {
+    "input": "投资来电",
+    "status": "ambiguous",
+    "podcast_id": "",
+    "selected_url": "",
+    "selected_title": "",
+    "score": 0.0,
+    "source": "sogou",
+    "candidates": [
+      {
+        "podcast_id": "643cdf1ad3d94ec2ad39ae94",
+        "url": "https://www.xiaoyuzhoufm.com/podcast/643cdf1ad3d94ec2ad39ae94",
+        "title": "投资实战派",
+        "score": 0.4444
+      }
+    ],
+    "from_cache": false,
+    "resolved_at": "2026-03-16 16:25:55"
+  },
+  "cf1d809063051100948f1912f973e7ac1790994c": {
+    "input": "FUND TALK",
+    "status": "not_found",
+    "podcast_id": "",
+    "selected_url": "",
+    "selected_title": "",
+    "score": 0.0,
+    "source": "",
+    "candidates": [],
+    "from_cache": false,
+    "resolved_at": "2026-03-16 16:25:59"
+  },
+  "0f6ed733d77ae38a3d943197eb8dd25cb9ec2a75": {
+    "input": "Bosera财经热点",
+    "status": "not_found",
+    "podcast_id": "",
+    "selected_url": "",
+    "selected_title": "",
+    "score": 0.0,
+    "source": "",
+    "candidates": [],
+    "from_cache": false,
+    "resolved_at": "2026-03-16 16:26:02"
+  },
+  "382bf5b497e6c0ac26773221343d11f15cc9a11e": {
+    "input": "从0开始学资产配置",
+    "status": "not_found",
+    "podcast_id": "",
+    "selected_url": "",
+    "selected_title": "",
+    "score": 0.0,
+    "source": "",
+    "candidates": [],
+    "from_cache": false,
+    "resolved_at": "2026-03-16 16:26:05"
+  },
+  "76c2c64b97b96a32bf5be23259a73432fa92abd5": {
+    "input": "投资不南",
+    "status": "not_found",
+    "podcast_id": "",
+    "selected_url": "",
+    "selected_title": "",
+    "score": 0.0,
+    "source": "",
+    "candidates": [],
+    "from_cache": false,
+    "resolved_at": "2026-03-16 16:26:08"
+  },
+  "adfdf6610fccc56d51b716f3c3abfe5770005b71": {
+    "input": "基本面投资读书会",
+    "status": "not_found",
+    "podcast_id": "",
+    "selected_url": "",
+    "selected_title": "",
+    "score": 0.0,
+    "source": "",
+    "candidates": [],
+    "from_cache": false,
+    "resolved_at": "2026-03-16 16:26:11"
+  },
+  "da0e7ed8589119ff1ca14688ac2f6cfc92403d3d": {
+    "input": "中金研究院",
+    "status": "ambiguous",
+    "podcast_id": "",
+    "selected_url": "",
+    "selected_title": "",
+    "min_score": 0.86,
+    "min_gap": 0.05,
+    "candidates": [
+      {
+        "podcast_id": "603d8cd7b3814560cb2e0021",
+        "url": "https://www.xiaoyuzhoufm.com/podcast/603d8cd7b3814560cb2e0021",
+        "title": "",
+        "score": 0.0
+      }
+    ],
+    "from_cache": false,
+    "source": "so",
+    "auth_used": false,
+    "resolved_at": "2026-03-16 15:20:55"
+  },
+  "42eb5448ffdbbecb359a2a80c0a55e0ac35d60d5": {
+    "input": "华宝财富魔方",
+    "status": "not_found",
+    "podcast_id": "",
+    "selected_url": "",
+    "selected_title": "",
+    "score": 0.0,
+    "source": "",
+    "candidates": [],
+    "from_cache": false,
+    "resolved_at": "2026-03-16 16:26:14"
+  },
+  "64e83ebfe3c23e7bfac2f1b69d438403589e460b": {
+    "input": "对话金融人",
+    "status": "ambiguous",
+    "podcast_id": "",
+    "selected_url": "",
+    "selected_title": "",
+    "min_score": 0.86,
+    "min_gap": 0.05,
+    "candidates": [
+      {
+        "podcast_id": "614da24187ad4d9340d860df",
+        "url": "https://www.xiaoyuzhoufm.com/podcast/614da24187ad4d9340d860df",
+        "title": "",
+        "score": 0.0
+      }
+    ],
+    "from_cache": false,
+    "source": "sogou",
+    "auth_used": false,
+    "resolved_at": "2026-03-16 15:21:45"
+  },
+  "3ac292f538b370d78deb7da9fc29170ba5b403b3": {
+    "input": "光大证券投研小分队",
+    "status": "not_found",
+    "podcast_id": "",
+    "selected_url": "",
+    "selected_title": "",
+    "score": 0.0,
+    "source": "",
+    "candidates": [],
+    "from_cache": false,
+    "resolved_at": "2026-03-16 16:26:17"
+  },
+  "342bbf237f8d58a5d35eb60cf30716b2faca8245": {
+    "input": "投资ABC",
+    "status": "ambiguous",
+    "podcast_id": "",
+    "selected_url": "",
+    "selected_title": "",
+    "min_score": 0.86,
+    "min_gap": 0.05,
+    "candidates": [
+      {
+        "podcast_id": "64b0bfde585daadfc82f3b12",
+        "url": "https://www.xiaoyuzhoufm.com/podcast/64b0bfde585daadfc82f3b12",
+        "title": "",
+        "score": 0.0
+      }
+    ],
+    "from_cache": false,
+    "source": "so",
+    "auth_used": false,
+    "resolved_at": "2026-03-16 15:22:40"
+  },
+  "d2ea2160e7d41452392df78436e683f9dd20a91b": {
+    "input": "商业就是这样",
+    "status": "ambiguous",
+    "podcast_id": "",
+    "selected_url": "",
+    "selected_title": "",
+    "min_score": 0.86,
+    "min_gap": 0.05,
+    "candidates": [
+      {
+        "podcast_id": "6022a180ef5fdaddc30bb101",
+        "url": "https://www.xiaoyuzhoufm.com/podcast/6022a180ef5fdaddc30bb101",
+        "title": "",
+        "score": 0.0
+      }
+    ],
+    "from_cache": false,
+    "source": "so",
+    "auth_used": false,
+    "resolved_at": "2026-03-16 15:22:46"
+  },
+  "b1ef899e24e84a681bd5ade0e92f62bc0dd4a6e3": {
+    "input": "面基",
+    "status": "ambiguous",
+    "podcast_id": "",
+    "selected_url": "",
+    "selected_title": "",
+    "min_score": 0.86,
+    "min_gap": 0.05,
+    "candidates": [
+      {
+        "podcast_id": "6388760f22567e8ea6ad070f",
+        "url": "https://www.xiaoyuzhoufm.com/podcast/6388760f22567e8ea6ad070f",
+        "title": "",
+        "score": 0.0
+      }
+    ],
+    "from_cache": false,
+    "source": "so",
+    "auth_used": false,
+    "resolved_at": "2026-03-16 15:22:56"
+  },
+  "a29e883f100f21a6e18e66888ebb818a406d9aac": {
+    "input": "起朱楼宴宾客",
+    "status": "ambiguous",
+    "podcast_id": "",
+    "selected_url": "",
+    "selected_title": "",
+    "min_score": 0.86,
+    "min_gap": 0.05,
+    "candidates": [
+      {
+        "podcast_id": "61dd99a47b29652ff572257b",
+        "url": "https://www.xiaoyuzhoufm.com/podcast/61dd99a47b29652ff572257b",
+        "title": "",
+        "score": 0.0
+      }
+    ],
+    "from_cache": false,
+    "source": "so",
+    "auth_used": false,
+    "resolved_at": "2026-03-16 15:23:02"
+  },
+  "eadfc9405c88f9229f26914cf1d91e12a46bdfa6": {
+    "input": "三点下班",
+    "status": "not_found",
+    "podcast_id": "",
+    "selected_url": "",
+    "selected_title": "",
+    "min_score": 0.86,
+    "min_gap": 0.05,
+    "candidates": [],
+    "from_cache": false,
+    "source": "",
+    "auth_used": false,
+    "resolved_at": "2026-03-16 15:23:15"
+  },
+  "e60b542c7c1d7e01ab400e8348900cf48ecff6ea": {
+    "input": "The Wanderers 流浪者",
+    "status": "ambiguous",
+    "podcast_id": "",
+    "selected_url": "",
+    "selected_title": "",
+    "min_score": 0.86,
+    "min_gap": 0.05,
+    "candidates": [
+      {
+        "podcast_id": "65539db173f6183e975cfccc",
+        "url": "https://www.xiaoyuzhoufm.com/podcast/65539db173f6183e975cfccc",
+        "title": "",
+        "score": 0.0
+      },
+      {
+        "podcast_id": "646d6bfa53a5e5ea14e69c7c",
+        "url": "https://www.xiaoyuzhoufm.com/podcast/646d6bfa53a5e5ea14e69c7c",
+        "title": "",
+        "score": 0.0
+      }
+    ],
+    "from_cache": false,
+    "source": "sogou",
+    "auth_used": false,
+    "resolved_at": "2026-03-16 15:23:23"
+  },
+  "b33934d42bc393de275d4d5f47ddb0ec2db2cf40": {
+    "input": "十分吸引",
+    "status": "ambiguous",
+    "podcast_id": "",
+    "selected_url": "",
+    "selected_title": "",
+    "min_score": 0.86,
+    "min_gap": 0.05,
+    "candidates": [
+      {
+        "podcast_id": "66b4ec5e29b084247093375f",
+        "url": "https://www.xiaoyuzhoufm.com/podcast/66b4ec5e29b084247093375f",
+        "title": "",
+        "score": 0.0
+      }
+    ],
+    "from_cache": false,
+    "source": "so",
+    "auth_used": false,
+    "resolved_at": "2026-03-16 15:23:29"
+  },
+  "f3d0ed7a4aaed2254516cf908c2321d5eb8fe3fd": {
+    "input": "钱粮胡同",
+    "status": "ambiguous",
+    "podcast_id": "",
+    "selected_url": "",
+    "selected_title": "",
+    "min_score": 0.86,
+    "min_gap": 0.05,
+    "candidates": [
+      {
+        "podcast_id": "5e7cc056418a84a0469754be",
+        "url": "https://www.xiaoyuzhoufm.com/podcast/5e7cc056418a84a0469754be",
+        "title": "",
+        "score": 0.0
+      }
+    ],
+    "from_cache": false,
+    "source": "sogou",
+    "auth_used": false,
+    "resolved_at": "2026-03-16 15:24:17"
+  },
+  "df892bf722cfa6c7a015f1ae789f90417e6ff64a": {
+    "input": "燕妮聊基金",
+    "status": "ambiguous",
+    "podcast_id": "",
+    "selected_url": "",
+    "selected_title": "",
+    "min_score": 0.86,
+    "min_gap": 0.05,
+    "candidates": [
+      {
+        "podcast_id": "65d541dcc10c027a33679998",
+        "url": "https://www.xiaoyuzhoufm.com/podcast/65d541dcc10c027a33679998",
+        "title": "",
+        "score": 0.0
+      }
+    ],
+    "from_cache": false,
+    "source": "so",
+    "auth_used": false,
+    "resolved_at": "2026-03-16 15:24:42"
+  },
+  "082a01ce5c47ca4288fa1d1f71d2f5e0e9bd5e4a": {
+    "input": "听懂掌声",
+    "status": "ambiguous",
+    "podcast_id": "",
+    "selected_url": "",
+    "selected_title": "",
+    "min_score": 0.86,
+    "min_gap": 0.05,
+    "candidates": [
+      {
+        "podcast_id": "6543750424e7ad2107e8b0b5",
+        "url": "https://www.xiaoyuzhoufm.com/podcast/6543750424e7ad2107e8b0b5",
+        "title": "",
+        "score": 0.0
+      },
+      {
+        "podcast_id": "64e6de593fa4090b741ee0e4",
+        "url": "https://www.xiaoyuzhoufm.com/podcast/64e6de593fa4090b741ee0e4",
+        "title": "",
+        "score": 0.0
+      }
+    ],
+    "from_cache": false,
+    "source": "so",
+    "auth_used": false,
+    "resolved_at": "2026-03-16 15:25:05"
+  },
+  "3713e3dce53b7a4a1c0f873d342d61c0b4beeaf7": {
+    "input": "无人知晓",
+    "status": "ambiguous",
+    "podcast_id": "",
+    "selected_url": "",
+    "selected_title": "",
+    "min_score": 0.86,
+    "min_gap": 0.05,
+    "candidates": [
+      {
+        "podcast_id": "611719d3cb0b82e1df0ad29e",
+        "url": "https://www.xiaoyuzhoufm.com/podcast/611719d3cb0b82e1df0ad29e",
+        "title": "",
+        "score": 0.0
+      }
+    ],
+    "from_cache": false,
+    "source": "so",
+    "auth_used": false,
+    "resolved_at": "2026-03-16 15:25:11"
   }
 }
