@@ -2,8 +2,8 @@ name: 播客监控日报
 
 on:
   schedule:
-    # 每天北京时间 10:00 运行（UTC 02:00）
-    - cron: '0 2 * * *'
+    # 每天北京时间 06:00 运行（UTC 22:00 前一天）
+    - cron: '0 22 * * *'
   workflow_dispatch:  # 允许手动触发
 
 permissions:
