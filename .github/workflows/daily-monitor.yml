@@ -39,11 +39,14 @@ jobs:
       - name: 生成网页
         run: python generate_html.py
 
+      - name: 生成 Next.js 数据 JSON
+        run: python generate_data_json.py
+
       - name: 提交报表和数据库
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add reports/ data/podcast_monitor.db docs/
+          git add reports/ data/podcast_monitor.db data/run_summary.json docs/ web/public/data.json
           # 如果有变更才提交
           git diff --cached --quiet || git commit -m "chore: 自动生成播客日报 $(date +'%Y-%m-%d')"
           git push
