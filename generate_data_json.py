@@ -90,7 +90,7 @@ def generate_data_json():
 
     result = {
         'date': date_str,
-        'generated_at': datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC'),
+        'generated_at': datetime.now().strftime('%Y-%m-%d %H:%M CST'),
         'podcasts': podcasts,
         'trend': {
             'dates': trend_dates,
