@@ -24,6 +24,7 @@ export function PodcastTable({ podcasts }: PodcastTableProps) {
   const filtered = podcasts.filter(
     (p) =>
       p.name.includes(search) ||
+      p.category.includes(search) ||
       p.company.includes(search) ||
       p.latest_episode.includes(search)
   )
@@ -44,7 +45,8 @@ export function PodcastTable({ podcasts }: PodcastTableProps) {
             <TableRow className="bg-muted/50">
               <TableHead className="w-12 text-center">#</TableHead>
               <TableHead>节目名称</TableHead>
-              <TableHead>基金公司</TableHead>
+              <TableHead>分类</TableHead>
+              <TableHead>机构名称</TableHead>
               <TableHead className="text-right">订阅数</TableHead>
               <TableHead className="text-right">7日增量</TableHead>
               <TableHead className="text-right">30日增量</TableHead>
@@ -58,6 +60,7 @@ export function PodcastTable({ podcasts }: PodcastTableProps) {
               <TableRow key={p.rank} className="hover:bg-muted/30">
                 <TableCell className="text-center text-muted-foreground text-sm">{p.rank}</TableCell>
                 <TableCell className="font-medium">{p.name}</TableCell>
+                <TableCell className="text-muted-foreground text-sm">{p.category}</TableCell>
                 <TableCell className="text-muted-foreground text-sm">{p.company}</TableCell>
                 <TableCell className="text-right font-mono">{p.subs.toLocaleString()}</TableCell>
                 <TableCell className="text-right font-mono text-sm">
@@ -88,7 +91,7 @@ export function PodcastTable({ podcasts }: PodcastTableProps) {
                 </span>
                 <div className="flex-1 min-w-0">
                   <div className="font-semibold truncate">{p.name}</div>
-                  <div className="text-sm text-muted-foreground">{p.company}</div>
+                  <div className="text-sm text-muted-foreground">{p.category}{p.company ? ` · ${p.company}` : ''}</div>
                   <div className="mt-2 grid grid-cols-4 gap-2 text-center">
                     <div>
                       <div className="text-base font-bold font-mono">{p.subs.toLocaleString()}</div>

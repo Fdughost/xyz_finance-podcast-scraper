@@ -39,7 +39,8 @@ class PodcastExcelGenerator:
         # 字段映射（中文名称）
         column_mapping = {
             'title': '节目名称',
-            'fund_company_name': '基金公司',
+            'category': '分类',
+            'institution_name': '机构名称',
             'subscribers': '订阅数',
             'latest_episode_title': '最新单集名称',
             'latest_episode_date': '最新单集上线日期',

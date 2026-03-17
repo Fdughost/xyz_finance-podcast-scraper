@@ -60,7 +60,8 @@ def generate_data_json():
         podcasts.append({
             'rank': i + 1,
             'name': name,
-            'company': str(row.get('基金公司', '') or ''),
+            'category': str(row.get('分类', '') or ''),
+            'company': str(row.get('机构名称', '') or ''),
             'subs': subs,
             'delta_7d': d7,
             'delta_30d': d30,

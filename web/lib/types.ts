@@ -1,6 +1,7 @@
 export interface Podcast {
   rank: number
   name: string
+  category: string
   company: string
   subs: number
   delta_7d: number | null

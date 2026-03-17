@@ -111,7 +111,8 @@ def generate_html():
         rows_html += f'''<tr style="background:{bg}">
             <td>{i + 1}</td>
             <td style="font-weight:500">{name}</td>
-            <td>{row.get("基金公司", "")}</td>
+            <td>{row.get("分类", "")}</td>
+            <td>{row.get("机构名称", "")}</td>
             <td style="text-align:right">{subs:,}</td>
             <td class="delta {d7_cls}" style="text-align:right">{d7_txt}</td>
             <td class="delta {d30_cls}" style="text-align:right">{d30_txt}</td>
@@ -136,7 +137,7 @@ def generate_html():
     <span class="pod-rank">{i + 1}</span>
     <div>
       <div class="pod-name">{name}</div>
-      <div class="pod-company">{row.get("基金公司", "")}</div>
+      <div class="pod-company">{row.get("分类", "")} · {row.get("机构名称", "")}</div>
     </div>
   </div>
   <div class="pod-stats">
@@ -470,7 +471,7 @@ document.getElementById('auth-modal').addEventListener('click', function(e) {
     <div class="desktop-table table-wrap">
     <table>
       <thead><tr>
-        <th>#</th><th>节目名称</th><th>基金公司</th><th>订阅数</th>
+        <th>#</th><th>节目名称</th><th>分类</th><th>机构名称</th><th>订阅数</th>
         <th>7日增量</th><th>30日增量</th>
         <th>最新单集</th><th>上线日期</th><th>播放量</th><th>互动</th>
       </tr></thead>

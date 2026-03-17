@@ -527,7 +527,7 @@ class XiaoyuzhouCrawler:
                 if not info.get('title'): info['title'] = p.get('name')
                 info['category'] = p.get('category', '未分类')
                 info['config_name'] = p.get('name')
-                info['fund_company_name'] = p.get('fund_company_name', p.get('fund_company', ''))
+                info['institution_name'] = p.get('institution_name', p.get('fund_company_name', p.get('fund_company', '')))
                 results.append(info)
                 logger.info(f"成功: {info['title']}, 播放: {info['latest_episode_play']}, 最新集: {info['latest_episode_title'][:20]}")
         return results

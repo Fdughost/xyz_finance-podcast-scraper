@@ -4,175 +4,175 @@
       "name": "大方谈钱",
       "podcast_id": "66ed1e69dbf9bb012f843e39",
       "category": "公募基金",
-      "fund_company_name": "华夏基金",
+      "institution_name": "华夏基金",
       "enabled": true
     },
     {
       "name": "中欧基金播客",
       "podcast_id": "66594e8894977a26ef2c7823",
       "category": "公募基金",
-      "fund_company_name": "中欧基金",
+      "institution_name": "中欧基金",
       "enabled": true
     },
     {
       "name": "有富同享",
       "podcast_id": "685e568f8d5a9c9c2e59bc59",
       "category": "公募基金",
-      "fund_company_name": "富国基金",
+      "institution_name": "富国基金",
       "enabled": true
     },
     {
       "name": "与财同行",
       "podcast_id": "68bfc415120c1ebd3ae51049",
       "category": "公募基金",
-      "fund_company_name": "财通基金",
+      "institution_name": "财通基金",
       "enabled": true
     },
     {
       "name": "人间钱话",
       "podcast_id": "65716792d6e0ff5822d25668",
       "category": "公募基金",
-      "fund_company_name": "天弘基金",
+      "institution_name": "天弘基金",
       "enabled": true
     },
     {
       "name": "深度求真",
       "podcast_id": "67a40d8651337de4afb904bf",
       "category": "公募基金",
-      "fund_company_name": "大成基金",
+      "institution_name": "大成基金",
       "enabled": true
     },
     {
       "name": "养基方程式",
       "podcast_id": "63e30c0b0d7e8eaa72262020",
       "category": "公募基金",
-      "fund_company_name": "广发基金",
+      "institution_name": "广发基金",
       "enabled": true
     },
     {
       "name": "基金经理一周论市",
       "podcast_id": "66c2ddd333591c27be1eab94",
       "category": "公募基金",
-      "fund_company_name": "银华基金",
+      "institution_name": "银华基金",
       "enabled": true
     },
     {
       "name": "好朋友的播客",
       "podcast_id": "64bcf642d0844ea8124f440e",
       "category": "公募基金",
-      "fund_company_name": "中泰资管",
+      "institution_name": "中泰资管",
       "enabled": true
     },
     {
       "name": "好朋友的直播间",
       "podcast_id": "66bab65359d80f45bc4536b0",
       "category": "公募基金",
-      "fund_company_name": "中泰资管",
+      "institution_name": "中泰资管",
       "enabled": true
     },
     {
       "name": "德邦基金财经列车",
       "podcast_id": "6696077d37236c546e76dadb",
       "category": "公募基金",
-      "fund_company_name": "德邦基金",
+      "institution_name": "德邦基金",
       "enabled": true
     },
     {
       "name": "投资心得·基金聊天局",
       "podcast_id": "68196909d65ef17b3c31dc64",
       "category": "公募基金",
-      "fund_company_name": "国投瑞银基金",
+      "institution_name": "国投瑞银基金",
       "enabled": true
     },
     {
       "name": "投资心法·基金访谈录",
       "podcast_id": "68e51df4f9024a8d552b97a0",
       "category": "公募基金",
-      "fund_company_name": "国投瑞银基金",
+      "institution_name": "国投瑞银基金",
       "enabled": true
     },
     {
       "name": "时间嘉讲",
       "podcast_id": "podcast/685a2f44a1309edcc5eb002d",
       "category": "公募基金",
-      "fund_company_name": "嘉实基金",
+      "institution_name": "嘉实基金",
       "enabled": true
     },
     {
       "name": "泰客Talk",
       "podcast_id": "66713893c26e396a369ed206",
       "category": "公募基金",
-      "fund_company_name": "国泰基金",
+      "institution_name": "国泰基金",
       "enabled": true
     },
     {
       "name": "茶水间经济学",
       "podcast_id": "67ca49d7f38eac9e544b9e02",
       "category": "公募基金",
-      "fund_company_name": "易方达基金",
+      "institution_name": "易方达基金",
       "enabled": true
     },
     {
       "name": "莫问钱程",
       "podcast_id": "67f777938f7b771017a82ee0",
       "category": "公募基金",
-      "fund_company_name": "银华基金",
+      "institution_name": "银华基金",
       "enabled": true
     },
     {
       "name": "财话连篇",
       "podcast_id": "672073aa1d2e86f67ab936ed",
       "category": "公募基金",
-      "fund_company_name": "易方达基金",
+      "institution_name": "易方达基金",
       "enabled": true
     },
     {
       "name": "钱途规划局",
       "podcast_id": "68ac193967d32ea07cdeaa15",
       "category": "公募基金",
-      "fund_company_name": "汇添富基金",
+      "institution_name": "汇添富基金",
       "enabled": true
     },
     {
       "name": "随基漫步",
       "podcast_id": "649a8998a5b2b405c6d152eb",
       "category": "公募基金",
-      "fund_company_name": "兴全基金",
+      "institution_name": "兴全基金",
       "enabled": true
     },
     {
       "name": "鹏然心动",
       "podcast_id": "68f9d033fa9d08a7bb5b5691",
       "category": "公募基金",
-      "fund_company_name": "鹏华基金",
+      "institution_name": "鹏华基金",
       "enabled": true
     },
     {
       "name": "话中有金",
       "podcast_id": "64f83ea4e490c5dee580ce7d",
       "category": "公募基金",
-      "fund_company_name": "中金资管",
+      "institution_name": "中金资管",
       "enabled": true
     },
     {
       "name": "泰度Voice",
       "podcast_id": "62b3227a053b85adc57a728a",
       "category": "公募基金",
-      "fund_company_name": "华泰证券",
+      "institution_name": "华泰证券",
       "enabled": true
     },
     {
       "name": "和盘托出",
       "podcast_id": "68021db8f5eff49a89582340",
       "category": "公募基金",
-      "fund_company_name": "蚂蚁财富",
+      "institution_name": "蚂蚁财富",
       "enabled": true
     },
     {
       "name": "厚雪长波",
       "podcast_id": "646d6bfa53a5e5ea14e69c7c",
       "category": "公募基金",
-      "fund_company_name": "雪球财富",
+      "institution_name": "雪球财富",
       "enabled": true
     },
 
@@ -180,100 +180,100 @@
       "name": "解盘一刻",
       "podcast_id": "656d2c4832fc3737bb380de4",
       "category": "公募基金",
-      "fund_company_name": "华夏基金",
+      "institution_name": "华夏基金",
       "enabled": true
     },
 
     {
       "name": "中金研究院",
       "podcast_id": "610d156f5df6959814391430",
-      "category": "泛财经",
-      "fund_company_name": "中金公司",
+      "category": "其他金融机构",
+      "institution_name": "中金公司",
       "enabled": true
     },
     {
       "name": "对话金融人",
       "podcast_id": "614da24187ad4d9340d860df",
-      "category": "泛财经",
-      "fund_company_name": "广发证券",
+      "category": "其他金融机构",
+      "institution_name": "广发证券",
+      "enabled": true
+    },
+    {
+      "name": "商业就是这样",
+      "podcast_id": "6022a180ef5fdaddc30bb101",
+      "category": "其他金融机构",
+      "institution_name": "第一财经",
       "enabled": true
     },
 
     {
       "name": "投资ABC",
       "podcast_id": "64b0bfde585daadfc82f3b12",
-      "category": "泛财经",
-      "fund_company_name": "",
-      "enabled": true
-    },
-    {
-      "name": "商业就是这样",
-      "podcast_id": "6022a180ef5fdaddc30bb101",
-      "category": "泛财经",
-      "fund_company_name": "第一财经",
+      "category": "独立节目",
+      "institution_name": "有知有行",
       "enabled": true
     },
     {
       "name": "面基",
       "podcast_id": "6388760f22567e8ea6ad070f",
-      "category": "泛财经",
-      "fund_company_name": "",
+      "category": "独立节目",
+      "institution_name": "老钱",
       "enabled": true
     },
     {
       "name": "起朱楼宴宾客",
       "podcast_id": "61dd99a47b29652ff572257b",
-      "category": "泛财经",
-      "fund_company_name": "",
+      "category": "独立节目",
+      "institution_name": "大卫翁",
       "enabled": true
     },
     {
       "name": "三点下班",
       "podcast_id": "62bd91adf288fd4eae3606ff",
-      "category": "泛财经",
-      "fund_company_name": "",
+      "category": "独立节目",
+      "institution_name": "李永浩、星辰",
       "enabled": true
     },
     {
       "name": "The Wanderers 流浪者",
       "podcast_id": "65539db173f6183e975cfccc",
-      "category": "泛财经",
-      "fund_company_name": "",
+      "category": "独立节目",
+      "institution_name": "zjyiran、Jason_NDV、Vincent-Lu",
       "enabled": true
     },
     {
       "name": "十分吸引",
       "podcast_id": "66b4ec5e29b084247093375f",
-      "category": "泛财经",
-      "fund_company_name": "",
+      "category": "独立节目",
+      "institution_name": "石磊",
       "enabled": true
     },
     {
       "name": "钱粮胡同",
       "podcast_id": "5e7cc056418a84a0469754be",
-      "category": "泛财经",
-      "fund_company_name": "",
+      "category": "独立节目",
+      "institution_name": "住在胡同的野人、无聊D、细菌佛",
       "enabled": true
     },
     {
       "name": "燕妮聊基金",
       "podcast_id": "65d541dcc10c027a33679998",
-      "category": "泛财经",
-      "fund_company_name": "",
+      "category": "独立节目",
+      "institution_name": "燕妮",
       "enabled": true
     },
     {
       "name": "听懂掌声",
       "podcast_id": "62dfff0732518424c87e7933",
-      "category": "泛财经",
-      "fund_company_name": "",
+      "category": "独立节目",
+      "institution_name": "天楠",
       "enabled": true
     },
     {
       "name": "无人知晓",
       "podcast_id": "611719d3cb0b82e1df0ad29e",
-      "category": "泛财经",
-      "fund_company_name": "",
+      "category": "独立节目",
+      "institution_name": "孟岩",
       "enabled": true
     }
 
