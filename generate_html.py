@@ -112,13 +112,13 @@ def generate_html():
 
         rows_html += f'''<tr style="background:{bg}">
             <td>{i + 1}</td>
-            <td class="cell-trunc col-name" style="font-weight:500" title="{name}">{name}</td>
+            <td class="cell-trunc col-name" style="font-weight:500" data-tip="{name}">{name}</td>
             <td>{row.get("分类", "")}</td>
-            <td class="cell-trunc col-inst" title="{row.get('机构名称', '')}">{row.get("机构名称", "")}</td>
+            <td class="cell-trunc col-inst" data-tip="{row.get('机构名称', '')}">{row.get("机构名称", "")}</td>
             <td style="text-align:right">{subs:,}</td>
             <td class="delta {d7_cls}" style="text-align:right">{d7_txt}</td>
             <td class="delta {d30_cls}" style="text-align:right">{d30_txt}</td>
-            <td style="max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="{row.get("最新单集名称", "")}">{row.get("最新单集名称", "")}</td>
+            <td class="cell-trunc col-ep" data-tip="{row.get('最新单集名称', '')}">{row.get("最新单集名称", "")}</td>
             <td>{row.get("最新单集上线日期", "")}</td>
             <td style="text-align:right">{row.get("最新单集播放数量", "")}</td>
             <td style="text-align:right">{row.get("互动指标(点赞+收藏)", "")}</td>
@@ -391,7 +391,9 @@ document.getElementById('auth-modal').addEventListener('click', function(e) {
   td {{ padding: 9px 12px; border-bottom: 1px solid #eee; vertical-align: middle; white-space: nowrap; }}
   .col-name {{ width: 120px; }}
   .col-inst {{ width: 96px; }}
+  .col-ep {{ width: 200px; }}
   .cell-trunc {{ overflow: hidden; text-overflow: ellipsis; cursor: default; }}
+  #tip {{ position:fixed; background:#1a3a5c; color:#fff; padding:7px 11px; border-radius:7px; font-size:12px; max-width:320px; line-height:1.6; pointer-events:none; white-space:normal; word-break:break-all; z-index:9999; display:none; box-shadow:0 3px 10px rgba(0,0,0,.25); }}
   tr:hover td {{ background: #eef3fb !important; }}
   .delta {{ font-weight: 500; }}
   .delta-up {{ color: #e74c3c; }}
@@ -550,8 +552,31 @@ document.getElementById('auth-modal').addEventListener('click', function(e) {
   </div>
 </div>
 
+<div id="tip"></div>
 <script>
 {js_code}
+</script>
+<script>
+(function() {{
+  var tip = document.getElementById('tip');
+  document.addEventListener('mouseover', function(e) {{
+    var el = e.target.closest('[data-tip]');
+    if (!el || el.scrollWidth <= el.clientWidth) {{ tip.style.display = 'none'; return; }}
+    tip.textContent = el.dataset.tip;
+    tip.style.display = 'block';
+  }});
+  document.addEventListener('mousemove', function(e) {{
+    if (tip.style.display === 'none') return;
+    var x = e.clientX + 14, y = e.clientY + 14;
+    if (x + tip.offsetWidth > window.innerWidth) x = e.clientX - tip.offsetWidth - 8;
+    if (y + tip.offsetHeight > window.innerHeight) y = e.clientY - tip.offsetHeight - 8;
+    tip.style.left = x + 'px';
+    tip.style.top = y + 'px';
+  }});
+  document.addEventListener('mouseout', function(e) {{
+    if (e.target.closest('[data-tip]') && !e.relatedTarget?.closest('[data-tip]')) tip.style.display = 'none';
+  }});
+}})();
 </script>
 </body>
 </html>'''
