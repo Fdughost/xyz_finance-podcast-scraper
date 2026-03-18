@@ -1,19 +1,19 @@
 {
-  "date": "2026-03-17",
-  "generated_at": "2026-03-17 22:28 UTC",
+  "date": "2026-03-18",
+  "generated_at": "2026-03-18 12:57 CST",
   "podcasts": [
     {
       "rank": 1,
       "name": "无人知晓",
       "category": "独立节目",
       "company": "孟岩",
-      "subs": 1570731,
+      "subs": 1571604,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "E45 孟岩对话李继刚：人何以自处",
       "latest_date": "2026-03-03",
-      "plays": 387308,
-      "interactions": 9077,
+      "plays": 393273,
+      "interactions": 9177,
       "duration": "3:26:38"
     },
     {
@@ -21,13 +21,13 @@
       "name": "商业就是这样",
       "category": "其他金融机构",
       "company": "第一财经",
-      "subs": 733043,
+      "subs": 733326,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "商业小样35 | 霍尔木兹海峡上的特殊保险",
       "latest_date": "2026-03-15",
-      "plays": 30909,
-      "interactions": 141,
+      "plays": 33174,
+      "interactions": 146,
       "duration": "11:24"
     },
     {
@@ -35,13 +35,13 @@
       "name": "面基",
       "category": "独立节目",
       "company": "老钱",
-      "subs": 530809,
+      "subs": 531179,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "管家里钱，其实和保险公司的思路最像",
       "latest_date": "2026-03-17",
-      "plays": 6604,
-      "interactions": 84,
+      "plays": 12994,
+      "interactions": 140,
       "duration": "1:19:03"
     },
     {
@@ -49,13 +49,13 @@
       "name": "起朱楼宴宾客",
       "category": "独立节目",
       "company": "大卫翁",
-      "subs": 356617,
+      "subs": 356877,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "159.算法的六副面孔：它是如何从处理数据，变成定义我们是谁的",
       "latest_date": "2026-03-10",
-      "plays": 30824,
-      "interactions": 381,
+      "plays": 31550,
+      "interactions": 383,
       "duration": "1:09:19"
     },
     {
@@ -63,13 +63,13 @@
       "name": "大方谈钱",
       "category": "公募基金",
       "company": "华夏基金",
-      "subs": 173605,
+      "subs": 173719,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "首届红火播客节科技场：奇点临近，咱能跟上科技浪潮么？",
       "latest_date": "2026-03-15",
-      "plays": 10835,
-      "interactions": 86,
+      "plays": 11927,
+      "interactions": 88,
       "duration": "1:10:26"
     },
     {
@@ -77,13 +77,13 @@
       "name": "中金研究院",
       "category": "其他金融机构",
       "company": "中金公司",
-      "subs": 145906,
+      "subs": 146044,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "episode 49｜中金机器人播客 跨维智能贾奎：物理AI、世界模型与具身智能的商业化路径",
       "latest_date": "2026-03-13",
-      "plays": 3460,
-      "interactions": 26,
+      "plays": 3700,
+      "interactions": 27,
       "duration": "1:24:21"
     },
     {
@@ -91,13 +91,13 @@
       "name": "三点下班",
       "category": "独立节目",
       "company": "李永浩、星辰",
-      "subs": 141559,
+      "subs": 141724,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "如何应对下一次危机--附方法论和检查清单",
       "latest_date": "2026-03-16",
-      "plays": 15913,
-      "interactions": 285,
+      "plays": 18962,
+      "interactions": 328,
       "duration": "56:21"
     },
     {
@@ -105,13 +105,13 @@
       "name": "厚雪长波",
       "category": "公募基金",
       "company": "雪球财富",
-      "subs": 122377,
+      "subs": 122515,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "AI时代，文科生要触底反弹了？",
       "latest_date": "2026-03-15",
-      "plays": 10798,
-      "interactions": 95,
+      "plays": 12130,
+      "interactions": 108,
       "duration": "1:18:08"
     },
     {
@@ -119,13 +119,13 @@
       "name": "投资ABC｜掌握投资中那些绕不开的知识",
       "category": "独立节目",
       "company": "有知有行",
-      "subs": 94404,
+      "subs": 94502,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "低利率时代，我的定期存款到期了，这笔钱该怎么办？｜我问陈博士 14",
       "latest_date": "2026-03-16",
-      "plays": 11290,
-      "interactions": 128,
+      "plays": 12633,
+      "interactions": 135,
       "duration": "47:21"
     },
     {
@@ -133,13 +133,13 @@
       "name": "中欧基金",
       "category": "公募基金",
       "company": "中欧基金",
-      "subs": 78581,
+      "subs": 78777,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "46.HALO交易爆火：当AI狂奔，市场又开始拥抱“老派”资产",
       "latest_date": "2026-03-10",
-      "plays": 10948,
-      "interactions": 119,
+      "plays": 11243,
+      "interactions": 123,
       "duration": "26:25"
     },
     {
@@ -147,13 +147,13 @@
       "name": "钱粮胡同FM",
       "category": "独立节目",
       "company": "住在胡同的野人、无聊D、细菌佛",
-      "subs": 74768,
+      "subs": 74806,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "318.伊朗的昨天",
       "latest_date": "2026-03-14",
-      "plays": 21455,
-      "interactions": 165,
+      "plays": 22799,
+      "interactions": 176,
       "duration": "1:54:25"
     },
     {
@@ -161,13 +161,13 @@
       "name": "十分吸引",
       "category": "独立节目",
       "company": "石磊",
-      "subs": 70317,
+      "subs": 70483,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "Vol.59 当\"失去的30年\"叙事终结：我们该如何看待今天的日本？",
       "latest_date": "2026-03-15",
-      "plays": 16118,
-      "interactions": 235,
+      "plays": 17936,
+      "interactions": 249,
       "duration": "1:11:36"
     },
     {
@@ -175,13 +175,13 @@
       "name": "和盘托出",
       "category": "公募基金",
       "company": "蚂蚁财富",
-      "subs": 49600,
+      "subs": 49617,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "关于马斯克精心布局，终于把\"奇点年\"召唤到眼前，这件大事",
       "latest_date": "2026-03-11",
-      "plays": 7531,
-      "interactions": 74,
+      "plays": 7665,
+      "interactions": 75,
       "duration": "1:12:04"
     },
     {
@@ -189,27 +189,27 @@
       "name": "有富同享",
       "category": "公募基金",
       "company": "富国基金",
-      "subs": 38508,
+      "subs": 38545,
       "delta_7d": null,
       "delta_30d": null,
-      "latest_episode": "一周富盘 | “养龙虾”爆火刷屏！头部大厂纷纷入局，AI智能体热潮下，基金该怎么布局？",
-      "latest_date": "2026-03-15",
-      "plays": 5111,
-      "interactions": 233,
-      "duration": "13:19"
+      "latest_episode": "一周富盘丨布伦特原油期货再度拉涨，伦敦金现货集体跳水，黄金避险人设崩塌？",
+      "latest_date": "2026-03-17",
+      "plays": 941,
+      "interactions": 1,
+      "duration": "9:11"
     },
     {
       "rank": 15,
       "name": "The Wanderers 流浪者",
       "category": "独立节目",
       "company": "zjyiran、Jason_NDV、Vincent-Lu",
-      "subs": 32140,
+      "subs": 32150,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "2028智能危机：人类经济体会崩溃吗？",
       "latest_date": "2026-03-02",
-      "plays": 19320,
-      "interactions": 213,
+      "plays": 19424,
+      "interactions": 215,
       "duration": "1:13:53"
     },
     {
@@ -222,7 +222,7 @@
       "delta_30d": null,
       "latest_episode": "E35 美伊冲突全球动荡，如何防止钱包烧毁？",
       "latest_date": "2026-03-12",
-      "plays": 2917,
+      "plays": 2973,
       "interactions": 23,
       "duration": "33:36"
     },
@@ -231,12 +231,12 @@
       "name": "泰度Voice",
       "category": "公募基金",
       "company": "华泰证券",
-      "subs": 22734,
+      "subs": 22736,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "S3E11 | 超越传统“因子工厂”：AGI开启量化投资新时代",
       "latest_date": "2025-08-15",
-      "plays": 953,
+      "plays": 955,
       "interactions": 21,
       "duration": "1:00:39"
     },
@@ -245,12 +245,12 @@
       "name": "深度求真",
       "category": "公募基金",
       "company": "大成基金",
-      "subs": 20530,
+      "subs": 20531,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "18.Seedance出炉，AI视频革命与科技投资新范式",
       "latest_date": "2026-02-13",
-      "plays": 7644,
+      "plays": 7651,
       "interactions": 309,
       "duration": "44:50"
     },
@@ -259,13 +259,13 @@
       "name": "燕妮聊基金",
       "category": "独立节目",
       "company": "燕妮",
-      "subs": 17360,
+      "subs": 17431,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "87、聊聊那些投资迷思",
       "latest_date": "2026-03-17",
-      "plays": 734,
-      "interactions": 13,
+      "plays": 1144,
+      "interactions": 21,
       "duration": "1:02:01"
     },
     {
@@ -273,12 +273,12 @@
       "name": "话中有金",
       "category": "公募基金",
       "company": "中金资管",
-      "subs": 8959,
+      "subs": 8968,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "EP135 对话中金公司食品饮料行业首席分析师：当“反向过年”遇上“下沉消费”",
       "latest_date": "2026-03-12",
-      "plays": 1160,
+      "plays": 1196,
       "interactions": 9,
       "duration": "59:51"
     },
@@ -287,12 +287,12 @@
       "name": "德邦基金财经列车",
       "category": "公募基金",
       "company": "德邦基金",
-      "subs": 8491,
+      "subs": 8493,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "311.3月17日财经速递",
       "latest_date": "2026-03-17",
-      "plays": 140,
+      "plays": 178,
       "interactions": 0,
       "duration": "4:14"
     },
@@ -301,13 +301,13 @@
       "name": "随基漫步 Random Walk",
       "category": "公募基金",
       "company": "兴全基金",
-      "subs": 6989,
+      "subs": 6998,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "OpenClaw爆火后，AI发展的2个重点方向",
       "latest_date": "2026-03-09",
-      "plays": 1312,
-      "interactions": 19,
+      "plays": 1331,
+      "interactions": 18,
       "duration": "55:15"
     },
     {
@@ -315,12 +315,12 @@
       "name": "茶水间经济学",
       "category": "公募基金",
       "company": "易方达基金",
-      "subs": 6840,
+      "subs": 6839,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "对话三点下班浩哥：他说感谢股市改写了他的人生",
       "latest_date": "2026-01-13",
-      "plays": 3211,
+      "plays": 3214,
       "interactions": 27,
       "duration": "1:42:13"
     },
@@ -329,12 +329,12 @@
       "name": "泰客Talk",
       "category": "公募基金",
       "company": "国泰基金",
-      "subs": 6282,
+      "subs": 6283,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "Vol 27 Z世代的新年消费回忆录",
       "latest_date": "2026-03-11",
-      "plays": 4427,
+      "plays": 4430,
       "interactions": 215,
       "duration": "53:31"
     },
@@ -343,13 +343,13 @@
       "name": "时间嘉讲",
       "category": "公募基金",
       "company": "嘉实基金",
-      "subs": 5401,
+      "subs": 5406,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "Ep10.当“一盒内存条=一套房”：这轮半导体行情谁在定价？",
       "latest_date": "2026-02-25",
-      "plays": 26419,
-      "interactions": 521,
+      "plays": 26466,
+      "interactions": 522,
       "duration": "1:20:43"
     },
     {
@@ -362,7 +362,7 @@
       "delta_30d": null,
       "latest_episode": "养娃这条路，做好财务规划能省多少弯路？",
       "latest_date": "2025-09-17",
-      "plays": 5358,
+      "plays": 5360,
       "interactions": 94,
       "duration": "1:12:50"
     },
@@ -418,7 +418,7 @@
       "delta_30d": null,
       "latest_episode": "E33.田瑀｜研究不必设限，结论宁缺毋滥",
       "latest_date": "2026-03-10",
-      "plays": 392,
+      "plays": 395,
       "interactions": 5,
       "duration": "32:01"
     },
@@ -427,12 +427,12 @@
       "name": "投资心得·基金聊天局",
       "category": "公募基金",
       "company": "国投瑞银基金",
-      "subs": 1496,
+      "subs": 1497,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "EP10.没有终点的修行：育儿与投资的无限游戏",
       "latest_date": "2026-03-17",
-      "plays": 32,
+      "plays": 42,
       "interactions": 2,
       "duration": "1:24:36"
     },
@@ -441,12 +441,12 @@
       "name": "与财同行",
       "category": "公募基金",
       "company": "财通基金",
-      "subs": 1306,
+      "subs": 1305,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "一线基金经理闭门分享：AI、有色、出海……2026年的钱往哪里投？",
       "latest_date": "2026-02-01",
-      "plays": 1250,
+      "plays": 1254,
       "interactions": 23,
       "duration": "1:29:38"
     },
@@ -455,7 +455,7 @@
       "name": "鹏然心动",
       "category": "公募基金",
       "company": "鹏华基金",
-      "subs": 738,
+      "subs": 740,
       "delta_7d": null,
       "delta_30d": null,
       "latest_episode": "Vol 3：新消费浪潮，Z世代用\"情绪货币\"改写\"商业规则\"？|元气消费局",
@@ -555,7 +555,8 @@
       "2026-03-14",
       "2026-03-15",
       "2026-03-16",
-      "2026-03-17"
+      "2026-03-17",
+      "2026-03-18"
     ],
     "series": [
       {
@@ -565,7 +566,8 @@
           null,
           null,
           1567662,
-          1570731
+          1570731,
+          1571604
         ]
       },
       {
@@ -575,7 +577,8 @@
           null,
           null,
           732138,
-          733043
+          733043,
+          733326
         ]
       },
       {
@@ -585,7 +588,8 @@
           null,
           null,
           529818,
-          530809
+          530809,
+          531179
         ]
       },
       {
@@ -595,7 +599,8 @@
           null,
           null,
           355565,
-          356617
+          356617,
+          356877
         ]
       },
       {
@@ -605,7 +610,8 @@
           172752,
           172829,
           173344,
-          173605
+          173605,
+          173719
         ]
       },
       {
@@ -615,7 +621,8 @@
           null,
           null,
           145180,
-          145906
+          145906,
+          146044
         ]
       },
       {
@@ -625,7 +632,8 @@
           null,
           null,
           141245,
-          141559
+          141559,
+          141724
         ]
       },
       {
@@ -635,7 +643,8 @@
           119112,
           119320,
           121870,
-          122377
+          122377,
+          122515
         ]
       },
       {
@@ -645,7 +654,8 @@
           null,
           null,
           94077,
-          94404
+          94404,
+          94502
         ]
       },
       {
@@ -655,12 +665,14 @@
           74905,
           75177,
           77938,
-          78581
+          78581,
+          78777
         ]
       }
     ]
   },
   "reports": [
+    "播客监控日报_2026-03-18.xlsx",
     "播客监控日报_2026-03-17.xlsx",
     "播客监控日报_2026-03-16.xlsx",
     "播客监控日报_2026-03-15.xlsx",
