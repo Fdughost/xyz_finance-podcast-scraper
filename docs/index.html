@@ -26,9 +26,12 @@
   .btn-login-inline { background: #1a3a5c; color: #fff; border: none; padding: 6px 14px; border-radius: 5px; cursor: pointer; font-size: 13px; white-space: nowrap; }
   .btn-login-inline:hover { background: #0f2540; }
   .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; table-layout: fixed; }
   th { background: #1a3a5c; color: #fff; padding: 10px 12px; text-align: left; white-space: nowrap; }
   td { padding: 9px 12px; border-bottom: 1px solid #eee; vertical-align: middle; white-space: nowrap; }
+  .col-name { width: 120px; }
+  .col-inst { width: 96px; }
+  .cell-trunc { overflow: hidden; text-overflow: ellipsis; cursor: default; }
   tr:hover td { background: #eef3fb !important; }
   .delta { font-weight: 500; }
   .delta-up { color: #e74c3c; }
@@ -85,7 +88,7 @@
 <header>
   <div class="header-left">
     <h1>公募基金播客监控日报</h1>
-    <p>数据日期：2026-03-18 &nbsp;|&nbsp; 页面生成：2026-03-18 12:57 CST &nbsp;|&nbsp; 共 39 个播客</p>
+    <p>数据日期：2026-03-18 &nbsp;|&nbsp; 页面生成：2026-03-18 13:23 CST &nbsp;|&nbsp; 共 39 个播客</p>
   </div>
   <div class="header-right">
     <div id="user-info">
@@ -113,15 +116,15 @@
     <div class="desktop-table table-wrap">
     <table>
       <thead><tr>
-        <th>#</th><th>节目名称</th><th>分类</th><th>机构名称</th><th>订阅数</th>
+        <th>#</th><th class="col-name">节目名称</th><th>分类</th><th class="col-inst">机构名称</th><th>订阅数</th>
         <th>7日增量</th><th>30日增量</th>
         <th>最新单集</th><th>上线日期</th><th>播放量</th><th>互动</th>
       </tr></thead>
       <tbody><tr style="background:#f9f9f9">
             <td>1</td>
-            <td style="font-weight:500">无人知晓</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="无人知晓">无人知晓</td>
             <td>独立节目</td>
-            <td>孟岩</td>
+            <td class="cell-trunc col-inst" title="孟岩">孟岩</td>
             <td style="text-align:right">1,571,604</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -131,9 +134,9 @@
             <td style="text-align:right">9177</td>
         </tr><tr style="background:#ffffff">
             <td>2</td>
-            <td style="font-weight:500">商业就是这样</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="商业就是这样">商业就是这样</td>
             <td>其他金融机构</td>
-            <td>第一财经</td>
+            <td class="cell-trunc col-inst" title="第一财经">第一财经</td>
             <td style="text-align:right">733,326</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -143,9 +146,9 @@
             <td style="text-align:right">146</td>
         </tr><tr style="background:#f9f9f9">
             <td>3</td>
-            <td style="font-weight:500">面基</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="面基">面基</td>
             <td>独立节目</td>
-            <td>老钱</td>
+            <td class="cell-trunc col-inst" title="老钱">老钱</td>
             <td style="text-align:right">531,179</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -155,9 +158,9 @@
             <td style="text-align:right">140</td>
         </tr><tr style="background:#ffffff">
             <td>4</td>
-            <td style="font-weight:500">起朱楼宴宾客</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="起朱楼宴宾客">起朱楼宴宾客</td>
             <td>独立节目</td>
-            <td>大卫翁</td>
+            <td class="cell-trunc col-inst" title="大卫翁">大卫翁</td>
             <td style="text-align:right">356,877</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -167,9 +170,9 @@
             <td style="text-align:right">383</td>
         </tr><tr style="background:#f9f9f9">
             <td>5</td>
-            <td style="font-weight:500">大方谈钱</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="大方谈钱">大方谈钱</td>
             <td>公募基金</td>
-            <td>华夏基金</td>
+            <td class="cell-trunc col-inst" title="华夏基金">华夏基金</td>
             <td style="text-align:right">173,719</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -179,9 +182,9 @@
             <td style="text-align:right">88</td>
         </tr><tr style="background:#ffffff">
             <td>6</td>
-            <td style="font-weight:500">中金研究院</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="中金研究院">中金研究院</td>
             <td>其他金融机构</td>
-            <td>中金公司</td>
+            <td class="cell-trunc col-inst" title="中金公司">中金公司</td>
             <td style="text-align:right">146,044</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -191,9 +194,9 @@
             <td style="text-align:right">27</td>
         </tr><tr style="background:#f9f9f9">
             <td>7</td>
-            <td style="font-weight:500">三点下班</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="三点下班">三点下班</td>
             <td>独立节目</td>
-            <td>李永浩、星辰</td>
+            <td class="cell-trunc col-inst" title="李永浩、星辰">李永浩、星辰</td>
             <td style="text-align:right">141,724</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -203,9 +206,9 @@
             <td style="text-align:right">328</td>
         </tr><tr style="background:#ffffff">
             <td>8</td>
-            <td style="font-weight:500">厚雪长波</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="厚雪长波">厚雪长波</td>
             <td>公募基金</td>
-            <td>雪球财富</td>
+            <td class="cell-trunc col-inst" title="雪球财富">雪球财富</td>
             <td style="text-align:right">122,515</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -215,9 +218,9 @@
             <td style="text-align:right">108</td>
         </tr><tr style="background:#f9f9f9">
             <td>9</td>
-            <td style="font-weight:500">投资ABC｜掌握投资中那些绕不开的知识</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="投资ABC｜掌握投资中那些绕不开的知识">投资ABC｜掌握投资中那些绕不开的知识</td>
             <td>独立节目</td>
-            <td>有知有行</td>
+            <td class="cell-trunc col-inst" title="有知有行">有知有行</td>
             <td style="text-align:right">94,502</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -227,9 +230,9 @@
             <td style="text-align:right">135</td>
         </tr><tr style="background:#ffffff">
             <td>10</td>
-            <td style="font-weight:500">中欧基金</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="中欧基金">中欧基金</td>
             <td>公募基金</td>
-            <td>中欧基金</td>
+            <td class="cell-trunc col-inst" title="中欧基金">中欧基金</td>
             <td style="text-align:right">78,777</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -239,9 +242,9 @@
             <td style="text-align:right">123</td>
         </tr><tr style="background:#f9f9f9">
             <td>11</td>
-            <td style="font-weight:500">钱粮胡同FM</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="钱粮胡同FM">钱粮胡同FM</td>
             <td>独立节目</td>
-            <td>住在胡同的野人、无聊D、细菌佛</td>
+            <td class="cell-trunc col-inst" title="住在胡同的野人、无聊D、细菌佛">住在胡同的野人、无聊D、细菌佛</td>
             <td style="text-align:right">74,806</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -251,9 +254,9 @@
             <td style="text-align:right">176</td>
         </tr><tr style="background:#ffffff">
             <td>12</td>
-            <td style="font-weight:500">十分吸引</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="十分吸引">十分吸引</td>
             <td>独立节目</td>
-            <td>石磊</td>
+            <td class="cell-trunc col-inst" title="石磊">石磊</td>
             <td style="text-align:right">70,483</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -263,9 +266,9 @@
             <td style="text-align:right">249</td>
         </tr><tr style="background:#f9f9f9">
             <td>13</td>
-            <td style="font-weight:500">和盘托出</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="和盘托出">和盘托出</td>
             <td>公募基金</td>
-            <td>蚂蚁财富</td>
+            <td class="cell-trunc col-inst" title="蚂蚁财富">蚂蚁财富</td>
             <td style="text-align:right">49,617</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -275,9 +278,9 @@
             <td style="text-align:right">75</td>
         </tr><tr style="background:#ffffff">
             <td>14</td>
-            <td style="font-weight:500">有富同享</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="有富同享">有富同享</td>
             <td>公募基金</td>
-            <td>富国基金</td>
+            <td class="cell-trunc col-inst" title="富国基金">富国基金</td>
             <td style="text-align:right">38,545</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -287,9 +290,9 @@
             <td style="text-align:right">1</td>
         </tr><tr style="background:#f9f9f9">
             <td>15</td>
-            <td style="font-weight:500">The Wanderers 流浪者</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="The Wanderers 流浪者">The Wanderers 流浪者</td>
             <td>独立节目</td>
-            <td>zjyiran、Jason_NDV、Vincent-Lu</td>
+            <td class="cell-trunc col-inst" title="zjyiran、Jason_NDV、Vincent-Lu">zjyiran、Jason_NDV、Vincent-Lu</td>
             <td style="text-align:right">32,150</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -299,9 +302,9 @@
             <td style="text-align:right">215</td>
         </tr><tr style="background:#ffffff">
             <td>16</td>
-            <td style="font-weight:500">人间钱话</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="人间钱话">人间钱话</td>
             <td>公募基金</td>
-            <td>天弘基金</td>
+            <td class="cell-trunc col-inst" title="天弘基金">天弘基金</td>
             <td style="text-align:right">26,915</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -311,9 +314,9 @@
             <td style="text-align:right">23</td>
         </tr><tr style="background:#f9f9f9">
             <td>17</td>
-            <td style="font-weight:500">泰度Voice</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="泰度Voice">泰度Voice</td>
             <td>公募基金</td>
-            <td>华泰证券</td>
+            <td class="cell-trunc col-inst" title="华泰证券">华泰证券</td>
             <td style="text-align:right">22,736</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -323,9 +326,9 @@
             <td style="text-align:right">21</td>
         </tr><tr style="background:#ffffff">
             <td>18</td>
-            <td style="font-weight:500">深度求真</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="深度求真">深度求真</td>
             <td>公募基金</td>
-            <td>大成基金</td>
+            <td class="cell-trunc col-inst" title="大成基金">大成基金</td>
             <td style="text-align:right">20,531</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -335,9 +338,9 @@
             <td style="text-align:right">309</td>
         </tr><tr style="background:#f9f9f9">
             <td>19</td>
-            <td style="font-weight:500">燕妮聊基金</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="燕妮聊基金">燕妮聊基金</td>
             <td>独立节目</td>
-            <td>燕妮</td>
+            <td class="cell-trunc col-inst" title="燕妮">燕妮</td>
             <td style="text-align:right">17,431</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -347,9 +350,9 @@
             <td style="text-align:right">21</td>
         </tr><tr style="background:#ffffff">
             <td>20</td>
-            <td style="font-weight:500">话中有金</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="话中有金">话中有金</td>
             <td>公募基金</td>
-            <td>中金资管</td>
+            <td class="cell-trunc col-inst" title="中金资管">中金资管</td>
             <td style="text-align:right">8,968</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -359,9 +362,9 @@
             <td style="text-align:right">9</td>
         </tr><tr style="background:#f9f9f9">
             <td>21</td>
-            <td style="font-weight:500">德邦基金财经列车</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="德邦基金财经列车">德邦基金财经列车</td>
             <td>公募基金</td>
-            <td>德邦基金</td>
+            <td class="cell-trunc col-inst" title="德邦基金">德邦基金</td>
             <td style="text-align:right">8,493</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -371,9 +374,9 @@
             <td style="text-align:right">0</td>
         </tr><tr style="background:#ffffff">
             <td>22</td>
-            <td style="font-weight:500">随基漫步 Random Walk</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="随基漫步 Random Walk">随基漫步 Random Walk</td>
             <td>公募基金</td>
-            <td>兴全基金</td>
+            <td class="cell-trunc col-inst" title="兴全基金">兴全基金</td>
             <td style="text-align:right">6,998</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -383,9 +386,9 @@
             <td style="text-align:right">18</td>
         </tr><tr style="background:#f9f9f9">
             <td>23</td>
-            <td style="font-weight:500">茶水间经济学</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="茶水间经济学">茶水间经济学</td>
             <td>公募基金</td>
-            <td>易方达基金</td>
+            <td class="cell-trunc col-inst" title="易方达基金">易方达基金</td>
             <td style="text-align:right">6,839</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -395,9 +398,9 @@
             <td style="text-align:right">27</td>
         </tr><tr style="background:#ffffff">
             <td>24</td>
-            <td style="font-weight:500">泰客Talk</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="泰客Talk">泰客Talk</td>
             <td>公募基金</td>
-            <td>国泰基金</td>
+            <td class="cell-trunc col-inst" title="国泰基金">国泰基金</td>
             <td style="text-align:right">6,283</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -407,9 +410,9 @@
             <td style="text-align:right">215</td>
         </tr><tr style="background:#f9f9f9">
             <td>25</td>
-            <td style="font-weight:500">时间嘉讲</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="时间嘉讲">时间嘉讲</td>
             <td>公募基金</td>
-            <td>嘉实基金</td>
+            <td class="cell-trunc col-inst" title="嘉实基金">嘉实基金</td>
             <td style="text-align:right">5,406</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -419,9 +422,9 @@
             <td style="text-align:right">522</td>
         </tr><tr style="background:#ffffff">
             <td>26</td>
-            <td style="font-weight:500">莫问钱程</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="莫问钱程">莫问钱程</td>
             <td>公募基金</td>
-            <td>银华基金</td>
+            <td class="cell-trunc col-inst" title="银华基金">银华基金</td>
             <td style="text-align:right">4,481</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -431,9 +434,9 @@
             <td style="text-align:right">94</td>
         </tr><tr style="background:#f9f9f9">
             <td>27</td>
-            <td style="font-weight:500">财话连篇</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="财话连篇">财话连篇</td>
             <td>公募基金</td>
-            <td>易方达基金</td>
+            <td class="cell-trunc col-inst" title="易方达基金">易方达基金</td>
             <td style="text-align:right">3,816</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -443,9 +446,9 @@
             <td style="text-align:right">36</td>
         </tr><tr style="background:#ffffff">
             <td>28</td>
-            <td style="font-weight:500">养基方程式</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="养基方程式">养基方程式</td>
             <td>公募基金</td>
-            <td>广发基金</td>
+            <td class="cell-trunc col-inst" title="广发基金">广发基金</td>
             <td style="text-align:right">3,297</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -455,9 +458,9 @@
             <td style="text-align:right">3</td>
         </tr><tr style="background:#f9f9f9">
             <td>29</td>
-            <td style="font-weight:500">钱途规划局</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="钱途规划局">钱途规划局</td>
             <td>公募基金</td>
-            <td>汇添富基金</td>
+            <td class="cell-trunc col-inst" title="汇添富基金">汇添富基金</td>
             <td style="text-align:right">1,989</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -467,9 +470,9 @@
             <td style="text-align:right">1</td>
         </tr><tr style="background:#ffffff">
             <td>30</td>
-            <td style="font-weight:500">好朋友的直播间</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="好朋友的直播间">好朋友的直播间</td>
             <td>公募基金</td>
-            <td>中泰资管</td>
+            <td class="cell-trunc col-inst" title="中泰资管">中泰资管</td>
             <td style="text-align:right">1,603</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -479,9 +482,9 @@
             <td style="text-align:right">5</td>
         </tr><tr style="background:#f9f9f9">
             <td>31</td>
-            <td style="font-weight:500">投资心得·基金聊天局</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="投资心得·基金聊天局">投资心得·基金聊天局</td>
             <td>公募基金</td>
-            <td>国投瑞银基金</td>
+            <td class="cell-trunc col-inst" title="国投瑞银基金">国投瑞银基金</td>
             <td style="text-align:right">1,497</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -491,9 +494,9 @@
             <td style="text-align:right">2</td>
         </tr><tr style="background:#ffffff">
             <td>32</td>
-            <td style="font-weight:500">与财同行</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="与财同行">与财同行</td>
             <td>公募基金</td>
-            <td>财通基金</td>
+            <td class="cell-trunc col-inst" title="财通基金">财通基金</td>
             <td style="text-align:right">1,305</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -503,9 +506,9 @@
             <td style="text-align:right">23</td>
         </tr><tr style="background:#f9f9f9">
             <td>33</td>
-            <td style="font-weight:500">鹏然心动</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="鹏然心动">鹏然心动</td>
             <td>公募基金</td>
-            <td>鹏华基金</td>
+            <td class="cell-trunc col-inst" title="鹏华基金">鹏华基金</td>
             <td style="text-align:right">740</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -515,9 +518,9 @@
             <td style="text-align:right">151</td>
         </tr><tr style="background:#ffffff">
             <td>34</td>
-            <td style="font-weight:500">对话金融人</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="对话金融人">对话金融人</td>
             <td>其他金融机构</td>
-            <td>广发证券</td>
+            <td class="cell-trunc col-inst" title="广发证券">广发证券</td>
             <td style="text-align:right">481</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -527,9 +530,9 @@
             <td style="text-align:right">0</td>
         </tr><tr style="background:#f9f9f9">
             <td>35</td>
-            <td style="font-weight:500">解盘一刻</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="解盘一刻">解盘一刻</td>
             <td>公募基金</td>
-            <td>华夏基金</td>
+            <td class="cell-trunc col-inst" title="华夏基金">华夏基金</td>
             <td style="text-align:right">417</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -539,9 +542,9 @@
             <td style="text-align:right">0</td>
         </tr><tr style="background:#ffffff">
             <td>36</td>
-            <td style="font-weight:500">基金经理一周论市</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="基金经理一周论市">基金经理一周论市</td>
             <td>公募基金</td>
-            <td>银华基金</td>
+            <td class="cell-trunc col-inst" title="银华基金">银华基金</td>
             <td style="text-align:right">305</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -551,9 +554,9 @@
             <td style="text-align:right">0</td>
         </tr><tr style="background:#f9f9f9">
             <td>37</td>
-            <td style="font-weight:500">好朋友</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="好朋友">好朋友</td>
             <td>公募基金</td>
-            <td>中泰资管</td>
+            <td class="cell-trunc col-inst" title="中泰资管">中泰资管</td>
             <td style="text-align:right">51</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -563,9 +566,9 @@
             <td style="text-align:right">5</td>
         </tr><tr style="background:#ffffff">
             <td>38</td>
-            <td style="font-weight:500">投资心法</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="投资心法">投资心法</td>
             <td>公募基金</td>
-            <td>国投瑞银基金</td>
+            <td class="cell-trunc col-inst" title="国投瑞银基金">国投瑞银基金</td>
             <td style="text-align:right">28</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>
@@ -575,9 +578,9 @@
             <td style="text-align:right">0</td>
         </tr><tr style="background:#f9f9f9">
             <td>39</td>
-            <td style="font-weight:500">听懂掌声</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="听懂掌声">听懂掌声</td>
             <td>独立节目</td>
-            <td>天楠</td>
+            <td class="cell-trunc col-inst" title="天楠">天楠</td>
             <td style="text-align:right">1</td>
             <td class="delta " style="text-align:right">—</td>
             <td class="delta " style="text-align:right">—</td>

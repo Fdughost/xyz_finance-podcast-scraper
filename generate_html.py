@@ -112,9 +112,9 @@ def generate_html():
 
         rows_html += f'''<tr style="background:{bg}">
             <td>{i + 1}</td>
-            <td style="font-weight:500">{name}</td>
+            <td class="cell-trunc col-name" style="font-weight:500" title="{name}">{name}</td>
             <td>{row.get("分类", "")}</td>
-            <td>{row.get("机构名称", "")}</td>
+            <td class="cell-trunc col-inst" title="{row.get('机构名称', '')}">{row.get("机构名称", "")}</td>
             <td style="text-align:right">{subs:,}</td>
             <td class="delta {d7_cls}" style="text-align:right">{d7_txt}</td>
             <td class="delta {d30_cls}" style="text-align:right">{d30_txt}</td>
@@ -386,9 +386,12 @@ document.getElementById('auth-modal').addEventListener('click', function(e) {
   .btn-login-inline {{ background: #1a3a5c; color: #fff; border: none; padding: 6px 14px; border-radius: 5px; cursor: pointer; font-size: 13px; white-space: nowrap; }}
   .btn-login-inline:hover {{ background: #0f2540; }}
   .table-wrap {{ overflow-x: auto; -webkit-overflow-scrolling: touch; }}
-  table {{ width: 100%; border-collapse: collapse; font-size: 13px; }}
+  table {{ width: 100%; border-collapse: collapse; font-size: 13px; table-layout: fixed; }}
   th {{ background: #1a3a5c; color: #fff; padding: 10px 12px; text-align: left; white-space: nowrap; }}
   td {{ padding: 9px 12px; border-bottom: 1px solid #eee; vertical-align: middle; white-space: nowrap; }}
+  .col-name {{ width: 120px; }}
+  .col-inst {{ width: 96px; }}
+  .cell-trunc {{ overflow: hidden; text-overflow: ellipsis; cursor: default; }}
   tr:hover td {{ background: #eef3fb !important; }}
   .delta {{ font-weight: 500; }}
   .delta-up {{ color: #e74c3c; }}
@@ -473,7 +476,7 @@ document.getElementById('auth-modal').addEventListener('click', function(e) {
     <div class="desktop-table table-wrap">
     <table>
       <thead><tr>
-        <th>#</th><th>节目名称</th><th>分类</th><th>机构名称</th><th>订阅数</th>
+        <th>#</th><th class="col-name">节目名称</th><th>分类</th><th class="col-inst">机构名称</th><th>订阅数</th>
         <th>7日增量</th><th>30日增量</th>
         <th>最新单集</th><th>上线日期</th><th>播放量</th><th>互动</th>
       </tr></thead>
