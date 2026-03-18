@@ -50,3 +50,13 @@ jobs:
           # 如果有变更才提交
           git diff --cached --quiet || git commit -m "chore: 自动生成播客日报 $(date +'%Y-%m-%d')"
           git push
+
+      - name: 同步数据到 nextjs 分支
+        run: |
+          git fetch origin nextjs
+          git checkout -B _sync_tmp origin/nextjs
+          git checkout main -- web/public/data.json
+          git add web/public/data.json
+          git diff --cached --quiet || git commit -m "chore: 更新播客数据 $(date +'%Y-%m-%d')"
+          git push origin _sync_tmp:nextjs
+          git checkout main
