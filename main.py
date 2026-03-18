@@ -8,7 +8,9 @@
 import os
 import json
 import logging
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
+
+BEIJING_TZ = timezone(timedelta(hours=8))
 from podcast_crawler import XiaoyuzhouCrawler
 from data_manager import PodcastDataManager
 from excel_generator import PodcastExcelGenerator
@@ -46,7 +48,7 @@ def _save_run_history(history: list):
 
 def run_monitor():
     """执行监控任务"""
-    start_time = datetime.now()
+    start_time = datetime.now(tz=BEIJING_TZ)
     run_record = {
         'run_at': start_time.strftime('%Y-%m-%d %H:%M:%S'),
         'status': 'running',
@@ -121,7 +123,7 @@ def run_monitor():
         report_path = excel_gen.generate_daily_report(current_data)
         run_record['report_path'] = report_path
 
-        elapsed = (datetime.now() - start_time).total_seconds()
+        elapsed = (datetime.now(tz=BEIJING_TZ) - start_time).total_seconds()
         run_record['duration_seconds'] = round(elapsed, 1)
         run_record['status'] = 'success' if run_record['failed_count'] == 0 else 'partial'
 
@@ -134,7 +136,7 @@ def run_monitor():
         logger.info("=" * 60)
 
     except Exception as e:
-        elapsed = (datetime.now() - start_time).total_seconds()
+        elapsed = (datetime.now(tz=BEIJING_TZ) - start_time).total_seconds()
         run_record['status'] = 'error'
         run_record['error'] = str(e)
         run_record['duration_seconds'] = round(elapsed, 1)
@@ -142,7 +144,7 @@ def run_monitor():
 
     finally:
         if run_record['duration_seconds'] is None:
-            run_record['duration_seconds'] = round((datetime.now() - start_time).total_seconds(), 1)
+            run_record['duration_seconds'] = round((datetime.now(tz=BEIJING_TZ) - start_time).total_seconds(), 1)
         history = _load_run_history()
         history.append(run_record)
         _save_run_history(history)

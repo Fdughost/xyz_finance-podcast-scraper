@@ -7,7 +7,9 @@ Excel报表生成模块 - 优化版
 
 import pandas as pd
 import os
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
+
+BEIJING_TZ = timezone(timedelta(hours=8))
 import logging
 from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
 from openpyxl.utils import get_column_letter
@@ -27,7 +29,7 @@ class PodcastExcelGenerator:
             logger.warning("没有数据，无法生成报表")
             return ""
 
-        today = datetime.now().strftime('%Y-%m-%d')
+        today = datetime.now(tz=BEIJING_TZ).strftime('%Y-%m-%d')
         if filename is None:
             filename = f'播客监控日报_{today}.xlsx'
         

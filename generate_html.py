@@ -8,7 +8,9 @@ import os
 import glob
 import json
 import pandas as pd
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
+
+BEIJING_TZ = timezone(timedelta(hours=8))
 from urllib.parse import quote
 
 REPORTS_DIR = 'reports'
@@ -70,7 +72,7 @@ def generate_html():
     date_str = os.path.basename(latest).replace('播客监控日报_', '').replace('.xlsx', '')
     latest_date = datetime.strptime(date_str, '%Y-%m-%d')
     all_reports = get_all_reports()
-    generated_at = datetime.now().strftime('%Y-%m-%d %H:%M UTC')
+    generated_at = datetime.now(tz=BEIJING_TZ).strftime('%Y-%m-%d %H:%M CST')
 
     # 加载历史数据用于增量计算
     subs_7d = load_subs_map(find_report_near_date(latest_date - timedelta(days=7)))

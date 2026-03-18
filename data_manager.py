@@ -9,7 +9,9 @@ import sqlite3
 import json
 import os
 import re
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
+
+BEIJING_TZ = timezone(timedelta(hours=8))
 from typing import Dict, List, Optional, Tuple
 import logging
 
@@ -125,7 +127,7 @@ class PodcastDataManager:
             conn = sqlite3.connect(self.db_path)
             cursor = conn.cursor()
             
-            crawl_time = datetime.now()
+            crawl_time = datetime.now(tz=BEIJING_TZ)
             crawl_date = crawl_time.date()
             
             # 保存播客快照
@@ -190,7 +192,7 @@ class PodcastDataManager:
         conn = sqlite3.connect(self.db_path)
         try:
             cursor = conn.cursor()
-            crawl_time = datetime.now()
+            crawl_time = datetime.now(tz=BEIJING_TZ)
             crawl_date = crawl_time.date()
 
             for podcast_data in podcast_list:
@@ -304,7 +306,7 @@ class PodcastDataManager:
             包含对比结果的字典
         """
         try:
-            today = datetime.now().date()
+            today = datetime.now(tz=BEIJING_TZ).date()
             yesterday = today - timedelta(days=1)
             
             today_data = self.get_snapshot_by_date(podcast_id, str(today))
@@ -418,7 +420,7 @@ class PodcastDataManager:
             conn = sqlite3.connect(self.db_path)
             cursor = conn.cursor()
             
-            end_date = datetime.now().date()
+            end_date = datetime.now(tz=BEIJING_TZ).date()
             start_date = end_date - timedelta(days=days-1)
             
             cursor.execute('''
@@ -453,7 +455,7 @@ def main():
     manager = PodcastDataManager()
     
     # 读取今天的爬取数据
-    today = datetime.now().strftime('%Y-%m-%d')
+    today = datetime.now(tz=BEIJING_TZ).strftime('%Y-%m-%d')
     data_file = f'data/podcast_data_{today}.json'
     
     if os.path.exists(data_file):

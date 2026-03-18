@@ -8,7 +8,9 @@ import os
 import glob
 import json
 import pandas as pd
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
+
+BEIJING_TZ = timezone(timedelta(hours=8))
 
 REPORTS_DIR = 'reports'
 OUTPUT_PATH = 'web/public/data.json'
@@ -91,7 +93,7 @@ def generate_data_json():
 
     result = {
         'date': date_str,
-        'generated_at': datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC'),
+        'generated_at': datetime.now(tz=BEIJING_TZ).strftime('%Y-%m-%d %H:%M CST'),
         'podcasts': podcasts,
         'trend': {
             'dates': trend_dates,
