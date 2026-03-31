@@ -196,5 +196,16 @@
     "report_path": "reports/播客监控日报_2026-03-31.xlsx",
     "error": null,
     "duration_seconds": 76.5
+  },
+  {
+    "run_at": "2026-04-01 06:29:19",
+    "status": "success",
+    "success_count": 39,
+    "failed_count": 0,
+    "skipped_count": 0,
+    "failed_podcasts": [],
+    "report_path": "reports/播客监控日报_2026-04-01.xlsx",
+    "error": null,
+    "duration_seconds": 76.5
   }
 ]
