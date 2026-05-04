@@ -1,16 +1,5 @@
 [
   {
-    "run_at": "2026-04-05 06:23:20",
-    "status": "success",
-    "success_count": 39,
-    "failed_count": 0,
-    "skipped_count": 0,
-    "failed_podcasts": [],
-    "report_path": "reports/播客监控日报_2026-04-05.xlsx",
-    "error": null,
-    "duration_seconds": 76.6
-  },
-  {
     "run_at": "2026-04-06 06:24:33",
     "status": "success",
     "success_count": 39,
@@ -485,5 +474,173 @@
     "report_path": "reports/播客监控日报_2026-05-04.xlsx",
     "error": null,
     "duration_seconds": 76.9
+  },
+  {
+    "run_at": "2026-05-05 06:51:57",
+    "status": "failed",
+    "success_count": 0,
+    "failed_count": 39,
+    "skipped_count": 0,
+    "failed_podcasts": [
+      {
+        "name": "大方谈钱",
+        "podcast_id": "66ed1e69dbf9bb012f843e39"
+      },
+      {
+        "name": "中欧基金播客",
+        "podcast_id": "66594e8894977a26ef2c7823"
+      },
+      {
+        "name": "有富同享",
+        "podcast_id": "685e568f8d5a9c9c2e59bc59"
+      },
+      {
+        "name": "与财同行",
+        "podcast_id": "68bfc415120c1ebd3ae51049"
+      },
+      {
+        "name": "人间钱话",
+        "podcast_id": "65716792d6e0ff5822d25668"
+      },
+      {
+        "name": "深度求真",
+        "podcast_id": "67a40d8651337de4afb904bf"
+      },
+      {
+        "name": "养基方程式",
+        "podcast_id": "63e30c0b0d7e8eaa72262020"
+      },
+      {
+        "name": "基金经理一周论市",
+        "podcast_id": "66c2ddd333591c27be1eab94"
+      },
+      {
+        "name": "好朋友的播客",
+        "podcast_id": "64bcf642d0844ea8124f440e"
+      },
+      {
+        "name": "好朋友的直播间",
+        "podcast_id": "66bab65359d80f45bc4536b0"
+      },
+      {
+        "name": "德邦基金财经列车",
+        "podcast_id": "6696077d37236c546e76dadb"
+      },
+      {
+        "name": "投资心得·基金聊天局",
+        "podcast_id": "68196909d65ef17b3c31dc64"
+      },
+      {
+        "name": "投资心法·基金访谈录",
+        "podcast_id": "68e51df4f9024a8d552b97a0"
+      },
+      {
+        "name": "时间嘉讲",
+        "podcast_id": "685a2f44a1309edcc5eb002d"
+      },
+      {
+        "name": "泰客Talk",
+        "podcast_id": "66713893c26e396a369ed206"
+      },
+      {
+        "name": "茶水间经济学",
+        "podcast_id": "67ca49d7f38eac9e544b9e02"
+      },
+      {
+        "name": "莫问钱程",
+        "podcast_id": "67f777938f7b771017a82ee0"
+      },
+      {
+        "name": "财话连篇",
+        "podcast_id": "672073aa1d2e86f67ab936ed"
+      },
+      {
+        "name": "钱途规划局",
+        "podcast_id": "68ac193967d32ea07cdeaa15"
+      },
+      {
+        "name": "随基漫步",
+        "podcast_id": "649a8998a5b2b405c6d152eb"
+      },
+      {
+        "name": "鹏然心动",
+        "podcast_id": "68f9d033fa9d08a7bb5b5691"
+      },
+      {
+        "name": "话中有金",
+        "podcast_id": "64f83ea4e490c5dee580ce7d"
+      },
+      {
+        "name": "泰度Voice",
+        "podcast_id": "62b3227a053b85adc57a728a"
+      },
+      {
+        "name": "和盘托出",
+        "podcast_id": "68021db8f5eff49a89582340"
+      },
+      {
+        "name": "厚雪长波",
+        "podcast_id": "646d6bfa53a5e5ea14e69c7c"
+      },
+      {
+        "name": "解盘一刻",
+        "podcast_id": "656d2c4832fc3737bb380de4"
+      },
+      {
+        "name": "中金研究院",
+        "podcast_id": "610d156f5df6959814391430"
+      },
+      {
+        "name": "对话金融人",
+        "podcast_id": "614da24187ad4d9340d860df"
+      },
+      {
+        "name": "商业就是这样",
+        "podcast_id": "6022a180ef5fdaddc30bb101"
+      },
+      {
+        "name": "投资ABC",
+        "podcast_id": "64b0bfde585daadfc82f3b12"
+      },
+      {
+        "name": "面基",
+        "podcast_id": "6388760f22567e8ea6ad070f"
+      },
+      {
+        "name": "起朱楼宴宾客",
+        "podcast_id": "61dd99a47b29652ff572257b"
+      },
+      {
+        "name": "三点下班",
+        "podcast_id": "62bd91adf288fd4eae3606ff"
+      },
+      {
+        "name": "The Wanderers 流浪者",
+        "podcast_id": "65539db173f6183e975cfccc"
+      },
+      {
+        "name": "十分吸引",
+        "podcast_id": "66b4ec5e29b084247093375f"
+      },
+      {
+        "name": "钱粮胡同",
+        "podcast_id": "5e7cc056418a84a0469754be"
+      },
+      {
+        "name": "燕妮聊基金",
+        "podcast_id": "65d541dcc10c027a33679998"
+      },
+      {
+        "name": "听懂涨声",
+        "podcast_id": "6543750424e7ad2107e8b0b5"
+      },
+      {
+        "name": "无人知晓",
+        "podcast_id": "611719d3cb0b82e1df0ad29e"
+      }
+    ],
+    "report_path": null,
+    "error": "未能获取到任何数据",
+    "duration_seconds": 258.5
   }
 ]
