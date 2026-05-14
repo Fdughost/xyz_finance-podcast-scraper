@@ -150,28 +150,28 @@
     {
       "name": "话中有金",
       "podcast_id": "64f83ea4e490c5dee580ce7d",
-      "category": "公募基金",
+      "category": "其他金融机构",
       "institution_name": "中金资管",
       "enabled": true
     },
     {
       "name": "泰度Voice",
       "podcast_id": "62b3227a053b85adc57a728a",
-      "category": "公募基金",
+      "category": "其他金融机构",
       "institution_name": "华泰证券",
       "enabled": true
     },
     {
       "name": "和盘托出",
       "podcast_id": "68021db8f5eff49a89582340",
-      "category": "公募基金",
+      "category": "其他金融机构",
       "institution_name": "蚂蚁财富",
       "enabled": true
     },
     {
       "name": "厚雪长波",
       "podcast_id": "646d6bfa53a5e5ea14e69c7c",
-      "category": "公募基金",
+      "category": "其他金融机构",
       "institution_name": "雪球财富",
       "enabled": true
     },
@@ -189,13 +189,6 @@
       "podcast_id": "610d156f5df6959814391430",
       "category": "其他金融机构",
       "institution_name": "中金公司",
-      "enabled": true
-    },
-    {
-      "name": "对话金融人",
-      "podcast_id": "614da24187ad4d9340d860df",
-      "category": "其他金融机构",
-      "institution_name": "广发证券",
       "enabled": true
     },
     {
