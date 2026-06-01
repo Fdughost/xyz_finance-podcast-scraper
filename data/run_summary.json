@@ -1,16 +1,5 @@
 [
   {
-    "run_at": "2026-05-04 06:34:40",
-    "status": "success",
-    "success_count": 39,
-    "failed_count": 0,
-    "skipped_count": 0,
-    "failed_podcasts": [],
-    "report_path": "reports/播客监控日报_2026-05-04.xlsx",
-    "error": null,
-    "duration_seconds": 76.9
-  },
-  {
     "run_at": "2026-05-05 06:51:57",
     "status": "failed",
     "success_count": 0,
@@ -485,5 +474,16 @@
     "report_path": "reports/播客监控日报_2026-06-01.xlsx",
     "error": null,
     "duration_seconds": 74.5
+  },
+  {
+    "run_at": "2026-06-02 07:22:59",
+    "status": "success",
+    "success_count": 38,
+    "failed_count": 0,
+    "skipped_count": 0,
+    "failed_podcasts": [],
+    "report_path": "reports/播客监控日报_2026-06-02.xlsx",
+    "error": null,
+    "duration_seconds": 74.4
   }
 ]
