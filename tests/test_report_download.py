@@ -50,6 +50,8 @@ class DownloadAcceptance(unittest.TestCase):
                     self.assertTrue(dialog.is_visible())
                     self.assertIn(reports[-1][7:17], host.locator('[aria-pressed=true]').get_attribute('data-date'))
                     date = filename.removeprefix('播客监控日报_').removesuffix('.xlsx')
+                    host.get_by_label('年份', exact=True).select_option(date[:4])
+                    host.get_by_label('月份', exact=True).select_option(date[5:7])
                     host.locator(f'[data-date="{date}"]').click()
                     self.assertEqual(page.url.rstrip('/'), url.rstrip('/'))
                     with page.expect_download(timeout=30000) as event:
