@@ -1,11 +1,10 @@
 import { Suspense } from 'react'
 import { getPodcastData } from '@/lib/data'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { PodcastTable } from '@/components/podcast-table'
 import { SubscriptionBarChart } from '@/components/bar-chart'
 import { TrendChart } from '@/components/trend-chart'
-import { AuthHeader } from '@/components/auth-header'
+import { ReportDownload } from '@/components/report-download'
 
 export const dynamic = 'force-dynamic'
 
@@ -21,7 +20,7 @@ export default async function Home() {
             <span className="text-lg font-bold">📻 播客日报</span>
             <span className="text-sm text-muted-foreground hidden sm:inline">公募基金播客监控</span>
           </div>
-          <AuthHeader />
+          <ReportDownload reports={data.reports} />
         </div>
       </header>
 
@@ -88,41 +87,6 @@ export default async function Home() {
           </CardHeader>
           <CardContent>
             <PodcastTable podcasts={data.podcasts} />
-          </CardContent>
-        </Card>
-
-        {/* Archive */}
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-base">历史报表下载</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Tabs defaultValue="list">
-              <TabsList className="mb-3">
-                <TabsTrigger value="list">报表列表</TabsTrigger>
-              </TabsList>
-              <TabsContent value="list">
-                <ul className="space-y-1.5">
-                  {data.reports.map((fname) => {
-                    const d = fname.replace('播客监控日报_', '').replace('.xlsx', '')
-                    const encoded = encodeURIComponent(fname)
-                    const url = `https://raw.githubusercontent.com/Fdughost/xyz_finance-podcast-scraper/main/reports/${encoded}`
-                    return (
-                      <li key={fname}>
-                        <a
-                          href={url}
-                          className="text-sm text-blue-600 hover:underline"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          📥 {d} 报表
-                        </a>
-                      </li>
-                    )
-                  })}
-                </ul>
-              </TabsContent>
-            </Tabs>
           </CardContent>
         </Card>
 

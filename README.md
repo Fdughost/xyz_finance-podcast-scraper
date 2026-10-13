@@ -65,7 +65,7 @@
 
 ## 环境要求
 
-- Python 3.8+
+- Python 3.12+
 - 依赖包见 `requirements.txt`
 
 ## 安装使用
@@ -149,3 +149,34 @@ Excel报表包含以下字段：
 ## License
 
 MIT License
+
+## 日报下载
+
+静态页面与 Next.js 页面均可免登录下载日报。点击顶部“下载日报”，在月历中选择已有日报的日期，再点击“确认下载”。没有报表的日期不可选，默认选中最新一期。文件仍由现有 GitHub 报表地址提供。
+
+两套页面共用 `web/public/report-download.js`。修改组件后运行 `python3 generate_html.py`，将相同组件内嵌到静态页面。新增日报会通过现有生成流程进入日期清单，无需配置云端数据库或 Supabase 环境变量。
+
+### 下载流程验收
+
+使用 Python 3.12 或更新版本，先安装 `requirements-dev.txt`，并运行 `python3 -m playwright install chromium`。在两个终端分别启动：
+
+```bash
+python3 -m http.server 8765 --bind 127.0.0.1
+```
+
+```bash
+cd web
+npm ci
+npm run build
+npm run start -- --hostname 127.0.0.1 --port 8766
+```
+
+在项目根目录运行：
+
+```bash
+python3 -m unittest discover -s tests -v
+```
+
+若使用已安装的 Chrome，可设置 `PLAYWRIGHT_CHANNEL=chrome`。浏览器测试会真实下载最新及最早的日报，验证 Excel 结构并与本地文件比较内容；因此需要访问 GitHub。生成流程测试仅在临时目录写入数据，不运行爬虫。
+
+发布时需要将 Next.js 界面代码同步到实际部署分支；每日任务只同步数据文件，不会自动同步界面改动。Supabase 云端项目清理须在上线验证及必要数据备份后进行。
