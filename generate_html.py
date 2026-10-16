@@ -182,6 +182,15 @@ def generate_html():
 <title>公募基金播客监控日报</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <style>
+  html {{ scroll-behavior: smooth; }}
+  #dataOverview, #rankingExplorer, #trendExplorer {{ scroll-margin-top: 76px; }}
+  .section-nav {{ position: sticky; top: 0; z-index: 100; background: rgba(244,246,249,.97); border-bottom: 1px solid #dce5ed; }}
+  .section-nav-inner {{ max-width: 1200px; margin: 0 auto; padding: 10px 16px; display: flex; gap: 8px; }}
+  .section-nav a {{ display: inline-flex; align-items: center; justify-content: center; padding: 9px 16px; border: 1px solid #cbd8e2; border-radius: 7px; color: #183a58; background: #fff; text-decoration: none; font-size: 13px; font-weight: 500; white-space: nowrap; }}
+  .section-nav a:hover, .section-nav a:focus-visible {{ background: #183a58; color: #fff; }}
+  .section-nav a:focus-visible {{ outline: 3px solid #54a5d5; outline-offset: 2px; }}
+  @media (max-width: 420px) {{ .section-nav-inner {{ padding: 9px 10px; gap: 6px; }} .section-nav a {{ flex: 1; padding: 9px 8px; font-size: 12px; }} }}
+  @media (prefers-reduced-motion: reduce) {{ html {{ scroll-behavior: auto; }} }}
   * {{ box-sizing: border-box; margin: 0; padding: 0; }}
   body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f4f6f9; color: #333; }}
   header {{ background: #1a3a5c; color: #fff; padding: 20px 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }}
@@ -243,9 +252,16 @@ def generate_html():
     <report-download data-reports="{reports_attribute}"></report-download>
   </div>
 </header>
+<nav class="section-nav" aria-label="页面导航">
+  <div class="section-nav-inner">
+    <a href="#dataOverview">数据总览</a>
+    <a href="#rankingExplorer">订阅排行</a>
+    <a href="#trendExplorer">订阅趋势</a>
+  </div>
+</nav>
 
 <div class="container">
-  <div class="card">
+  <div class="card" id="dataOverview">
     <h2>播客数据总览</h2>
     <div class="desktop-table table-wrap">
     <table>
