@@ -1,8 +1,9 @@
 {
   "date": "2026-10-16",
-  "generated_at": "2026-10-16 08:01 CST",
+  "generated_at": "2026-10-16 12:39 CST",
   "podcasts": [
     {
+      "podcast_id": "611719d3cb0b82e1df0ad29e",
       "rank": 1,
       "name": "无人知晓",
       "category": "独立节目",
@@ -17,6 +18,7 @@
       "duration": "1:20:36"
     },
     {
+      "podcast_id": "6022a180ef5fdaddc30bb101",
       "rank": 2,
       "name": "商业就是这样",
       "category": "其他金融机构",
@@ -31,6 +33,7 @@
       "duration": "43:24"
     },
     {
+      "podcast_id": "6388760f22567e8ea6ad070f",
       "rank": 3,
       "name": "面基",
       "category": "独立节目",
@@ -45,6 +48,7 @@
       "duration": "1:30:33"
     },
     {
+      "podcast_id": "61dd99a47b29652ff572257b",
       "rank": 4,
       "name": "起朱楼宴宾客",
       "category": "独立节目",
@@ -59,6 +63,7 @@
       "duration": "1:11:46"
     },
     {
+      "podcast_id": "66ed1e69dbf9bb012f843e39",
       "rank": 5,
       "name": "大方谈钱",
       "category": "公募基金",
@@ -73,6 +78,7 @@
       "duration": "1:15:50"
     },
     {
+      "podcast_id": "646d6bfa53a5e5ea14e69c7c",
       "rank": 6,
       "name": "厚雪长波",
       "category": "其他金融机构",
@@ -87,6 +93,7 @@
       "duration": "1:34:47"
     },
     {
+      "podcast_id": "64b0bfde585daadfc82f3b12",
       "rank": 7,
       "name": "投资ABC",
       "category": "独立节目",
@@ -101,6 +108,7 @@
       "duration": "1:05:30"
     },
     {
+      "podcast_id": "610d156f5df6959814391430",
       "rank": 8,
       "name": "中金研究院",
       "category": "其他金融机构",
@@ -115,6 +123,7 @@
       "duration": "28:48"
     },
     {
+      "podcast_id": "6543750424e7ad2107e8b0b5",
       "rank": 9,
       "name": "听懂涨声",
       "category": "独立节目",
@@ -129,6 +138,7 @@
       "duration": "1:28:31"
     },
     {
+      "podcast_id": "62bd91adf288fd4eae3606ff",
       "rank": 10,
       "name": "三点下班",
       "category": "独立节目",
@@ -143,6 +153,7 @@
       "duration": "51:40"
     },
     {
+      "podcast_id": "66594e8894977a26ef2c7823",
       "rank": 11,
       "name": "中欧基金",
       "category": "公募基金",
@@ -157,6 +168,7 @@
       "duration": "28:04"
     },
     {
+      "podcast_id": "66b4ec5e29b084247093375f",
       "rank": 12,
       "name": "十分吸引",
       "category": "独立节目",
@@ -171,6 +183,7 @@
       "duration": "1:14:55"
     },
     {
+      "podcast_id": "685e568f8d5a9c9c2e59bc59",
       "rank": 13,
       "name": "有富同享",
       "category": "公募基金",
@@ -185,6 +198,7 @@
       "duration": "12:36"
     },
     {
+      "podcast_id": "5e7cc056418a84a0469754be",
       "rank": 14,
       "name": "钱粮胡同FM",
       "category": "独立节目",
@@ -199,6 +213,7 @@
       "duration": "1:34:53"
     },
     {
+      "podcast_id": "68021db8f5eff49a89582340",
       "rank": 15,
       "name": "和盘托出",
       "category": "其他金融机构",
@@ -213,6 +228,7 @@
       "duration": "59:24"
     },
     {
+      "podcast_id": "65716792d6e0ff5822d25668",
       "rank": 16,
       "name": "人间钱话",
       "category": "公募基金",
@@ -227,6 +243,7 @@
       "duration": "1:02:42"
     },
     {
+      "podcast_id": "65539db173f6183e975cfccc",
       "rank": 17,
       "name": "The Wanderers 流浪者",
       "category": "独立节目",
@@ -241,6 +258,7 @@
       "duration": "1:23:46"
     },
     {
+      "podcast_id": "67a40d8651337de4afb904bf",
       "rank": 18,
       "name": "深度求真",
       "category": "公募基金",
@@ -255,6 +273,7 @@
       "duration": "37:08"
     },
     {
+      "podcast_id": "67ca49d7f38eac9e544b9e02",
       "rank": 19,
       "name": "茶水间经济学",
       "category": "公募基金",
@@ -269,6 +288,7 @@
       "duration": "31:58"
     },
     {
+      "podcast_id": "649a8998a5b2b405c6d152eb",
       "rank": 20,
       "name": "随基漫步 Random Walk",
       "category": "公募基金",
@@ -283,6 +303,7 @@
       "duration": "49:40"
     },
     {
+      "podcast_id": "62b3227a053b85adc57a728a",
       "rank": 21,
       "name": "泰度Voice",
       "category": "其他金融机构",
@@ -297,13 +318,14 @@
       "duration": "47:19"
     },
     {
+      "podcast_id": "65d541dcc10c027a33679998",
       "rank": 22,
       "name": "燕妮小录",
       "category": "独立节目",
       "company": "燕妮",
       "subs": 22560,
-      "delta_7d": null,
-      "delta_30d": null,
+      "delta_7d": 55,
+      "delta_30d": 329,
       "latest_episode": "103、如何当好家庭的财务总监？",
       "latest_date": "2026-10-04",
       "plays": 3088,
@@ -311,6 +333,7 @@
       "duration": "35:06"
     },
     {
+      "podcast_id": "685a2f44a1309edcc5eb002d",
       "rank": 23,
       "name": "时间嘉讲",
       "category": "公募基金",
@@ -325,6 +348,7 @@
       "duration": "1:14:31"
     },
     {
+      "podcast_id": "64f83ea4e490c5dee580ce7d",
       "rank": 24,
       "name": "话中有金",
       "category": "其他金融机构",
@@ -339,6 +363,7 @@
       "duration": "1:25:17"
     },
     {
+      "podcast_id": "6696077d37236c546e76dadb",
       "rank": 25,
       "name": "德邦基金财经列车",
       "category": "公募基金",
@@ -353,6 +378,7 @@
       "duration": "5:34"
     },
     {
+      "podcast_id": "66713893c26e396a369ed206",
       "rank": 26,
       "name": "泰客Talk",
       "category": "公募基金",
@@ -367,6 +393,7 @@
       "duration": "39:10"
     },
     {
+      "podcast_id": "67f777938f7b771017a82ee0",
       "rank": 27,
       "name": "莫问钱程",
       "category": "公募基金",
@@ -381,6 +408,7 @@
       "duration": "1:12:50"
     },
     {
+      "podcast_id": "672073aa1d2e86f67ab936ed",
       "rank": 28,
       "name": "财话连篇",
       "category": "公募基金",
@@ -395,6 +423,7 @@
       "duration": "25:02"
     },
     {
+      "podcast_id": "63e30c0b0d7e8eaa72262020",
       "rank": 29,
       "name": "养基方程式",
       "category": "公募基金",
@@ -409,6 +438,7 @@
       "duration": "55:16"
     },
     {
+      "podcast_id": "68bfc415120c1ebd3ae51049",
       "rank": 30,
       "name": "与财同行",
       "category": "公募基金",
@@ -423,6 +453,7 @@
       "duration": "53:38"
     },
     {
+      "podcast_id": "66bab65359d80f45bc4536b0",
       "rank": 31,
       "name": "好朋友的直播间",
       "category": "公募基金",
@@ -437,6 +468,7 @@
       "duration": "36:59"
     },
     {
+      "podcast_id": "68ac193967d32ea07cdeaa15",
       "rank": 32,
       "name": "钱途规划局",
       "category": "公募基金",
@@ -451,6 +483,7 @@
       "duration": "17:57"
     },
     {
+      "podcast_id": "68196909d65ef17b3c31dc64",
       "rank": 33,
       "name": "投资心得·基金聊天局",
       "category": "公募基金",
@@ -465,6 +498,7 @@
       "duration": "1:28:20"
     },
     {
+      "podcast_id": "68f9d033fa9d08a7bb5b5691",
       "rank": 34,
       "name": "鹏然心动",
       "category": "公募基金",
@@ -479,6 +513,7 @@
       "duration": "22:57"
     },
     {
+      "podcast_id": "656d2c4832fc3737bb380de4",
       "rank": 35,
       "name": "解盘一刻",
       "category": "公募基金",
@@ -493,6 +528,7 @@
       "duration": "19:20"
     },
     {
+      "podcast_id": "66c2ddd333591c27be1eab94",
       "rank": 36,
       "name": "基金经理一周论市",
       "category": "公募基金",
@@ -507,6 +543,7 @@
       "duration": "2:01"
     },
     {
+      "podcast_id": "64bcf642d0844ea8124f440e",
       "rank": 37,
       "name": "好朋友",
       "category": "公募基金",
@@ -521,6 +558,7 @@
       "duration": "1:38:24"
     },
     {
+      "podcast_id": "68e51df4f9024a8d552b97a0",
       "rank": 38,
       "name": "投资心法",
       "category": "公募基金",
@@ -600,6 +638,7 @@
     ],
     "series": [
       {
+        "podcast_id": "611719d3cb0b82e1df0ad29e",
         "name": "无人知晓",
         "data": [
           1808610,
@@ -665,6 +704,7 @@
         ]
       },
       {
+        "podcast_id": "6022a180ef5fdaddc30bb101",
         "name": "商业就是这样",
         "data": [
           818545,
@@ -730,6 +770,7 @@
         ]
       },
       {
+        "podcast_id": "6388760f22567e8ea6ad070f",
         "name": "面基",
         "data": [
           706187,
@@ -795,6 +836,7 @@
         ]
       },
       {
+        "podcast_id": "61dd99a47b29652ff572257b",
         "name": "起朱楼宴宾客",
         "data": [
           439748,
@@ -860,6 +902,7 @@
         ]
       },
       {
+        "podcast_id": "66ed1e69dbf9bb012f843e39",
         "name": "大方谈钱",
         "data": [
           238242,
@@ -925,6 +968,7 @@
         ]
       },
       {
+        "podcast_id": "646d6bfa53a5e5ea14e69c7c",
         "name": "厚雪长波",
         "data": [
           181789,
@@ -990,6 +1034,7 @@
         ]
       },
       {
+        "podcast_id": "64b0bfde585daadfc82f3b12",
         "name": "投资ABC",
         "data": [
           181014,
@@ -1055,6 +1100,7 @@
         ]
       },
       {
+        "podcast_id": "610d156f5df6959814391430",
         "name": "中金研究院",
         "data": [
           181959,
@@ -1120,6 +1166,7 @@
         ]
       },
       {
+        "podcast_id": "6543750424e7ad2107e8b0b5",
         "name": "听懂涨声",
         "data": [
           173585,
@@ -1185,6 +1232,7 @@
         ]
       },
       {
+        "podcast_id": "62bd91adf288fd4eae3606ff",
         "name": "三点下班",
         "data": [
           165530,

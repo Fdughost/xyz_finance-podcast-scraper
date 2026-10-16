@@ -45,7 +45,7 @@
     return svg;
   }
   function card(item) {
-    const el = document.createElement('article'); el.className = `trend-mini${selected.has(item.name) ? ' selected' : ''}`;
+    const el = document.createElement('article'); el.className = `trend-mini${selected.has(item.podcast_id) ? ' selected' : ''}`;
     el.innerHTML = '<div class="trend-mini-head"><div><h3></h3><p class="category"></p></div><label><input type="checkbox">对比</label></div><div class="trend-metrics"><strong class="trend-number"></strong><span class="trend-change"></span></div><div class="spark-slot"></div><div class="trend-foot"><span></span><span></span></div>';
     el.querySelector('h3').textContent = item.name;
     el.querySelector('.category').textContent = item.category;
@@ -54,13 +54,13 @@
     el.querySelector('.spark-slot').append(sparkline(item));
     el.querySelector('.trend-foot span').textContent = item.firstDate ? `${item.firstDate.slice(5)} — ${item.lastDate.slice(5)}` : '暂无数据';
     el.querySelector('.trend-foot span:last-child').textContent = `${item.present.length}/${item.dates.length} 天有数据`;
-    const checkbox = el.querySelector('input'); checkbox.checked = selected.has(item.name); checkbox.setAttribute('aria-label', `对比${item.name}`);
-    checkbox.addEventListener('change', () => { if (checkbox.checked) selected.add(item.name); else selected.delete(item.name); el.classList.toggle('selected', checkbox.checked); updateCount(); });
+    const checkbox = el.querySelector('input'); checkbox.checked = selected.has(item.podcast_id); checkbox.setAttribute('aria-label', `对比${item.name}`);
+    checkbox.addEventListener('change', () => { if (checkbox.checked) selected.add(item.podcast_id); else selected.delete(item.podcast_id); el.classList.toggle('selected', checkbox.checked); updateCount(); });
     return el;
   }
   function updateCount() { get('trendCompareTab').textContent = `对比已选（${selected.size}）`; }
   function renderCompare(items) {
-    const chosen = items.filter(s => selected.has(s.name));
+    const chosen = items.filter(s => selected.has(s.podcast_id));
     const relative = get('trendMetric').value === 'rate';
     get('trendCompareEmpty').hidden = chosen.length > 0;
     get('trendPlot').hidden = !chosen.length;
@@ -89,9 +89,9 @@
   get('trendCompareTab').onclick = () => { view = 'compare';render(); };
   get('trendClear').onclick = () => { selected.clear();render(); };
   get('trendReset').onclick = () => { get('trendSearch').value = '';get('trendCategory').value = '';render(); };
-  function choose(key, count) { const items = filtered(entries()).sort((a, b) => (b[key] ?? -Infinity) - (a[key] ?? -Infinity)).filter(s => s[key] != null).slice(0, count);selected.clear();items.forEach(s => selected.add(s.name));view = 'compare';render(); }
+  function choose(key, count) { const items = filtered(entries()).sort((a, b) => (b[key] ?? -Infinity) - (a[key] ?? -Infinity)).filter(s => s[key] != null).slice(0, count);selected.clear();items.forEach(s => selected.add(s.podcast_id));view = 'compare';render(); }
   get('trendGrowth').onclick = () => choose('rate', 5);
   get('trendLargest').onclick = () => choose('latest', 5);
-  get('trendBatch').onclick = () => { selected.clear();filtered(entries()).forEach(s => selected.add(s.name));view = 'compare';render(); };
+  get('trendBatch').onclick = () => { selected.clear();filtered(entries()).forEach(s => selected.add(s.podcast_id));view = 'compare';render(); };
   render();
 })();

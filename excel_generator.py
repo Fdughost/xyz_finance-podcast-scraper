@@ -52,7 +52,8 @@ class PodcastExcelGenerator:
             'latest_episode_favorite': '最新单集收藏数',
             'latest_episode_interaction': '互动指标(点赞+收藏)',
             'latest_episode_duration': '最新单集时长',
-            'crawl_time': '抓取时间'
+            'crawl_time': '抓取时间',
+            'podcast_id': '节目ID'
         }
         
         # 确保所有列都存在，不存在的填充为空字符串

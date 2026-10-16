@@ -8,6 +8,7 @@ import os
 import glob
 import json
 import pandas as pd
+from podcast_identity import PodcastIdentity
 from datetime import datetime, timedelta, timezone
 
 BEIJING_TZ = timezone(timedelta(hours=8))
@@ -38,12 +39,8 @@ def find_report_near_date(target_date, max_days_offset=5):
     return None
 
 
-def load_subs_map(filepath):
-    """从报表文件读取 {节目名称: 订阅数} 映射"""
-    if not filepath:
-        return {}
-    df = pd.read_excel(filepath)
-    return dict(zip(df['节目名称'], df['订阅数']))
+def load_subs_map(filepath, identity=None):
+    return (identity or PodcastIdentity()).subs_map(filepath)
 
 
 def fmt_delta(delta):
@@ -58,15 +55,18 @@ def fmt_delta(delta):
         return '0', ''
 
 
-def build_trend_data(df, latest_date):
+def build_trend_data(df, latest_date, identity=None):
     """Return every current program on a shared calendar axis, including missing days."""
-    names = df['节目名称'].drop_duplicates().tolist()
+    identity = identity or PodcastIdentity()
+    df = df.copy()
+    df['节目ID'] = [identity.key(row) for _, row in df.iterrows()]
+    ids = df['节目ID'].drop_duplicates().tolist()
     paths = {Path(f).stem.removeprefix('播客监控日报_'): f for f in glob.glob(os.path.join(REPORTS_DIR, '播客监控日报_*.xlsx'))}
     end = latest_date.date()
     start = max(end - timedelta(days=59), datetime.strptime(min(paths), '%Y-%m-%d').date()) if paths else end
     dates = [(start + timedelta(days=i)).isoformat() for i in range((end - start).days + 1)]
-    snapshots = {d: load_subs_map(paths[d]) if d in paths else {} for d in dates}
-    metadata = df.drop_duplicates('节目名称').set_index('节目名称')
+    snapshots = {d: load_subs_map(paths[d], identity) if d in paths else {} for d in dates}
+    metadata = df.drop_duplicates('节目ID').set_index('节目ID')
 
     def clean(value):
         return str(value) if pd.notna(value) else ''
@@ -77,11 +77,12 @@ def build_trend_data(df, latest_date):
     return {
         'dates': dates,
         'series': [{
-            'name': name,
-            'category': clean(metadata.loc[name].get('分类', '')) or '未分类',
-            'institution': clean(metadata.loc[name].get('机构名称', '')),
-            'data': [number(snapshots[d].get(name)) for d in dates],
-        } for name in names],
+            'podcast_id': pid,
+            'name': clean(metadata.loc[pid].get('节目名称', '')),
+            'category': clean(metadata.loc[pid].get('分类', '')) or '未分类',
+            'institution': clean(metadata.loc[pid].get('机构名称', '')),
+            'data': [number(snapshots[d].get(pid)) for d in dates],
+        } for pid in ids],
     }
 
 
@@ -93,18 +94,19 @@ def generate_html():
         print("没有找到报表文件")
         return
 
-    df = pd.read_excel(latest)
+    identity = PodcastIdentity()
+    df = identity.read_report(latest)
     date_str = os.path.basename(latest).replace('播客监控日报_', '').replace('.xlsx', '')
     latest_date = datetime.strptime(date_str, '%Y-%m-%d')
     all_reports = get_all_reports()
     generated_at = datetime.now(tz=BEIJING_TZ).strftime('%Y-%m-%d %H:%M CST')
 
     # 加载历史数据用于增量计算
-    subs_7d = load_subs_map(find_report_near_date(latest_date - timedelta(days=7)))
-    subs_30d = load_subs_map(find_report_near_date(latest_date - timedelta(days=30)))
+    subs_7d = load_subs_map(find_report_near_date(latest_date - timedelta(days=7)), identity)
+    subs_30d = load_subs_map(find_report_near_date(latest_date - timedelta(days=30)), identity)
 
     # All current programs, aligned to calendar days. Missing observations remain null.
-    trend_json = json.dumps(build_trend_data(df, latest_date), ensure_ascii=False).replace('<', r'\u003c')
+    trend_json = json.dumps(build_trend_data(df, latest_date, identity), ensure_ascii=False).replace('<', r'\u003c')
     assets = Path(__file__).parent / 'static_assets'
     trend_css = (assets / 'trends.css').read_text(encoding='utf-8')
     trend_script = (assets / 'trends.js').read_text(encoding='utf-8')
@@ -115,10 +117,11 @@ def generate_html():
     for i, row in df.iterrows():
         bg = '#f9f9f9' if i % 2 == 0 else '#ffffff'
         name = row.get('节目名称', '')
+        pid = identity.key(row)
         subs = int(row['订阅数'])
 
-        d7 = (subs - subs_7d[name]) if name in subs_7d else None
-        d30 = (subs - subs_30d[name]) if name in subs_30d else None
+        d7 = (subs - subs_7d[pid]) if pid in subs_7d else None
+        d30 = (subs - subs_30d[pid]) if pid in subs_30d else None
         d7_txt, d7_cls = fmt_delta(d7)
         d30_txt, d30_cls = fmt_delta(d30)
 
@@ -140,9 +143,10 @@ def generate_html():
     cards_html = ''
     for i, row in df.iterrows():
         name = row.get('节目名称', '')
+        pid = identity.key(row)
         subs = int(row['订阅数'])
-        d7 = (subs - subs_7d[name]) if name in subs_7d else None
-        d30 = (subs - subs_30d[name]) if name in subs_30d else None
+        d7 = (subs - subs_7d[pid]) if pid in subs_7d else None
+        d30 = (subs - subs_30d[pid]) if pid in subs_30d else None
         d7_txt, d7_cls = fmt_delta(d7)
         d30_txt, d30_cls = fmt_delta(d30)
         episode = row.get('最新单集名称', '')

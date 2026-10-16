@@ -1,5 +1,6 @@
 export interface Podcast {
   rank: number
+  podcast_id: string
   name: string
   category: string
   company: string
@@ -14,6 +15,7 @@ export interface Podcast {
 }
 
 export interface TrendSeries {
+  podcast_id: string
   name: string
   data: (number | null)[]
 }

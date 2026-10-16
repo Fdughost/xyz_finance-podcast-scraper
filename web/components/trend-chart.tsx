@@ -25,13 +25,13 @@ const LINE_COLORS = [
 
 export function TrendChart({ trend }: TrendChartProps) {
   const [selected, setSelected] = useState<Set<string>>(
-    new Set(trend.series.slice(0, 5).map((s) => s.name))
+    new Set(trend.series.slice(0, 5).map((s) => s.podcast_id))
   )
 
   const chartData = trend.dates.map((date, i) => {
     const point: Record<string, string | number | null> = { date: date.slice(5) } // MM-DD
     trend.series.forEach((s) => {
-      point[s.name] = s.data[i] ?? null
+      point[s.podcast_id] = s.data[i] ?? null
     })
     return point
   })
@@ -53,15 +53,15 @@ export function TrendChart({ trend }: TrendChartProps) {
       <div className="flex flex-wrap gap-1.5">
         {trend.series.map((s, i) => (
           <Badge
-            key={s.name}
-            variant={selected.has(s.name) ? 'default' : 'outline'}
+            key={s.podcast_id}
+            variant={selected.has(s.podcast_id) ? 'default' : 'outline'}
             className="cursor-pointer text-xs"
             style={
-              selected.has(s.name)
+              selected.has(s.podcast_id)
                 ? { background: LINE_COLORS[i % LINE_COLORS.length], borderColor: LINE_COLORS[i % LINE_COLORS.length] }
                 : { color: LINE_COLORS[i % LINE_COLORS.length], borderColor: LINE_COLORS[i % LINE_COLORS.length] }
             }
-            onClick={() => toggleSeries(s.name)}
+            onClick={() => toggleSeries(s.podcast_id)}
           >
             {s.name}
           </Badge>
@@ -94,11 +94,12 @@ export function TrendChart({ trend }: TrendChartProps) {
             wrapperStyle={{ fontSize: 11, display: 'none' }}
           />
           {trend.series.map((s, i) =>
-            selected.has(s.name) ? (
+            selected.has(s.podcast_id) ? (
               <Line
-                key={s.name}
+                key={s.podcast_id}
                 type="monotone"
-                dataKey={s.name}
+                name={s.name}
+                dataKey={s.podcast_id}
                 stroke={LINE_COLORS[i % LINE_COLORS.length]}
                 strokeWidth={2}
                 dot={false}

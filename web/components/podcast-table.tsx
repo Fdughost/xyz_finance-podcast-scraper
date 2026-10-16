@@ -57,7 +57,7 @@ export function PodcastTable({ podcasts }: PodcastTableProps) {
           </TableHeader>
           <TableBody>
             {filtered.map((p) => (
-              <TableRow key={p.rank} className="hover:bg-muted/30">
+              <TableRow key={p.podcast_id} className="hover:bg-muted/30">
                 <TableCell className="text-center text-muted-foreground text-sm">{p.rank}</TableCell>
                 <TableCell className="font-medium">{p.name}</TableCell>
                 <TableCell className="text-muted-foreground text-sm">{p.category}</TableCell>
@@ -83,7 +83,7 @@ export function PodcastTable({ podcasts }: PodcastTableProps) {
       {/* Mobile cards */}
       <div className="md:hidden space-y-3">
         {filtered.map((p) => (
-          <Card key={p.rank}>
+          <Card key={p.podcast_id}>
             <CardContent className="pt-4 pb-3 px-4">
               <div className="flex items-start gap-3">
                 <span className="text-2xl font-bold text-muted-foreground/40 leading-none mt-1 w-7 shrink-0">

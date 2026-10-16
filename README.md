@@ -189,3 +189,11 @@ python3 -m unittest discover -s tests -v
 可以一键对比增长前5、规模前5或整个筛选结果，也可勾选少量节目比较。对比图支持增长率与订阅人数切换；总览小图各用独立纵轴。日期按日历对齐，缺失数据不补零、不跨缺口连线。
 
 界面源文件在 `static_assets/trends.html`、`trends.css` 和 `trends.js`。运行 `python3 generate_html.py` 会将其内嵌到静态页面，现有每日任务无需额外构建。Next.js 趋势组件保持原有实现。
+
+### 节目改名与历史身份识别
+
+节目以小宇宙 `podcast_id` 为稳定标识（节目 URL 中的 ID），名称仅用于显示。SQLite 已按 `(podcast_id, crawl_date)` 唯一保存快照；Excel 新增 `节目ID` 列，网页增量、趋势序列及选择状态均使用 ID。
+
+旧版 Excel 没有 ID 时，`podcast_identity.py` 从数据库快照的 `podcast_name`、原始 `title` / `config_name` 及配置建立精确名称到 ID 的映射，优先匹配报表当日快照。不做模糊匹配；存在多个候选 ID 时中止生成并要求补充报表 ID，防止误合并同名节目。完全未知的旧名称暂保留独立的 `legacy-name:` 标识。生成历史网页时应保留 `data/podcast_monitor.db`。历史报表和快照中的原名称保持原样。
+
+已核验：`65d541dcc10c027a33679998` 在 2026-10-10 的快照名称为“燕妮聊基金”，2026-10-11 起为“燕妮小录”。同一个 ID 的历史数据会自动衔接；无需为改名新建节目或修改旧订阅数。

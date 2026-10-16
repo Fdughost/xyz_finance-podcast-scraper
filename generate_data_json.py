@@ -8,6 +8,7 @@ import os
 import glob
 import json
 import pandas as pd
+from podcast_identity import PodcastIdentity
 from datetime import datetime, timedelta, timezone
 
 BEIJING_TZ = timezone(timedelta(hours=8))
@@ -21,11 +22,8 @@ def get_all_excel():
     return sorted(glob.glob(os.path.join(REPORTS_DIR, '播客监控日报_*.xlsx')))
 
 
-def load_subs_map(filepath):
-    if not filepath or not os.path.exists(filepath):
-        return {}
-    df = pd.read_excel(filepath)
-    return dict(zip(df['节目名称'], df['订阅数']))
+def load_subs_map(filepath, identity=None):
+    return (identity or PodcastIdentity()).subs_map(filepath)
 
 
 def find_report_near_date(target_date, max_days=7):
@@ -47,19 +45,22 @@ def generate_data_json():
     date_str = os.path.basename(latest).replace('播客监控日报_', '').replace('.xlsx', '')
     latest_date = datetime.strptime(date_str, '%Y-%m-%d')
 
-    df = pd.read_excel(latest)
+    identity = PodcastIdentity()
+    df = identity.read_report(latest)
 
     # 历史增量
-    subs_7d = load_subs_map(find_report_near_date(latest_date - timedelta(days=7)))
-    subs_30d = load_subs_map(find_report_near_date(latest_date - timedelta(days=30)))
+    subs_7d = load_subs_map(find_report_near_date(latest_date - timedelta(days=7)), identity)
+    subs_30d = load_subs_map(find_report_near_date(latest_date - timedelta(days=30)), identity)
 
     podcasts = []
     for i, row in df.iterrows():
         name = row.get('节目名称', '')
+        pid = identity.key(row)
         subs = int(row['订阅数'])
-        d7 = int(subs - subs_7d[name]) if name in subs_7d else None
-        d30 = int(subs - subs_30d[name]) if name in subs_30d else None
+        d7 = int(subs - subs_7d[pid]) if pid in subs_7d else None
+        d30 = int(subs - subs_30d[pid]) if pid in subs_30d else None
         podcasts.append({
+            'podcast_id': pid,
             'rank': i + 1,
             'name': name,
             'category': str(row.get('分类', '') or ''),
@@ -78,13 +79,14 @@ def generate_data_json():
     trend_files = all_files[-60:]
     trend_dates = []
     trend_data = {}
-    top_names = df['节目名称'].head(10).tolist()
+    top_ids = df['节目ID'].head(10).tolist()
+    names = dict(zip(df['节目ID'], df['节目名称']))
 
     for fpath in trend_files:
         d = os.path.basename(fpath).replace('播客监控日报_', '').replace('.xlsx', '')
         trend_dates.append(d)
-        tmp = load_subs_map(fpath)
-        for n in top_names:
+        tmp = load_subs_map(fpath, identity)
+        for n in top_ids:
             if n not in trend_data:
                 trend_data[n] = []
             trend_data[n].append(tmp.get(n, None))
@@ -97,7 +99,7 @@ def generate_data_json():
         'podcasts': podcasts,
         'trend': {
             'dates': trend_dates,
-            'series': [{'name': n, 'data': trend_data[n]} for n in top_names],
+            'series': [{'podcast_id': n, 'name': names[n], 'data': trend_data[n]} for n in top_ids],
         },
         'reports': all_reports,
     }
