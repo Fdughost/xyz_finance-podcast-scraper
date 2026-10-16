@@ -44,7 +44,7 @@ class DownloadAcceptance(unittest.TestCase):
                 self.assertEqual(page.get_by_text('历史报表下载', exact=True).count(), 0)
                 if page.locator('#trendExplorer').count():
                     page.locator('.trend-mini').first.wait_for(state='visible')
-                    page.locator('#barChart').wait_for(state='visible')
+                    page.locator('.ranking-row').first.wait_for(state='visible')
                 else:
                     page.locator('.recharts-wrapper > svg').nth(1).wait_for(state='visible')
                 reports = sorted(json.loads(host.get_attribute('data-reports')))

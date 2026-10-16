@@ -111,6 +111,9 @@ def generate_html():
     trend_css = (assets / 'trends.css').read_text(encoding='utf-8')
     trend_script = (assets / 'trends.js').read_text(encoding='utf-8')
     trend_panel = (assets / 'trends.html').read_text(encoding='utf-8')
+    ranking_css = (assets / 'ranking.css').read_text(encoding='utf-8')
+    ranking_script = (assets / 'ranking.js').read_text(encoding='utf-8')
+    ranking_panel = (assets / 'ranking.html').read_text(encoding='utf-8')
 
     # 生成表格行
     rows_html = ''
@@ -171,42 +174,6 @@ def generate_html():
     # Both frontends use the same calendar component and actual report inventory.
     reports_attribute = escape(json.dumps(all_reports, ensure_ascii=False), quote=True)
     download_script = (Path(__file__).parent / 'web/public/report-download.js').read_text(encoding='utf-8')
-    js_code = """
-// 图表
-(function() {
-  const raw = __TREND_JSON__;
-  if (!raw.dates || raw.dates.length === 0) return;
-
-  const colors = [
-    '#3b82f6','#ef4444','#10b981','#f59e0b','#8b5cf6',
-    '#ec4899','#14b8a6','#f97316','#6366f1','#84cc16'
-  ];
-
-  // 横向条形图：最新订阅数
-  const ranking = raw.series.slice(0, 10);
-  const latestSubs = ranking.map(s => s.data.at(-1) ?? 0);
-  new Chart(document.getElementById('barChart'), {
-    type: 'bar',
-    data: {
-      labels: ranking.map(s => s.name),
-      datasets: [{ data: latestSubs, backgroundColor: colors, borderRadius: 4, borderSkipped: false }]
-    },
-    options: {
-      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: { callbacks: { label: ctx => ' ' + ctx.raw.toLocaleString() } }
-      },
-      scales: {
-        x: { grid: { color: '#f5f5f5' }, ticks: { callback: v => v >= 10000 ? (v/10000).toFixed(0)+'w' : v, font: { size: 11 } } },
-        y: { grid: { display: false }, ticks: { font: { size: 12 } } }
-      }
-    }
-  });
-
-})();
-""".replace('__TREND_JSON__', trend_json)
-
     html = f'''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -263,6 +230,7 @@ def generate_html():
     .chart-container {{ height: 220px; }}
   }}
 {trend_css}
+{ranking_css}
 </style>
 </head>
 <body>
@@ -292,12 +260,7 @@ def generate_html():
     <div class="mobile-cards">{cards_html}</div>
   </div>
 
-  <div class="card">
-    <h2>订阅数排行 Top 10</h2>
-    <div class="chart-container">
-      <canvas id="barChart"></canvas>
-    </div>
-  </div>
+  {ranking_panel}
 
   {trend_panel}
 
@@ -309,11 +272,9 @@ def generate_html():
 <script>{download_script}</script>
 <script id="trendData" type="application/json">{trend_json}</script>
 <script>{trend_script}</script>
+<script>{ranking_script}</script>
 
 <div id="tip"></div>
-<script>
-{js_code}
-</script>
 <script>
 (function() {{
   var tip = document.getElementById('tip');

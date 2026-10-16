@@ -1,0 +1,15 @@
+<section class="card trend-explorer ranking-explorer" id="rankingExplorer" aria-labelledby="rankingTitle">
+  <div class="trend-heading"><div><h2 id="rankingTitle">订阅排行 · 规模一览</h2><p class="trend-subtitle">从全部节目出发，按分类或机构快速找到你关心的位置。</p></div><span class="trend-badge" id="rankingTotal"></span></div>
+  <div class="ranking-summary" id="rankingSummary"></div>
+  <div class="trend-toolbar">
+    <label class="trend-field search">搜索节目或机构<input id="rankingSearch" type="search" aria-label="排行搜索节目或机构" placeholder="输入节目名称或机构" autocomplete="off"></label>
+    <label class="trend-field">节目分类<select id="rankingCategory" aria-label="排行节目分类"><option value="">全部分类</option></select></label>
+    <label class="trend-field">排列方式<select id="rankingSort" aria-label="排行排列方式"><option value="desc">从高到低</option><option value="asc">从低到高</option></select></label>
+    <label class="trend-field">条形比例<select id="rankingScale" aria-label="排行条形比例"><option value="linear">标准比例</option><option value="log">对数比例</option></select></label>
+  </div>
+  <div class="trend-actions"><button type="button" data-ranking-limit="0" aria-pressed="true">全部节目</button><button type="button" data-ranking-limit="10" aria-pressed="false">前 10 名</button><button type="button" data-ranking-limit="20" aria-pressed="false">前 20 名</button><span class="spacer"></span><button type="button" id="rankingReset">重置排行</button></div>
+  <p class="trend-status" id="rankingStatus" aria-live="polite"></p>
+  <p class="trend-status" id="rankingScaleNote"></p>
+  <ol class="ranking-list" id="rankingList" aria-label="节目订阅排行"></ol>
+  <p class="trend-note">名次基于最新日报的全部节目，订阅数相同则并列；搜索和分类筛选不改变全局名次。订阅人次合计包含同一用户订阅多个节目的情况，不代表独立听众数。</p>
+</section>
