@@ -1,0 +1,23 @@
+<section class="card trend-explorer" id="trendExplorer" aria-labelledby="trendTitle">
+  <div class="trend-heading"><div><h2 id="trendTitle">订阅趋势 · 全景观察</h2><p class="trend-subtitle">先看每个节目的变化，再把感兴趣的节目放在一起比较。</p></div><span class="trend-badge" id="trendTotal"></span></div>
+  <div class="trend-toolbar">
+    <label class="trend-field search">搜索节目或机构<input id="trendSearch" type="search" placeholder="输入节目名称或机构" autocomplete="off"></label>
+    <label class="trend-field">节目分类<select aria-label="节目分类" id="trendCategory"><option value="">全部分类</option></select></label>
+    <label class="trend-field">观察区间<select aria-label="观察区间" id="trendRange"><option value="7">近 7 天</option><option value="30" selected>近 30 天</option><option value="60">近 60 天</option></select></label>
+    <label class="trend-field">排列方式<select aria-label="排列方式" id="trendSort"><option value="rate">增长率优先</option><option value="change">净增人数优先</option><option value="latest">订阅规模优先</option></select></label>
+  </div>
+  <div class="trend-actions">
+    <button id="trendOverviewTab" type="button" aria-pressed="true">全部总览</button><button id="trendCompareTab" type="button" aria-pressed="false">对比已选（0）</button><span class="spacer"></span>
+    <button id="trendGrowth" type="button">一键对比增长前 5</button><button id="trendLargest" type="button">一键对比规模前 5</button><button id="trendBatch" type="button">对比筛选结果</button><button id="trendClear" type="button">清空已选</button><button id="trendReset" type="button">重置筛选</button>
+  </div>
+  <p id="trendStatus" class="trend-status" aria-live="polite"></p>
+  <p class="trend-status">总览小图各用独立纵轴；数字为区间末订阅数，右侧为区间净增人数与增长率。</p>
+  <div id="trendOverview" class="trend-grid"></div>
+  <div id="trendComparison" hidden>
+    <div class="trend-mode"><label class="trend-field">对比指标<select aria-label="对比指标" id="trendMetric"><option value="rate">增长率（%）</option><option value="absolute">订阅人数</option></select></label><p class="trend-subtitle">仅对比当前筛选范围内的已选节目；切换筛选不会清除选择。</p></div>
+    <div id="trendLegend" class="trend-legend"></div>
+    <p id="trendCompareEmpty" class="trend-empty" hidden>当前没有可对比的节目。可一键选择增长前 5，或返回总览勾选节目。</p>
+    <div id="trendPlot" class="trend-compare"><canvas id="trendCompareCanvas" aria-label="所选节目订阅趋势对比" role="img"></canvas></div>
+  </div>
+  <p class="trend-note">总览每张小图使用独立纵轴，适合观察走势，不代表节目之间的规模差异。增量与增长率按所选区间内首末有效值计算；缺失日期留空，不补零、不连线。零基数或不足两个数据点时增长率显示“—”。</p>
+</section>

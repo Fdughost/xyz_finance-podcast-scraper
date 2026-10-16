@@ -58,6 +58,33 @@ def fmt_delta(delta):
         return '0', ''
 
 
+def build_trend_data(df, latest_date):
+    """Return every current program on a shared calendar axis, including missing days."""
+    names = df['节目名称'].drop_duplicates().tolist()
+    paths = {Path(f).stem.removeprefix('播客监控日报_'): f for f in glob.glob(os.path.join(REPORTS_DIR, '播客监控日报_*.xlsx'))}
+    end = latest_date.date()
+    start = max(end - timedelta(days=59), datetime.strptime(min(paths), '%Y-%m-%d').date()) if paths else end
+    dates = [(start + timedelta(days=i)).isoformat() for i in range((end - start).days + 1)]
+    snapshots = {d: load_subs_map(paths[d]) if d in paths else {} for d in dates}
+    metadata = df.drop_duplicates('节目名称').set_index('节目名称')
+
+    def clean(value):
+        return str(value) if pd.notna(value) else ''
+
+    def number(value):
+        return int(value) if pd.notna(value) else None
+
+    return {
+        'dates': dates,
+        'series': [{
+            'name': name,
+            'category': clean(metadata.loc[name].get('分类', '')) or '未分类',
+            'institution': clean(metadata.loc[name].get('机构名称', '')),
+            'data': [number(snapshots[d].get(name)) for d in dates],
+        } for name in names],
+    }
+
+
 def generate_html():
     os.makedirs(DOCS_DIR, exist_ok=True)
 
@@ -76,25 +103,12 @@ def generate_html():
     subs_7d = load_subs_map(find_report_near_date(latest_date - timedelta(days=7)))
     subs_30d = load_subs_map(find_report_near_date(latest_date - timedelta(days=30)))
 
-    # 加载最近 60 天所有报表用于趋势图（最多取 60 个）
-    all_files = sorted(glob.glob(os.path.join(REPORTS_DIR, '播客监控日报_*.xlsx')))[-60:]
-    trend_dates = []
-    trend_data = {}  # {节目名称: [订阅数, ...]}
-    top_names = df['节目名称'].head(10).tolist()  # 只展示前10名的趋势
-
-    for fpath in all_files:
-        d = os.path.basename(fpath).replace('播客监控日报_', '').replace('.xlsx', '')
-        trend_dates.append(d)
-        tmp = load_subs_map(fpath)
-        for name in top_names:
-            if name not in trend_data:
-                trend_data[name] = []
-            trend_data[name].append(tmp.get(name, None))
-
-    trend_json = json.dumps({
-        'dates': trend_dates,
-        'series': [{'name': n, 'data': trend_data[n]} for n in top_names]
-    }, ensure_ascii=False)
+    # All current programs, aligned to calendar days. Missing observations remain null.
+    trend_json = json.dumps(build_trend_data(df, latest_date), ensure_ascii=False).replace('<', r'\u003c')
+    assets = Path(__file__).parent / 'static_assets'
+    trend_css = (assets / 'trends.css').read_text(encoding='utf-8')
+    trend_script = (assets / 'trends.js').read_text(encoding='utf-8')
+    trend_panel = (assets / 'trends.html').read_text(encoding='utf-8')
 
     # 生成表格行
     rows_html = ''
@@ -165,14 +179,12 @@ def generate_html():
   ];
 
   // 横向条形图：最新订阅数
-  const latestSubs = raw.series.map(s => {
-    const vals = s.data.filter(v => v != null);
-    return vals[vals.length - 1] || 0;
-  });
+  const ranking = raw.series.slice(0, 10);
+  const latestSubs = ranking.map(s => s.data.at(-1) ?? 0);
   new Chart(document.getElementById('barChart'), {
     type: 'bar',
     data: {
-      labels: raw.series.map(s => s.name),
+      labels: ranking.map(s => s.name),
       datasets: [{ data: latestSubs, backgroundColor: colors, borderRadius: 4, borderSkipped: false }]
     },
     options: {
@@ -188,68 +200,6 @@ def generate_html():
     }
   });
 
-  // 趋势折线图：多选 pill 切换
-  if (raw.dates.length < 2) return;
-
-  const activeSet = new Set(raw.series.map((_, i) => i)); // 默认全选
-
-  const datasets = raw.series.map((s, i) => ({
-    label: s.name, data: s.data, spanGaps: true,
-    borderColor: colors[i], backgroundColor: colors[i] + '18',
-    borderWidth: 2, pointRadius: 3, pointHoverRadius: 5,
-    tension: 0.4, fill: false,
-  }));
-
-  const trendChart = new Chart(document.getElementById('trendChart'), {
-    type: 'line',
-    data: { labels: raw.dates, datasets },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      interaction: { mode: 'index', intersect: false },
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          backgroundColor: '#fff', borderColor: '#e2e8f0', borderWidth: 1,
-          titleColor: '#333', bodyColor: '#555',
-          filter: item => activeSet.has(item.datasetIndex),
-          callbacks: { label: ctx => ' ' + ctx.dataset.label + ': ' + (ctx.raw != null ? ctx.raw.toLocaleString() : '—') }
-        }
-      },
-      scales: {
-        y: { grid: { color: '#f5f5f5' }, ticks: { callback: v => v >= 10000 ? (v/10000).toFixed(1)+'w' : v.toLocaleString(), font: { size: 11 } } },
-        x: { grid: { display: false }, ticks: { font: { size: 11 }, maxTicksLimit: 8 } }
-      }
-    }
-  });
-
-  // 生成 pill 按钮
-  const pillList = document.getElementById('trendPills');
-  raw.series.forEach((s, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'pill active';
-    btn.style.background = colors[i];
-    btn.textContent = s.name;
-    btn.onclick = () => {
-      const isActive = activeSet.has(i);
-      if (isActive && activeSet.size === 1) return; // 至少保留一条
-      if (isActive) {
-        activeSet.delete(i);
-        btn.classList.remove('active');
-        btn.style.background = '';
-        btn.style.color = '';
-      } else {
-        activeSet.add(i);
-        btn.classList.add('active');
-        btn.style.background = colors[i];
-        btn.style.color = '#fff';
-      }
-      trendChart.data.datasets.forEach((ds, j) => {
-        ds.hidden = !activeSet.has(j);
-      });
-      trendChart.update('active');
-    };
-    pillList.appendChild(btn);
-  });
 })();
 """.replace('__TREND_JSON__', trend_json)
 
@@ -284,9 +234,6 @@ def generate_html():
   .delta-up {{ color: #e74c3c; }}
   .delta-down {{ color: #27ae60; }}
   .chart-container {{ position: relative; height: 320px; }}
-  .pill-list {{ display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }}
-  .pill {{ padding: 5px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; border: 1.5px solid #e2e8f0; color: #64748b; background: #f8fafc; transition: .15s; user-select: none; }}
-  .pill.active {{ color: #fff; border-color: transparent; }}
   footer {{ text-align: center; font-size: 12px; color: #999; padding: 20px; }}
   /* 播客卡片（移动端） */
   .pod-card {{ border: 1px solid #e8edf2; border-radius: 8px; padding: 14px; margin-bottom: 10px; }}
@@ -311,6 +258,7 @@ def generate_html():
     .mobile-cards {{ display: block; }}
     .chart-container {{ height: 220px; }}
   }}
+{trend_css}
 </style>
 </head>
 <body>
@@ -341,19 +289,13 @@ def generate_html():
   </div>
 
   <div class="card">
-    <h2>订阅数排行</h2>
+    <h2>订阅数排行 Top 10</h2>
     <div class="chart-container">
       <canvas id="barChart"></canvas>
     </div>
   </div>
 
-  <div class="card">
-    <h2>订阅数趋势</h2>
-    <div id="trendPills" class="pill-list"></div>
-    <div class="chart-container">
-      <canvas id="trendChart"></canvas>
-    </div>
-  </div>
+  {trend_panel}
 
 
 </div>
@@ -361,6 +303,8 @@ def generate_html():
 <footer>数据来源：小宇宙 FM &nbsp;|&nbsp; 自动更新，每日北京时间 10:00</footer>
 
 <script>{download_script}</script>
+<script id="trendData" type="application/json">{trend_json}</script>
+<script>{trend_script}</script>
 
 <div id="tip"></div>
 <script>

@@ -30,7 +30,7 @@ class DownloadAcceptance(unittest.TestCase):
         cls.driver.stop()
 
     def test_both_frontends_real_downloads(self):
-        for url in ['http://127.0.0.1:8765/docs/index.html', 'http://127.0.0.1:8766']:
+        for url in [os.environ.get('STATIC_URL', 'http://127.0.0.1:8765/docs/index.html'), 'http://127.0.0.1:8766']:
             with self.subTest(url=url):
                 context = self.browser.new_context(accept_downloads=True, timezone_id='America/Los_Angeles')
                 page = context.new_page()
@@ -42,7 +42,11 @@ class DownloadAcceptance(unittest.TestCase):
                 trigger = host.get_by_role('button', name='下载日报', exact=True)
                 self.assertEqual(page.get_by_text('登录', exact=False).count(), 0)
                 self.assertEqual(page.get_by_text('历史报表下载', exact=True).count(), 0)
-                page.locator('canvas, .recharts-wrapper > svg').nth(1).wait_for(state='visible')
+                if page.locator('#trendExplorer').count():
+                    page.locator('.trend-mini').first.wait_for(state='visible')
+                    page.locator('#barChart').wait_for(state='visible')
+                else:
+                    page.locator('.recharts-wrapper > svg').nth(1).wait_for(state='visible')
                 reports = sorted(json.loads(host.get_attribute('data-reports')))
                 for filename in [reports[-1], reports[0]]:
                     trigger.click()
@@ -86,7 +90,7 @@ class DownloadAcceptance(unittest.TestCase):
 
     def test_calendar_boundaries_empty_and_new_reports(self):
         page = self.browser.new_page(timezone_id='Pacific/Kiritimati')
-        page.goto('http://127.0.0.1:8765/docs/index.html')
+        page.goto(os.environ.get('STATIC_URL', 'http://127.0.0.1:8765/docs/index.html'))
         fixtures = ['播客监控日报_2023-12-31.xlsx', '播客监控日报_2024-02-29.xlsx', '播客监控日报_2024-03-01.xlsx', '播客监控日报_2024-02-30.xlsx', '../invalid.xlsx']
         page.evaluate('''files => {
           const old = document.querySelector('report-download');
